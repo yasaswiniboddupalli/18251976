@@ -7,6 +7,11 @@ if(isset($_POST['signup'])){
 	$email=$_POST['email'];
 	$password=$_POST['password'];
 	$password1=$_POST['password1'];
+	$sql="SELECT * FROM users where email='$email' ";
+	$res=mysqli_query($con, $sql) or die(mysqli_error($con));
+	if (mysqli_num_rows($sql)>0){
+		$error="Sorry..Email already taken";
+	}else{
 	if($password == $password1) {
 				//create user
 				$password = sha1($password); //security
@@ -19,6 +24,7 @@ if(isset($_POST['signup'])){
 		echo "The two passwords do not match";
 	}
 	header("location:Signin.html");
+	}
 }
 
 ?>
