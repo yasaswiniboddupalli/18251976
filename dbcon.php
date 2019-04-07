@@ -4,5 +4,5 @@ $con=mysqli_connect("localhost","root","") or die("connection failed");
 if(!$con){
 	die('could not connect:'.mysqli_error());
 }
-mysqli_select_db($con, 'Bibliography') or die("db not found");
+mysqli_select_db($con, 'BibliographyManager') or die("db not found");
 ?>

@@ -1,5 +1,6 @@
 <?php 
-if(isset($_POST['firstname'])){
+include('dbcon.php');
+if(isset($_POST['signup'])){
 	include('dbcon.php');
 	$firstname=$_POST['firstname'];
 	$lastname=$_POST['lastname'];
@@ -13,14 +14,11 @@ if(isset($_POST['firstname'])){
 	echo('inserted');
 	if(!mysqli_query($con,$query)){
 		die('failed');
-		/*echo "<h3>successfully inserted</h3>";
-		$_SESSION['message'] = "you are now logged in";
-				$_SESSION['firstname'] = $firstname;
-				header("location: home1.php"); */
 	}
 	}else{
 		echo "The two passwords do not match";
 	}
+	header("location:Signin.html");
 }
 
 ?>

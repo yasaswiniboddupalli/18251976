@@ -11,7 +11,7 @@ if(mysqli_num_rows(mysqli_query($con,"SELECT * FROM users where email= '$email' 
 	$result=mysqli_query($con,"SELECT * FROM users where email='$email' AND password='$password'");
 	while($row = mysqli_fetch_array($result))
 	{
-		header("location:user_dashboard.html");
+		header("location:Dashboard.html");
 		
 	}
 	
