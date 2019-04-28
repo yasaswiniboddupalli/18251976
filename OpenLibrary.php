@@ -375,8 +375,6 @@ body {font-family: "Roboto", sans-serif}
   <input type="submit" class="btn btn-default" id="ReferenceSubmitButton" style="margin-left: 216px; " value="Insert" name="submitData" >
      </div>
 
-
-
           <div id="Inproceedingsid" style = "display:none;" class="col-sm-12">
 
             <div class="col-sm-4" style=" width:100px;">Author</div>
@@ -431,23 +429,21 @@ body {font-family: "Roboto", sans-serif}
       <input type="text" name="entryType" require_once>
        </div><br/><br/>
       <div class="col-sm-4">Author </div>
-      <div class="col-sm-8"><input type="text" name="author"> </div><br/>
-      <tr id='BookTitle'>
+      <div class="col-sm-8"><input   type="text" name="author"> </div><br/>
       <div class="col-sm-4" >Book Title </div>
-      <div class="col-sm-8"><input type="text" name="booktitle" > </div><br/>
-      </tr>
+      <div class="col-sm-8"><input  type="text" name="booktitle" > </div><br/>
       <div class="col-sm-4">Editor </div>
-      <div class="col-sm-8"><input type="text" name="editor" > </div><br/>
+      <div class="col-sm-8"><input  type="text" name="editor" > </div><br/>
       <div class="col-sm-4">Title </div>
-      <div class="col-sm-8"><input type="text" name="title" > </div><br/>
+      <div class="col-sm-8"><input  type="text" name="title" > </div><br/>
       <div class="col-sm-4">Journal </div>
-      <div class="col-sm-8"><input type="text" name="journal" ></div> <br/>
+      <div class="col-sm-8"><input  type="text" name="journal" ></div> <br/>
       <div class="col-sm-4">Publisher </div>
-      <div class="col-sm-8"><input type="text" name="publisher" > </div><br/>
+      <div class="col-sm-8"><input  type="text" name="publisher" > </div><br/>
       <div class="col-sm-4">Year </div>
-      <div class="col-sm-8"><input type="text" name="year" ></div> <br/>
+      <div class="col-sm-8"><input  type="text" name="year" ></div> <br/>
       <div class="col-sm-4">Volume </div>
-      <div class="col-sm-8"><input type="text" name="volume" > </div><br/>
+      <div class="col-sm-8"><input  type="text" name="volume" > </div><br/>
       <input type="submit" value="Update" name="submitData" >
 
          </div>
@@ -474,10 +470,10 @@ body {font-family: "Roboto", sans-serif}
 				<form name="form_deleteReference" onsubmit="reference_operator('deleteReference',<?php echo $userID?>)">
 					<div class="row">
 
-						<div class="col-sm">Are you sure to delete the selected references from the library?</div>
+						<div class="col-sm">Click On Delete Button to delete the selected reference</div>
 
 
-						<input type="submit" value="Delete" name="submitData">
+						<input type="submit" value="Delete" name="submitData" style="margin-left: 250px;">
 
 					</div>
 				</form>
@@ -506,10 +502,10 @@ body {font-family: "Roboto", sans-serif}
 
 						<div class="col-sm-4">Library Name</div>
 						<div class="col-sm-8">
-							<input type="text" id="libraryName_create" name="libraryName" required>
+							<input type="text" id="libraryName_create" name="libraryName" class="modalInputBox" style="margin-bottom:25px;" required>
 						</div>
 
-						<input type="submit" value="Create" name="submitData">
+						<input type="submit" value="Create" name="submitData" style="margin-left: 250px;">
 
 					</div>
 				</form>
@@ -569,9 +565,9 @@ body {font-family: "Roboto", sans-serif}
 				<form name="form_deleteLibrary" onsubmit="library_operator('deleteLibrary',<?php echo $userID?>)">
 					<div class="row" id="txtDeleteLibrary">
 
-						<div class="col-sm">Are you sure to delete the selected libraries?</div>
+						<div class="col-sm-4" style="  margin-bottom: 15px;">Are you sure to delete all selected libraries?</div>
 
-						<input type="submit" value="Delete" name="submitData">
+						<input type="submit" value="Delete Selected Libraries" name="submitData" style="margin-left: 200px;">
 
 					</div>
 				</form>
@@ -598,23 +594,24 @@ body {font-family: "Roboto", sans-serif}
 
 						<div class="col-sm-4">Original Library</div>
 						<div class="col-sm-8">
-							<input type="text" id="libraryID_Origin" name="libraryID_Origin" required>
+							<input type="text" class="modalInputBox" style="margin-bottom: 13px;"  id="libraryID_Origin" name="libraryID_Origin" required>
 						</div>
 
 						<div class="col-sm-4">Destination Library</div>
 						<div class="col-sm-8">
-						<textarea type="text" id="libraryID_Dest" name="libraryID_Dest" disabled required></textarea>
-							<input type='text' id='libraryID_DestID' name='libraryID_DestID' hidden>
-							<input type='button' value='Search Library' onclick='openWindow_searchLibrary(<?php echo $userID?>)'>
+						<textarea type="text" style="width:100%;    height: 75px;" id="libraryID_Dest" name="libraryID_Dest" disabled required></textarea>
+							<input type='text'  id='libraryID_DestID' name='libraryID_DestID' hidden>
+							<input type='button' style="margin-bottom: 13px;" value='Search Library' onclick='openWindow_searchLibrary(<?php echo $userID?>)'>
 						</div>
 
 						<div class="col-sm-5">Also Keep one in Original Library</div>
 						<div class="col-sm-7">
 							<input type="radio" name="keep" value="yes"> Yes
-							<input type="radio" name="keep" value="no" checked> No<br>
+							<input type="radio" style="margin-bottom: 13px;"  name="keep" value="no" checked> No<br>
 						</div>
 
-						<input type="submit" value="Add To" name="submitData">
+
+						<input type="submit" value="Add To" name="submitData" style="    margin-left: 250px;">
 
 					</div>
 				</form>

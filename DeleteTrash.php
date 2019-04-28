@@ -35,17 +35,17 @@ body {font-family: "Roboto", sans-serif}
 
   <!--Code to print user name--->
 <h4 style="text-align:left">
-<?php
-  $userEmailId =$_SESSION["email"];
-  $sql = "SELECT userID, firstName FROM userTable WHERE email = '$userEmailId'";
-  $result = $connSQL->query($sql);
-  if(true) {
-   while($row = $result->fetch_assoc()) {
-	   $id = $row["userID"];
-		echo "Hello"." ".$row["firstName"];
-  
-}}
-?>
+  <?php
+    $userEmailId =$_SESSION["email"];
+    $sql = "SELECT userID, firstName FROM userTable WHERE email = '$userEmailId'";
+    $result = $connSQL->query($sql);
+    if(true) {
+     while($row = $result->fetch_assoc()) {
+  	   $id = $row["userID"];
+  		
+
+  }}
+  ?>
 </h4>
 
 <form id="form" name="thisform" enctype="multipart/form-data" method="post" action="command/control_book.php?operator=DeleteTrash">
@@ -57,7 +57,7 @@ body {font-family: "Roboto", sans-serif}
 
 <table id="customers" class=" table order-list">
   <thead>
-    
+
 
       <tr>
 		<th><input type="checkbox" onclick="selectall(this);" />Reference</th>
@@ -83,7 +83,7 @@ body {font-family: "Roboto", sans-serif}
           $result2 = $connSQL->query($sqldelete);
         }
       }
- 
+
       // each checkbox is given referenceId so that we can delete  them easily
   if(!empty($_POST['selectedcheckbox'])&& isset($_POST['delete'])){
   // Loop to store and display values of individual checked checkbox.
@@ -91,7 +91,7 @@ body {font-family: "Roboto", sans-serif}
     $sqldelete = "DELETE from referenceTable WHERE referenceID='$selected'";
     $result2 = $connSQL->query($sqldelete);
   }
-  } 
+  }
 
 
 
