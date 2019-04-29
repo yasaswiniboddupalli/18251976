@@ -98,17 +98,18 @@ body {font-family: "Roboto", sans-serif}
 
 
 	<p>
-	<table style="table-layout: fixed;">
+	<table style="table-layout: fixed; margin-bottom:20px;">
 		<form id="form" name="thisform" enctype="multipart/form-data" method="post" action="command/command.php?table=sharelibrarytable&page=OpenLibrary">
 			<tr>
+				<td style="width:3%;"></td>
 				<td>
 					<ul style="border-radius:35px;width:205px">
-						<li><button type="button" style="border-radius:35px;width: 185px;" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal_createLibrary">Create New Library</button></li>
-						<li><button id="mybutton_updateLibrary" style="border-radius:35px;width: 185px;" type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="showLibrary();">Update Library</button></li>
-						<li><button id="mybutton_deleteLibrary" style="border-radius:35px;width: 185px;" type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="deleteLibrary('<?=$userID;?>')">Delete Library</button></li>
+						<li><button type="button" style="border-radius:35px;width: 185px; background-color:cadetblue;" class="btn btn-lg" data-toggle="modal" data-target="#myModal_createLibrary">Create New Library</button></li>
+						<li><button id="mybutton_updateLibrary" style="border-radius:35px;width: 185px; background-color:cadetblue;" type="button" class="btn  btn-lg" data-toggle="modal" onclick="showLibrary();">Update Library</button></li>
+						<li><button id="mybutton_deleteLibrary" style="border-radius:35px;width: 185px; background-color:cadetblue;" type="button" class="btn btn-lg" data-toggle="modal" onclick="deleteLibrary('<?=$userID;?>')">Delete Library</button></li>
 					</ul>
 				</td>
-				<td style="width:5%;">
+				<td style="width:3%;">
 				</td>
 				<td style="width:500px; border-style: groove;">
 
@@ -118,8 +119,8 @@ body {font-family: "Roboto", sans-serif}
 							<thead>
 								<tr>
 									<th style="width:100%;">
-										<h4 style="margin-top:0px !important; padding =0px;" >
-										<input type="checkbox" onclick="select_all(this,'library');" /> Library<p id="library_name">Active Library is 'unfiled'</p>
+										<h4 style="margin-top:0px !important; padding =0px; margin-left:11px;" >
+										<input type="checkbox" onclick="select_all(this,'library');" /> Library<p style="margin-top:6px" id="library_name">Active Library is 'unfiled'</p>
 										</h4>
 									</th>
 								</tr>
@@ -130,7 +131,7 @@ body {font-family: "Roboto", sans-serif}
 												<!--<input type="checkbox" name="check_ShareLibraryList[]" value="0">-->
 												<input name="check_LibraryUserList[]" value="<?=$userID;?>" hidden>
 												<input name="check_ShareLibraryList[]" value="0" hidden>
-												<span style="color:mediumblue">Unfiled</span>
+												<span style="color:black">Unfiled</span>
 											</td>
 										</tr>
 								<?php 	$query_RecWebInfo = "SELECT * FROM librarytable where userID = '$userID'";
@@ -145,7 +146,7 @@ body {font-family: "Roboto", sans-serif}
 												<td onclick="showInfo('userAndLibrary','<?php echo $row_RecShareLibraryInfo['libraryID'];?>','<?=$row_RecShareLibraryInfo['libraryName'];?>')">
 													<input type="checkbox" name="check_LibraryUserList[]" value="<?php echo $row_RecShareLibraryInfo['userID'];?>" hidden>
 													<input type="checkbox" name="check_ShareLibraryList[]" value="<?php echo $row_RecShareLibraryInfo['libraryID'];?>">
-													<span style="color:mediumblue"><?php echo $row_RecShareLibraryInfo['libraryName'];?></span>
+													<span style="color:black"><?php echo $row_RecShareLibraryInfo['libraryName'];?></span>
 												</td>
 											</tr>
 								<?php 	} ?>
@@ -174,7 +175,7 @@ body {font-family: "Roboto", sans-serif}
 														<td onclick="showInfo('userAndLibrary','<?php echo $row_RecLibraryInfo['libraryID'];?>','<?=$row_RecShareLibraryInfo['libraryName'];?>')">
 															<input type="checkbox" name="check_LibraryUserList[]" value="<?php echo $row_RecLibraryInfo['userID'];?>" hidden>
 															<input type="checkbox" name="check_ShareLibraryList[]" value="<?php echo $row_RecLibraryInfo['libraryID'];?>">
-															<span style="color:mediumblue"><?php echo $row_RecLibraryInfo['libraryName'];?></span>
+															<span style="color:black"><?php echo $row_RecLibraryInfo['libraryName'];?></span>
 														</td>
 													</tr>
 										<?php
@@ -187,7 +188,7 @@ body {font-family: "Roboto", sans-serif}
 						</div>
 						</div>
 				</td>
-				<td style="width:12%;">
+				<td style="width:4%;">
 				</td>
 				<td style="width:500px; border-style: groove; height:150px;">
 						<div id="table-wrapper">
@@ -195,7 +196,7 @@ body {font-family: "Roboto", sans-serif}
 						<table id="share_table">
 							<thead>
 								<tr>
-									<th style="width:100%;"><h4 style="margin-top:0px !important; padding =0px;">Shared with User</h4></th>
+									<th style="width:100%;height:65px"><h4 style="margin-top:11px !important; margin-left: 11px;">Shared with User</h4></th>
 								</tr>
 							</thead>
 							<tbody id ="txtShareWithUser">
@@ -206,32 +207,17 @@ body {font-family: "Roboto", sans-serif}
 						</div>
 				</td>
 			</tr>
-			<tr>
-				<td>
-						<div style="height:5px;"></div>
-				</td>
-			</tr>
-			<!-- <table>
-				<tr>
-					<td>
-						<!--
-						<input  type="submit" name="Update" value="Update" style="float:left;"></input>
-						<input  type="submit" name="Create" value="Create" style="float:left;"></input>
-						<input  type="submit" name="Delete" value="Delete" style="float:left;"></input>
-						-->
 
-					<!-- </td>
-				</tr>
-			</table> -->
+
 		</form>
 	</table>
 	<p style="height:0px;">
 
 	<ul style="border-radius:35px;">
-		<li><button id="mybutton_addReference" style="border-radius:38px;width: 185px;" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Record</button></li>
-		<li><button id="mybutton_updateReference" style="border-radius:38px; width: 185px;" type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="openModal_Reference('updateReference');">Update Reference</button></li>
-		<li><button id="mybutton_deleteReference" style="border-radius:38px; width: 185px;" type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="openModal_Reference('deleteReference');">Delete Reference</button></li>
-		<li><button id="mybutton_addToOtherLibrary" style="border-radius:38px; width: 185px;" type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="openModal_Reference('addToOtherLibrary');">Add To Other Library</button></li>
+		<li><button id="mybutton_addReference" style="border-radius:38px;width: 185px; margin-left: 100px; margin-right: 60px; background-color:cadetblue;" type="button" class="btn btn-lg" data-toggle="modal" data-target="#myModal">Add Record</button></li>
+		<li><button id="mybutton_updateReference" style="border-radius:38px; width: 185px; margin-left: 60px; margin-right: 60px; background-color:cadetblue;" type="button" class="btn btn-lg" data-toggle="modal" onclick="openModal_Reference('updateReference');">Update Reference</button></li>
+		<li><button id="mybutton_deleteReference" style="border-radius:38px; width: 185px; margin-left: 60px; margin-right: 60px; background-color:cadetblue;" type="button" class="btn btn-lg" data-toggle="modal" onclick="openModal_Reference('deleteReference');">Delete Reference</button></li>
+		<li><button id="mybutton_addToOtherLibrary" style="border-radius:38px; width: 185px; margin-left: 60px; margin-right: 100px; background-color:cadetblue;" type="button" class="btn btn-lg" data-toggle="modal" onclick="openModal_Reference('addToOtherLibrary');">Add To Other Library</button></li>
 		<!--<li><button id="mybutton_removeFromLibrary" type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="openModal_Reference('removeFromLibrary');">Remove From Library</button></li>-->
 	</ul>
 
@@ -253,9 +239,9 @@ body {font-family: "Roboto", sans-serif}
 				</tr>
 			</thead>
 			<tbody id ="txtHint">
-				<tr>
+				<!-- <tr>
 					Reference info will be listed here...
-				</tr>
+				</tr> -->
 				<?php
 					$stmt = $pdo->query("SELECT * FROM referenceTable where isDelete=0 and defaultLibrary=1 and userID='$userID'");
 					echo "<tr hidden><td><input type='text' id='libraryID' name='libraryID' value='0' hidden/>";

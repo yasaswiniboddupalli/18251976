@@ -38,7 +38,7 @@ $(document).ready(function(){
 
 
   <div class="w3-bar" style="background-color:cadetblue;color:#fff;">
-    <button class="w3-bar-item w3-button tablink w3-red w3-mobile" onclick="openCity(event,'Home')">Home</button>
+    <button class="w3-bar-item w3-button tablink w3-white w3-mobile" onclick="openCity(event,'Home')">Home</button>
 
     <button class="w3-bar-item w3-button tablink w3-mobile" onclick="openCity(event,'Update')">Update Details</button>
     <button class="w3-bar-item w3-button tablink w3-mobile" onclick="openCity(event,'Trash')">Trash</button>
@@ -69,10 +69,10 @@ function openCity(evt, cityName) {
   }
   tablinks = document.getElementsByClassName("tablink");
   for (i = 0; i < x.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+    tablinks[i].className = tablinks[i].className.replace(" w3-white", "");
   }
   document.getElementById(cityName).style.display = "block";
-  evt.currentTarget.className += " w3-red";
+  evt.currentTarget.className += " w3-white";
 }
 </script>
 

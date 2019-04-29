@@ -10,7 +10,7 @@ input[type=text] {
   background-image: url('searchicon.png');
   background-position: 10px 10px;
   background-repeat: no-repeat;
-   padding: 12px 20px 12px 40px;
+  padding: 12px 20px 12px 40px;
 }
 /* style for table nav bar*/
 body {
@@ -32,7 +32,8 @@ ul {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #7baeaf !important;
+  /* background-color: #7baeaf !important; */
+  background-color: #d3e4e5 !important;
   position: -webkit-sticky; /* Safari */
   top: 0;
 }
@@ -85,7 +86,10 @@ li a:hover {
 
 /* OpenLibrary css */
 
-body {font-family: "Roboto", sans-serif}
+body {font-family: "Roboto", sans-serif;
+
+}
+
 .w3-bar-block .w3-bar-item {
   padding: 16px;
   font-weight: bold;
@@ -95,7 +99,7 @@ body {font-family: "Roboto", sans-serif}
 	position:relative;
 }
 #table-scroll {
-  height:100px;
+  height:140px;
   overflow:auto;
   margin-top:65px;
 }

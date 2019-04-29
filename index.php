@@ -6,14 +6,21 @@
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><style>
-body {font-family: "Roboto", sans-serif}
+
+body {font-family: "Roboto", sans-serif;
+background-image: url('./Images/Books.jpg');
+background-repeat: no-repeat;
+background-size: 1440px 788px;
+}
+
 .w3-bar-block .w3-bar-item {
   padding: 16px;
   font-weight: bold;
+
 }
 .headerFooter{
   color: #fff;
-  background-color: darkcyan;
+  background-color: transparent;
 }
 </style>
 <body>
@@ -30,12 +37,12 @@ body {font-family: "Roboto", sans-serif}
    </div>
 
 
-<header class="w3-container headerFooter" style="height:75px !important; text-align:center;">
-  <h1 style="font-size: 44px; margin-top: 6px;">Bibliography Manager</h1>
+<header class="w3-container w3-card-4  headerFooter" style="height:75px !important; text-align:center;">
+  <h1 style="font-size: 44px; margin-top: 6px;" >Bibliography Manager</h1>
 </header>
-<iframe  height="685px" width="100%" style="border-width: 0px !important; " src="Signin.html" name="iframe_a">
+<iframe height="685px" width="100%" style="border-width: 0px !important; margin-bottom: -6px;" src="Signin.html" name="iframe_a">
   </iframe>
-  <footer class="w3-container headerFooter" style="position: fixed;width: 100%;text-align: center;">
+  <footer class="w3-container w3-card-4 headerFooter" style="position: fixed;width: 100%;text-align: center; background-color: black !important; font-style:bold">
   <p style="margin-top: 2px;">© Copyright Maynooth Students</p>
 </footer>
 
