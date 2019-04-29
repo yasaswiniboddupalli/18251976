@@ -89,17 +89,27 @@ body {font-family: "Roboto", sans-serif}
 		//echo $totalRows_RecLibraryInfo;
 	//}while($row_RecLibraryInfo = mysqli_fetch_assoc($RecLibraryInfo));
 ?>
-	<ul>
-		<li><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal_createLibrary">Create New Library</button></li>
-		<li><button id="mybutton_updateLibrary" type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="showLibrary();">Update Library</button></li>
-		<li><button id="mybutton_deleteLibrary" type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="deleteLibrary('<?=$userID;?>')">Delete Library</button></li>
+	<!-- <ul style="border-radius:35px;width:205px">
+		<li><button type="button" style="border-radius:35px;width: 185px;" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal_createLibrary">Create New Library</button></li>
+		<li><button id="mybutton_updateLibrary" style="border-radius:35px;width: 185px;" type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="showLibrary();">Update Library</button></li>
+		<li><button id="mybutton_deleteLibrary" style="border-radius:35px;width: 185px;" type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="deleteLibrary('<?=$userID;?>')">Delete Library</button></li>
+</ul> -->
 		<!--<li><button type="button" class="btn btn-info btn-lg" onclick="deleteLibrary()">Delete Library</button></li>-->
-	</ul>
+
 
 	<p>
 	<table style="table-layout: fixed;">
 		<form id="form" name="thisform" enctype="multipart/form-data" method="post" action="command/command.php?table=sharelibrarytable&page=OpenLibrary">
 			<tr>
+				<td>
+					<ul style="border-radius:35px;width:205px">
+						<li><button type="button" style="border-radius:35px;width: 185px;" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal_createLibrary">Create New Library</button></li>
+						<li><button id="mybutton_updateLibrary" style="border-radius:35px;width: 185px;" type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="showLibrary();">Update Library</button></li>
+						<li><button id="mybutton_deleteLibrary" style="border-radius:35px;width: 185px;" type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="deleteLibrary('<?=$userID;?>')">Delete Library</button></li>
+					</ul>
+				</td>
+				<td style="width:5%;">
+				</td>
 				<td style="width:500px; border-style: groove;">
 
 						<div id="table-wrapper">
@@ -108,15 +118,15 @@ body {font-family: "Roboto", sans-serif}
 							<thead>
 								<tr>
 									<th style="width:100%;">
-										<h4 style="margin-top:0px !important; padding =0px;">
-										<input type="checkbox" onclick="select_all(this,'library');" /> Library
+										<h4 style="margin-top:0px !important; padding =0px;" >
+										<input type="checkbox" onclick="select_all(this,'library');" /> Library<p id="library_name">Active Library is 'unfiled'</p>
 										</h4>
 									</th>
 								</tr>
 							</thead>
 							<tbody id ="txtLibrary">
 										<tr>
-											<td onclick="showInfo('unfiled',<?php echo $userID;?>)">
+											<td onclick="showInfo('unfiled',<?php echo $userID;?>,'unfiled')">
 												<!--<input type="checkbox" name="check_ShareLibraryList[]" value="0">-->
 												<input name="check_LibraryUserList[]" value="<?=$userID;?>" hidden>
 												<input name="check_ShareLibraryList[]" value="0" hidden>
@@ -132,7 +142,7 @@ body {font-family: "Roboto", sans-serif}
 										{
 										?>
 											<tr>
-												<td onclick="showInfo('userAndLibrary','<?php echo $row_RecShareLibraryInfo['libraryID'];?>')">
+												<td onclick="showInfo('userAndLibrary','<?php echo $row_RecShareLibraryInfo['libraryID'];?>','<?=$row_RecShareLibraryInfo['libraryName'];?>')">
 													<input type="checkbox" name="check_LibraryUserList[]" value="<?php echo $row_RecShareLibraryInfo['userID'];?>" hidden>
 													<input type="checkbox" name="check_ShareLibraryList[]" value="<?php echo $row_RecShareLibraryInfo['libraryID'];?>">
 													<span style="color:mediumblue"><?php echo $row_RecShareLibraryInfo['libraryName'];?></span>
@@ -161,7 +171,7 @@ body {font-family: "Roboto", sans-serif}
 												if($userID == $list_sharelibraryID[$i] && ($userID != $row_RecLibraryInfo['userID'])){
 										?>
 													<tr>
-														<td onclick="showInfo('userAndLibrary','<?php echo $row_RecLibraryInfo['libraryID'];?>')">
+														<td onclick="showInfo('userAndLibrary','<?php echo $row_RecLibraryInfo['libraryID'];?>','<?=$row_RecShareLibraryInfo['libraryName'];?>')">
 															<input type="checkbox" name="check_LibraryUserList[]" value="<?php echo $row_RecLibraryInfo['userID'];?>" hidden>
 															<input type="checkbox" name="check_ShareLibraryList[]" value="<?php echo $row_RecLibraryInfo['libraryID'];?>">
 															<span style="color:mediumblue"><?php echo $row_RecLibraryInfo['libraryName'];?></span>
@@ -177,7 +187,7 @@ body {font-family: "Roboto", sans-serif}
 						</div>
 						</div>
 				</td>
-				<td style="width:28%;">
+				<td style="width:12%;">
 				</td>
 				<td style="width:500px; border-style: groove; height:150px;">
 						<div id="table-wrapper">
@@ -217,11 +227,11 @@ body {font-family: "Roboto", sans-serif}
 	</table>
 	<p style="height:0px;">
 
-	<ul>
-		<li><button id="mybutton_addReference" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Record</button></li>
-		<li><button id="mybutton_updateReference" type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="openModal_Reference('updateReference');">Update Reference</button></li>
-		<li><button id="mybutton_deleteReference" type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="openModal_Reference('deleteReference');">Delete Reference</button></li>
-		<li><button id="mybutton_addToOtherLibrary" type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="openModal_Reference('addToOtherLibrary');">Add To Other Library</button></li>
+	<ul style="border-radius:35px;">
+		<li><button id="mybutton_addReference" style="border-radius:38px;width: 185px;" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Record</button></li>
+		<li><button id="mybutton_updateReference" style="border-radius:38px; width: 185px;" type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="openModal_Reference('updateReference');">Update Reference</button></li>
+		<li><button id="mybutton_deleteReference" style="border-radius:38px; width: 185px;" type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="openModal_Reference('deleteReference');">Delete Reference</button></li>
+		<li><button id="mybutton_addToOtherLibrary" style="border-radius:38px; width: 185px;" type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="openModal_Reference('addToOtherLibrary');">Add To Other Library</button></li>
 		<!--<li><button id="mybutton_removeFromLibrary" type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="openModal_Reference('removeFromLibrary');">Remove From Library</button></li>-->
 	</ul>
 
@@ -667,7 +677,7 @@ body {font-family: "Roboto", sans-serif}
 			}
 		}
 
-		function showInfo(type,id) {
+		function showInfo(type,id,name) {
 			if(type != "userAndLibrary"){
 				document.getElementById("txtShareWithUser").innerHTML = "";
 			}
@@ -687,11 +697,13 @@ body {font-family: "Roboto", sans-serif}
 				xmlhttp.onreadystatechange = function() {
 					if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 						document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+						document.getElementById("library_name").innerHTML = "Active Library is '"+name+"'";
 					}
 				};
 
 				if(type == "unfiled"){
 					xmlhttp.open("GET","command/control_book.php?operator=showUnfiled"+"&userID="+id,true);
+
 				}else{
 					xmlhttp.open("GET","command/getReference.php?DataType=reference"+"&DataInfo="+id,true);
 				}
@@ -707,7 +719,9 @@ body {font-family: "Roboto", sans-serif}
 					}
 					xmlhttp_user.onreadystatechange = function() {
 						if (xmlhttp_user.readyState == 4 && xmlhttp_user.status == 200) {
+
 							document.getElementById("txtShareWithUser").innerHTML = xmlhttp_user.responseText;
+
 						}
 					};
 					xmlhttp_user.open("GET","command/getReference.php?DataType="+type+"&DataInfo="+id,true);
