@@ -42,7 +42,11 @@ INSERT INTO `libraryTable` (`libraryID`, `libraryName`, `userID`) VALUES
 (1,'library1',2),
 (2,'libraryTest',2),
 (3,'library3',3),
-(4,'library4',4);
+(4,'library4',4),
+(5,'sharelibrary1',1),
+(6,'sharelibrary2_Test',2),
+(7,'sharelibrary3',3),
+(8,'sharelibrary4',4);
 
 -- --------------------------------------------------------
 
@@ -73,22 +77,22 @@ CREATE TABLE `referenceTable` (
 --
 
 INSERT INTO `referenceTable` (`referenceID`, `entryType`, `author`, `bookTitle`, `editor`, `title`, `journal`, `publisher`, `year`, `volume`, `libraryID`, `defaultLibrary`, `isDelete`, `userID`, `sharelibraryID`) VALUES
-(1, 'sharelibrary1,3,2', 'AAAA', 'BBBB', 'CCCC', 'DDDD', 'EEEEE', 'FFFFF', '2019', '01', 1, 1, 0, 1, '1,3,2'),
-(2, 'sharelibrary3,2', 'AAAA', 'BBBB', 'CCCC', 'DDDD', 'EEEEE', 'FFFFF', '2019', '01', 1, 1, 0, 2, '3,2'),
-(3, 'sharelibrary2,1', 'AAAA', 'BBBB', 'CCCC', 'DDDD', 'EEEEE', 'FFFFF', '2019', '01', 1, 1, 0, 3, '2,1'),
-(4, 'sharelibrary23', 'AAAA', 'BBBB', 'CCCC', 'DDDD', 'EEEEE', 'FFFFF', '2019', '01', 1, 1, 0, 4, '2,3'),
-(5, 'sharelibrary1', 'AAAA', 'BBBB', 'CCCC', 'DDDD', 'EEEEE', 'FFFFF', '2019', '01', 1, 1, 0, 4, '1'),
-(6, 'sharelibrary13', 'AAAA', 'BBBB', 'CCCC', 'DDDD', 'EEEEE', 'FFFFF', '2019', '01', 1, 1, 0, 2, '1,3'),
-(7, 'sharelibrary23', 'AAAA', 'BBBB', 'CCCC', 'DDDD', 'EEEEE', 'FFFFF', '2019', '01', 1, 1, 0, 3, '2,3'),
-(8, 'sharelibrary3', 'AAAA', 'BBBB', 'CCCC', 'DDDD', 'EEEEE', 'FFFFF', '2019', '01', 1, 1, 0, 1, '3'),
-(9, 'sharelibrary23', 'AAAA', 'BBBB', 'CCCC', 'DDDD', 'EEEEE', 'FFFFF', '2019', '01', 1, 1, 0, 1, '2,3'),
-(10, 'sharelibrary1', 'AAAA', 'BBBB', 'CCCC', 'DDDD', 'EEEEE', 'FFFFF', '2019', '01', 1, 1, 0, 2, '1'),
-(11, 'sharelibrary13', 'AAAA', 'BBBB', 'CCCC', 'DDDD', 'EEEEE', 'FFFFF', '2019', '01', 1, 1, 0, 4, '1,3'),
-(12, 'sharelibrary13', 'AAAA', 'BBBB', 'CCCC', 'DDDD', 'EEEEE', 'FFFFF', '2019', '01', 1, 1, 0, 3, '1,3'),
-(13, 'sharelibrary3', 'AAAA', 'BBBB', 'CCCC', 'DDDD', 'EEEEE', 'FFFFF', '2019', '01', 1, 1, 0, 1, '3'),
-(14, 'sharelibrary23', 'AAAA', 'BBBB', 'CCCC', 'DDDD', 'EEEEE', 'FFFFF', '2019', '01', 1, 1, 0, 2, '2,3'),
-(15, 'sharelibrary23', 'AAAA', 'BBBB', 'CCCC', 'DDDD', 'EEEEE', 'FFFFF', '2019', '01', 1, 1, 0, 4, '2,3'),
-(16, 'sharelibrary3', 'AAAA', 'BBBB', 'CCCC', 'DDDD', 'EEEEE', 'FFFFF', '2019', '01', 1, 1, 0, 3, '3');
+(1, 'Book', 'Sanket', 'Harry potter', 'navneet', 'ignore', 'ignore', 'apple', '2019', '01', 1, 1, 0, 1, '1,3,2'),
+(2, 'library2', 'AAAA', 'BBBB', 'CCCC', 'DDDD', 'EEEEE', 'FFFFF', '2019', '01', 2, 1, 0, 2, '3,2'),
+(3, 'library3', 'AAAA', 'BBBB', 'CCCC', 'DDDD', 'EEEEE', 'FFFFF', '2019', '01', 3, 1, 0, 3, '2,1'),
+(4, 'library4', 'AAAA', 'BBBB', 'CCCC', 'DDDD', 'EEEEE', 'FFFFF', '2019', '01', 4, 1, 0, 4, '2,3'),
+(5, 'library5', 'AAAA', 'BBBB', 'CCCC', 'DDDD', 'EEEEE', 'FFFFF', '2019', '01', 5, 1, 0, 4, '1'),
+(6, 'library6', 'AAAA', 'BBBB', 'CCCC', 'DDDD', 'EEEEE', 'FFFFF', '2019', '01', 6, 1, 0, 2, '1,3'),
+(7, 'library7', 'AAAA', 'BBBB', 'CCCC', 'DDDD', 'EEEEE', 'FFFFF', '2019', '01', 7, 1, 0, 3, '2,3'),
+(8, 'library8', 'AAAA', 'BBBB', 'CCCC', 'DDDD', 'EEEEE', 'FFFFF', '2019', '01', 8, 1, 0, 1, '3'),
+(9, 'library1', 'AAAA', 'BBBB', 'CCCC', 'DDDD', 'EEEEE', 'FFFFF', '2019', '01', 1, 1, 0, 1, '2,3'),
+(10, 'library2', 'AAAA', 'BBBB', 'CCCC', 'DDDD', 'EEEEE', 'FFFFF', '2019', '01', 2, 1, 0, 2, '1'),
+(11, 'library3', 'AAAA', 'BBBB', 'CCCC', 'DDDD', 'EEEEE', 'FFFFF', '2019', '01', 3, 1, 0, 4, '1,3'),
+(12, 'library4', 'AAAA', 'BBBB', 'CCCC', 'DDDD', 'EEEEE', 'FFFFF', '2019', '01', 4, 1, 0, 3, '1,3'),
+(13, 'library5', 'AAAA', 'BBBB', 'CCCC', 'DDDD', 'EEEEE', 'FFFFF', '2019', '01', 5, 1, 0, 1, '3'),
+(14, 'library6', 'AAAA', 'BBBB', 'CCCC', 'DDDD', 'EEEEE', 'FFFFF', '2019', '01', 6, 1, 0, 2, '2,3'),
+(15, 'library7', 'AAAA', 'BBBB', 'CCCC', 'DDDD', 'EEEEE', 'FFFFF', '2019', '01', 7, 1, 0, 4, '2,3'),
+(16, 'library8', 'AAAA', 'BBBB', 'CCCC', 'DDDD', 'EEEEE', 'FFFFF', '2019', '01', 8, 1, 0, 3, '3');
 
 -- --------------------------------------------------------
 
@@ -97,9 +101,8 @@ INSERT INTO `referenceTable` (`referenceID`, `entryType`, `author`, `bookTitle`,
 --
 
 CREATE TABLE `shareLibraryTable` (
-  `libraryID` int(11) UNSIGNED NOT NULL,
-  `libraryName` text COLLATE utf8_unicode_ci,
-  `userID` int(11) UNSIGNED DEFAULT '0',
+  `shareLibraryID` int(11) UNSIGNED NOT NULL ,
+  `libraryID` int(11) UNSIGNED DEFAULT '0',
   `shareUser` text COLLATE utf8_unicode_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4;
 
@@ -107,11 +110,11 @@ CREATE TABLE `shareLibraryTable` (
 -- sharelibraryTable data `sharelibraryTable`
 --
 
-INSERT INTO `sharelibraryTable` (`libraryID`, `libraryName`, `userID`, `shareUser`) VALUES
-(1,'sharelibrary1',2,'2,3'),
-(2,'sharelibrary2_Test',3,'3,4'),
-(3,'sharelibrary3',4,'4,1'),
-(4,'sharelibrary4',1,'1,2');
+INSERT INTO `sharelibraryTable` (`shareLibraryID`, `libraryID`, `shareUser`) VALUES
+(1,5,'1,2'),
+(2,6,'2,3'),
+(3,7,'3,1,4'),
+(4,8,'2,4');
 -- --------------------------------------------------------
 
 --
@@ -131,8 +134,8 @@ CREATE TABLE `userTable` (
 --
 
 INSERT INTO `userTable` (`userID`, `firstName`, `lastName`, `email`, `password`) VALUES
-(1, 'user1', 'user1lastname', 'smotke93@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b'),
-(2, 'user2', 'user2lastname', 'abc@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b'),
+(1, 'Sankalp', 'Motke', 'smotke93@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b'),
+(2, 'Chun', 'Hung', 'abc@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b'),
 (3, 'user3', 'user3lastname', 'xyz@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b'),
 (4, 'user4', 'user4lastname', 'cxyz@gmail.com', '011c945f30ce2cbafc452f39840f025693339c42');
 
@@ -156,7 +159,7 @@ ALTER TABLE `referenceTable`
 -- Indexes for table `shareLibraryTable`
 --
 ALTER TABLE `shareLibraryTable`
-  ADD PRIMARY KEY (`libraryID`);
+  ADD PRIMARY KEY (`shareLibraryID`);
 
 --
 -- Indexes for table `userTable`
@@ -184,7 +187,7 @@ ALTER TABLE `referenceTable`
 -- AUTO_INCREMENT for table `shareLibraryTable`
 --
 ALTER TABLE `shareLibraryTable`
-  MODIFY `libraryID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `shareLibraryID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `userTable`
