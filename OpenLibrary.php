@@ -103,18 +103,21 @@ body {font-family: "Roboto", sans-serif}
 			<tr>
 				<td style="width:3%;"></td>
 				<td>
-					<ul style="border-radius:35px;width:205px">
-						<li><button type="button" style="border-radius:35px;width: 185px; background-color:cadetblue;" class="btn btn-lg" data-toggle="modal" data-target="#myModal_createLibrary">Create New Library</button></li>
-						<li><button id="mybutton_updateLibrary" style="border-radius:35px;width: 185px; background-color:cadetblue;" type="button" class="btn  btn-lg" data-toggle="modal" onclick="showLibrary();">Update Library</button></li>
-						<li><button id="mybutton_deleteLibrary" style="border-radius:35px;width: 185px; background-color:cadetblue;" type="button" class="btn btn-lg" data-toggle="modal" onclick="deleteLibrary('<?=$userID;?>')">Delete Library</button></li>
+					<ul style="border-radius:32px;width:84%">
+						<li><button type="button" style="border-radius:35px; width: 185px; background-color:cadetblue;" class="btn btn-lg" data-toggle="modal" data-target="#myModal_createLibrary">Create New Library</button></li>
+						<li><button id="mybutton_updateLibrary" style="border-radius:35px; width: 185px; background-color:cadetblue;" type="button" class="btn  btn-lg" data-toggle="modal" onclick="showLibrary();">Update Library</button></li>
+						<li><button id="mybutton_deleteLibrary" style="border-radius:35px; width: 185px; background-color:cadetblue;" type="button" class="btn btn-lg" data-toggle="modal" onclick="deleteLibrary('<?=$userID;?>')">Delete Library</button></li>
 					</ul>
 				</td>
 				<td style="width:3%;">
 				</td>
-				<td style="width:500px; border-style: groove;">
+				<td style="width:38%; border-style: groove;">
 
 						<div id="table-wrapper">
 						<div id="table-scroll">
+						<div align="center">
+            <input type="text" name="search1" id="search1" placeholder="Search by library name...." class="form-control"/>
+        </div>
 						<table id="share_table">
 							<thead>
 								<tr>
@@ -188,11 +191,14 @@ body {font-family: "Roboto", sans-serif}
 						</div>
 						</div>
 				</td>
-				<td style="width:4%;">
+				<td style="width:5%;">
 				</td>
-				<td style="width:500px; border-style: groove; height:150px;">
+				<td style="width:32%; border-style: groove; height:150px;">
 						<div id="table-wrapper">
 						<div id="table-scroll">
+						<div align="center">
+            <input type="text" name="search2" id="search2" placeholder="Search for Entry type,Author,Book Titles,...." class="form-control"/>
+        </div>
 						<table id="share_table">
 							<thead>
 								<tr>
@@ -206,6 +212,8 @@ body {font-family: "Roboto", sans-serif}
 						</div>
 						</div>
 				</td>
+				<td style="width:2%;">
+				</td>
 			</tr>
 
 
@@ -213,14 +221,30 @@ body {font-family: "Roboto", sans-serif}
 	</table>
 	<p style="height:0px;">
 
-	<ul style="border-radius:35px;">
-		<li><button id="mybutton_addReference" style="border-radius:38px;width: 185px; margin-left: 100px; margin-right: 60px; background-color:cadetblue;" type="button" class="btn btn-lg" data-toggle="modal" data-target="#myModal">Add Record</button></li>
-		<li><button id="mybutton_updateReference" style="border-radius:38px; width: 185px; margin-left: 60px; margin-right: 60px; background-color:cadetblue;" type="button" class="btn btn-lg" data-toggle="modal" onclick="openModal_Reference('updateReference');">Update Reference</button></li>
-		<li><button id="mybutton_deleteReference" style="border-radius:38px; width: 185px; margin-left: 60px; margin-right: 60px; background-color:cadetblue;" type="button" class="btn btn-lg" data-toggle="modal" onclick="openModal_Reference('deleteReference');">Delete Reference</button></li>
-		<li><button id="mybutton_addToOtherLibrary" style="border-radius:38px; width: 185px; margin-left: 60px; margin-right: 100px; background-color:cadetblue;" type="button" class="btn btn-lg" data-toggle="modal" onclick="openModal_Reference('addToOtherLibrary');">Add To Other Library</button></li>
+	<div style="border-radius:35px;" class="col-sm-12">
+		<div class="col-sm-3"><button id="mybutton_addReference" style="border-radius:38px;width: 185px; margin-left: 100px; margin-right: 60px; background-color:cadetblue;" type="button" class="btn btn-lg" data-toggle="modal" data-target="#myModal">Add Record</button> </div>
+		<div class="col-sm-3"><button id="mybutton_updateReference" style="border-radius:38px; width: 185px; margin-left: 60px; margin-right: 60px; background-color:cadetblue;" type="button" class="btn btn-lg" data-toggle="modal" onclick="openModal_Reference('updateReference');">Update Reference</button> </div>
+		<div class="col-sm-3"><button id="mybutton_deleteReference" style="border-radius:38px; width: 185px; margin-left: 60px; margin-right: 60px; background-color:cadetblue;" type="button" class="btn btn-lg" data-toggle="modal" onclick="openModal_Reference('deleteReference');">Delete Reference</button> </div>
+		<div class="col-sm-3"><button id="mybutton_addToOtherLibrary" style="border-radius:38px; width: 200px; margin-left: 60px; margin-right: 100px; background-color:cadetblue;" type="button" class="btn btn-lg" data-toggle="modal" onclick="openModal_Reference('addToOtherLibrary');">Add To Other Library</button></div>
 		<!--<li><button id="mybutton_removeFromLibrary" type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="openModal_Reference('removeFromLibrary');">Remove From Library</button></li>-->
-	</ul>
-
+	</div>
+	
+	<div>
+		<select id="sort_data_type">
+		  <option value="Sort_Author">Author</option>
+		  <option value="Sort_Title">Title</option>
+		  <option value="Sort_Booktitle">Book title</option>
+		  <option value="Sort_Year">Year</option>
+		</select>
+		
+		<select id="sort_type">
+		  <option value="order_asc">Asscending order</option>
+		  <option value="order_dec">Decending order</option>
+		</select>
+		
+		<button id="mybutton_sort" type="button" onclick="SortReference(<?=$userID;?>);">Sort Reference</button> 
+		<input id="CurrentlibraryID" value="0" hidden>
+	</div>
 	<!--table-->
 	<form id="form" name="thisform" enctype="multipart/form-data" method="post" action="command/command.php?table=sharelibrarytable&page=OpenLibrary">
 		<table id="customers">
@@ -700,15 +724,55 @@ body {font-family: "Roboto", sans-serif}
 
 						<div class="col-sm-4">Destination Library</div>
 						<div class="col-sm-8">
-						<textarea type="text" style="width:100%;    height: 75px;" id="libraryID_Dest" name="libraryID_Dest" disabled required></textarea>
+						<!--<textarea type="text" style="width:100%;    height: 75px;" id="libraryID_Dest" name="libraryID_Dest" disabled required></textarea>
 							<input type='text'  id='libraryID_DestID' name='libraryID_DestID' hidden>
-							<input type='button' style="margin-bottom: 13px;" value='Search Library' onclick='openWindow_searchLibrary(<?php echo $userID?>)'>
+							<input type='button' style="margin-bottom: 13px;" value='Search Library' onclick='openWindow_searchLibrary(<?php //echo $userID?>)'>-->
+						<?php
+							echo "<select id='libraryID_Dest' name='libraryID_Dest' style='width:370px;height:100px;' multiple='multiple'>";
+							//if($libraryID_Origin != $row1['libraryID']){
+								echo "<option value='0'>Unfiled</option>";
+							//}
+							
+							$RecLibraryInfo = $pdo->query("SELECT * FROM librarytable where userID='$userID'");
+							foreach( $RecLibraryInfo as $row1 ){
+								if($libraryID_Origin != $row1['libraryID']){
+									echo "<option value='".$row1['libraryID']."'>" . $row1['libraryName']. "</option>";
+								}
+							}
+							
+							$query_RecWebInfo = "SELECT * FROM sharelibrarytable";
+							//$RecShareLibraryInfo = mysqli_query($connSQL, $query_RecWebInfo) or die(mysql_error());
+							$RecShareLibraryInfo = $pdo->query($query_RecWebInfo);
+							
+							//while ($row_RecShareLibraryInfo = mysqli_fetch_assoc($RecShareLibraryInfo))
+							while ($row_RecShareLibraryInfo = $RecShareLibraryInfo->fetch())
+							{
+								$list_sharelibraryID = explode(',',$row_RecShareLibraryInfo['shareUser']);
+								$listLength_sharelibraryID = sizeof($list_sharelibraryID);
+								
+								$libraryID = $row_RecShareLibraryInfo['libraryID'];
+								$query_RecWebInfo = "SELECT * FROM librarytable where libraryID = '$libraryID'";
+								//$RecLibraryInfo = mysqli_query($connSQL, $query_RecWebInfo) or die(mysql_error());
+								$RecLibraryInfo = $pdo->query($query_RecWebInfo);
+								//$row_RecLibraryInfo = mysqli_fetch_assoc($RecLibraryInfo);
+								$row_RecLibraryInfo = $RecLibraryInfo->fetch();
+								
+								for($i=0;$i<$listLength_sharelibraryID;$i++){
+									if($userID == $list_sharelibraryID[$i] && ($userID != $row_RecLibraryInfo['userID'])
+										&& $libraryID_Origin != $row_RecLibraryInfo['libraryID']){
+											echo "<option value='".$row_RecLibraryInfo['libraryID']."'>" . $row_RecLibraryInfo['libraryName']. "</option>";
+											break;
+										}
+								}
+							}
+							echo "</select>";
+						?>
 						</div>
 
-						<div class="col-sm-5">Also Keep one in Original Library</div>
-						<div class="col-sm-7">
-							<input type="radio" name="keep" value="yes"> Yes
-							<input type="radio" style="margin-bottom: 13px;"  name="keep" value="no" checked> No<br>
+						<div class="col-sm-5" hidden>Also Keep one in Original Library</div>
+						<div class="col-sm-7" hidden>
+							<input type="radio" name="keep" value="yes" hidden> Yes
+							<input type="radio" style="margin-bottom: 13px;"  name="keep" value="no" checked hidden> No<br>
 						</div>
 
 
@@ -775,6 +839,7 @@ body {font-family: "Roboto", sans-serif}
 			}
 
 			if (id == "") {
+				document.getElementById("CurrentlibraryID").value = -1;
 				document.getElementById("txtHint").innerHTML = "";
 				document.getElementById("txtShareWithUser").innerHTML = "";
 				return;
@@ -794,12 +859,14 @@ body {font-family: "Roboto", sans-serif}
 				};
 
 				if(type == "unfiled"){
-					xmlhttp.open("GET","command/control_book.php?operator=showUnfiled"+"&userID="+id,true);
+					xmlhttp.open("GET","command/control_book.php?operator=showUnfiled"+"&userID="+id+"&datatype=&sorttype=",true);
 
 				}else{
-					xmlhttp.open("GET","command/getReference.php?DataType=reference"+"&DataInfo="+id,true);
+					xmlhttp.open("GET","command/getReference.php?DataType=reference"+"&DataInfo="+id+"&datatype=&sorttype=",true);
 				}
 				xmlhttp.send();
+				
+				document.getElementById("CurrentlibraryID").value = id;
 
 				if(type == "userAndLibrary"){
 					if (window.XMLHttpRequest) {
@@ -1107,6 +1174,13 @@ body {font-family: "Roboto", sans-serif}
 
 			if(param == "addToOtherLibrary"){
 				document.forms["form_addToOtherLibrary"]["libraryID_Origin"].value = document.getElementById("libraryName").value;
+				
+				var cboxes_DestLibID = document.getElementById('libraryID_Dest');
+				var len = cboxes_DestLibID.options.length;
+				//var value_checked_cboxes_DestLibID = '';
+				for (var i=0; i<len; i++) {
+					cboxes_DestLibID.options[i].selected = false;
+				}
 
 				$("#myModal_addToOtherLibrary").modal();
 			}else if(param == "removeFromLibrary"){
@@ -1141,17 +1215,33 @@ body {font-family: "Roboto", sans-serif}
 								//document.getElementById("demo").innerHTML = myObj.name;
 								//alert(myObj.title);
 								//alert(myObj.entryType);
+								var cboxes_myselect = document.getElementById('mySelect_update');
+								var len = cboxes_myselect.options.length;
+								var value_checked_cboxes_share = '';
+								for (var i=0; i<len; i++) {
+									cboxes_myselect.options[i].selected=false;
+									//alert(cboxes_myselect.options[i].selected);
+								}
+								document.getElementById("Bookid_update").style= "display:none;";
+								document.getElementById("Articleid_update").style= "display:none;";
+								document.getElementById("Incollectionid_update").style= "display:none;";
+								document.getElementById("Inproceedingsid_update").style= "display:none;";
+								
 								if(myObj.entryType=="Book"){
-									document.getElementById("Bookid_update").style = "display:initial";
+									document.getElementById("Bookid_update").style = "display:initial;";
+									cboxes_myselect.options[0].selected=true;
 									
 								}else if(myObj.entryType=="Article"){
-									document.getElementById("Bookid_update").style = "display:initial";
+									document.getElementById("Articleid_update").style = "display:initial;";
+									cboxes_myselect.options[1].selected=true;
 									
 								}else if(myObj.entryType=="Incollection"){
-									document.getElementById("Bookid_update").style = "display:initial";
+									document.getElementById("Incollectionid_update").style = "display:initial;";
+									cboxes_myselect.options[2].selected=true;
 									
 								}else if(myObj.entryType=="Inproceedings"){
-									document.getElementById("Bookid_update").style = "display:initial";
+									document.getElementById("Inproceedingsid_update").style = "display:initial;";
+									cboxes_myselect.options[3].selected=true;
 									
 								}
 								document.getElementById("referenceID").value = value_checked_cboxes;
@@ -1183,7 +1273,7 @@ body {font-family: "Roboto", sans-serif}
 								
 							  }
 							};
-							xmlhttp.open("GET", "command/myfile.json", true);
+							xmlhttp.open("GET", "json/getReference.json", true);
 							xmlhttp.send();
 						
 						$("#modal_updateReference").modal();
@@ -1206,11 +1296,20 @@ body {font-family: "Roboto", sans-serif}
 					}
 					//alert(i + (cboxes[i].checked?' checked ':' unchecked ') + cboxes[i].value);
 				}
-
+				
+				var cboxes_DestLibID = document.getElementById('libraryID_Dest');
+				var len = cboxes_DestLibID.options.length;
+				var value_checked_cboxes_DestLibID = '';
+				for (var i=0; i<len; i++) {
+					if(cboxes_DestLibID.options[i].selected){
+						value_checked_cboxes_DestLibID += (cboxes_DestLibID.options[i].value+',');
+					}
+				}
+				
 				var data = new FormData();
 				data.append('keepOne', document.forms["form_addToOtherLibrary"]["keep"].value);
 				data.append('value_checked_cboxes', value_checked_cboxes);
-				data.append('libraryID_DestID', document.forms["form_addToOtherLibrary"]["libraryID_DestID"].value);
+				data.append('libraryID_DestID', value_checked_cboxes_DestLibID);
 				data.append('userID', userID);
 
 				url1 = "command/command.php?page=OpenLibrary&table=referencetable&operator=addToOtherLibrary";
@@ -1300,6 +1399,133 @@ body {font-family: "Roboto", sans-serif}
 				//}
 			}
 		}
+		
+		//the following is the code to search the data from the table.
+		//when ever the user types something in the search box, the below code calls search_table() function.
+		  $(document).ready(function(){
+			$('#search').keyup(function(){
+			   search_table($(this).val());
+			  });
+			
+			function search_table(value){
+			  $('#customers tr').each(function(){
+			   var found = 'false';
+			   $(this).each(function(){
+			   //text from each row is taken and converted into lower case
+				 if($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0){
+				 
+				   found = 'true';
+				 }
+			   });
+			   //if the search text is found, all the relavant rows would be displayed and irrelavent would be hidden
+			   if(found == 'true')
+			   {
+				 $(this).show();
+			   }
+			   else{
+				 $(this).hide();
+			   }
+			   
+			  });
+			 }
+			  
+			  });
+			  
+			  //the following is the code to search the library by its name.
+		//when ever the user types something in the search box, the below code calls search_table() function.
+		  $(document).ready(function(){
+			$('#search1').keyup(function(){
+			   search_table($(this).val());
+			  });
+			
+			function search_table(value){
+			  $('#share_table tr').each(function(){
+			   var found = 'false';
+			   $(this).each(function(){
+			   //text from each row is taken and converted into lower case
+				 if($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0){
+				 
+				   found = 'true';
+				 }
+			   });
+			   //if the search text is found, all the relavant rows would be displayed and irrelavent would be hidden
+			   if(found == 'true')
+			   {
+				 $(this).show();
+			   }
+			   else{
+				 $(this).hide();
+			   }
+			   
+			  });
+			 }
+			  
+			  });
+			  
+			  //the following is the code to search the user share data.
+		//when ever the user types something in the search box, the below code calls search_table() function.
+		  $(document).ready(function(){
+			$('#search2').keyup(function(){
+			   search_table($(this).val());
+			  });
+			
+			function search_table(value){
+			  $('#txtShareWithUser tr').each(function(){
+			   var found = 'false';
+			   $(this).each(function(){
+			   //text from each row is taken and converted into lower case
+				 if($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0){
+				 
+				   found = 'true';
+				 }
+			   });
+			   //if the search text is found, all the relavant rows would be displayed and irrelavent would be hidden
+			   if(found == 'true')
+			   {
+				 $(this).show();
+			   }
+			   else{
+				 $(this).hide();
+			   }
+			   
+			  });
+			 }
+			  
+			  });
+			  
+		function SortReference(id){
+			document.getElementById("txtHint").innerHTML = "";
+			
+			if (window.XMLHttpRequest) {
+				// code for IE7+, Firefox, Chrome, Opera, Safari
+				xmlhttp = new XMLHttpRequest();
+			} else {
+				// code for IE6, IE5
+				xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			xmlhttp.onreadystatechange = function() {
+				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+					document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+					
+					//alert(datatype);
+					//alert(sorttype);
+					//alert(id);
+					//alert(document.getElementById("CurrentlibraryID").value);
+				}
+			};
+
+			datatype=document.getElementById("sort_data_type").value;
+			sorttype=document.getElementById("sort_type").value;
+			
+			if(document.getElementById("CurrentlibraryID").value==0){
+				xmlhttp.open("GET","command/control_book.php?operator=showUnfiled"+"&userID="+id+"&datatype="+datatype+"&sorttype="+sorttype,true);
+
+			}else{
+				xmlhttp.open("GET","command/getReference.php?DataType=reference"+"&DataInfo="+document.getElementById("CurrentlibraryID").value+"&datatype="+datatype+"&sorttype="+sorttype,true);
+			}
+			xmlhttp.send();
+		}
+
 	</script>
 </body>
 </html>

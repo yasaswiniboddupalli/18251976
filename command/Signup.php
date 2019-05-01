@@ -1,6 +1,6 @@
 
 <?php
-include('../Connections/connSQL.php');
+include('../../Connections/connSQL.php');
 mysqli_select_db($connSQL, $database_connSQL);
 $emailError ="";
 $accountCreated ="";
@@ -63,5 +63,5 @@ $passwordDoesNotMatch = "The passwords does not match";
 	if(test!=""){
 	alert(test);
 }
-	window.location.href = "Signup.html";
+	window.location.href = "../Signup.html";
 </script>

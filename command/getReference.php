@@ -13,13 +13,40 @@ if(isset($_GET['DataInfo'])){
 }
 
 if($DataType=='reference'){
+	
 	$stmt = $pdo->query("SELECT * FROM librarytable where libraryID='$DataInfo'");
 	$row = $stmt->fetch();
 	
 	echo "<input type='text' id='libraryID' name='libraryID' value='".$DataInfo."' hidden />";
 	echo "<input type='text' id='libraryName' name='libraryName' value='".$row['libraryName']."' hidden />";
 	
-	$stmt = $pdo->query("SELECT * FROM referenceTable where isDelete=0");
+	$sorttype =$_GET["sorttype"];
+	$datatype =$_GET["datatype"];
+	
+	if($sorttype==""){
+		$stmt = $pdo->query("SELECT * FROM referenceTable where isDelete=0");
+	}else if($sorttype=="order_asc"){
+		if($datatype=="Sort_Author"){
+			$stmt = $pdo->query("SELECT * FROM referenceTable where isDelete=0 ORDER BY author ASC");
+		}else if($datatype=="Sort_Title"){
+			$stmt = $pdo->query("SELECT * FROM referenceTable where isDelete=0 ORDER BY title ASC");
+		}else if($datatype=="Sort_Booktitle"){
+			$stmt = $pdo->query("SELECT * FROM referenceTable where isDelete=0 ORDER BY bookTitle ASC");
+		}else if($datatype=="Sort_Year"){
+			$stmt = $pdo->query("SELECT * FROM referenceTable where isDelete=0 ORDER BY year ASC");
+		}
+	}else{
+		if($datatype=="Sort_Author"){
+			$stmt = $pdo->query("SELECT * FROM referenceTable where isDelete=0 ORDER BY author DESC");
+		}else if($datatype=="Sort_Title"){
+			$stmt = $pdo->query("SELECT * FROM referenceTable where isDelete=0 ORDER BY title DESC");
+		}else if($datatype=="Sort_Booktitle"){
+			$stmt = $pdo->query("SELECT * FROM referenceTable where isDelete=0 ORDER BY bookTitle DESC");
+		}else if($datatype=="Sort_Year"){
+			$stmt = $pdo->query("SELECT * FROM referenceTable where isDelete=0 ORDER BY year DESC");
+		}
+	}
+	//$stmt = $pdo->query("SELECT * FROM referenceTable where isDelete=0");
 	while($row = $stmt->fetch()) {
 		if($DataInfo==$row['libraryID']){
 			echo "<tr>";
@@ -139,8 +166,23 @@ if($DataType=='reference'){
 			}
 		}else{
 			//echo "	<input type='text' id='shareWithUser_update' name='shareUser' disabled>";
-			echo "	<textarea rows='5' style='width:370px;height:100px;' class='scrollabletextbox' id='shareWithUser_update' name='shareUser' disabled></textarea>";
-			echo "	<input type='text' id='shareWithUser_update' name='shareUserID' hidden disabled>";
+			//echo "	<textarea rows='5' style='width:370px;height:100px;' class='scrollabletextbox' id='shareWithUser_update' name='shareUser' disabled></textarea>";
+			//echo "	<input type='text' id='shareWithUser_update' name='shareUserID' hidden disabled>";
+			echo "<select id='shareWithUser_update' name='shareUser' style='width:370px;height:100px;' multiple='multiple'>";
+			
+			$RecUserInfo = $pdo->query("SELECT * FROM usertable");
+			foreach( $RecUserInfo as $row1 ){
+				$selected=false;
+				for($i=0;$i<$listLength_shareUserInfo;$i++){
+					if($row1['userID']==$list_shareUserInfo[$i]){
+						echo "<option selected value='".$row1['userID']."'>" . $row1['firstName']." ".$row1['lastName']. "</option>";
+						$selected=true;
+					}
+				}
+				if($selected==false){
+					echo "<option value='".$row1['userID']."'>" . $row1['firstName']." ".$row1['lastName']. "</option>";
+				}
+			}
 		}
 	}else{
 			echo "<div class='col-sm-4'>Library Name</div>";
@@ -173,8 +215,24 @@ if($DataType=='reference'){
 			}
 		}else{
 			//echo "	<input type='text' id='shareWithUser_update' name='shareUser' disabled>";
-			echo "	<textarea rows='5' style='width:370px;height:100px;' class='scrollabletextbox' id='shareWithUser_update' name='shareUser' disabled></textarea>";
-			echo "	<input type='text' id='shareWithUser_update' name='shareUserID' hidden disabled>";
+			//echo "	<textarea rows='5' style='width:370px;height:100px;' class='scrollabletextbox' id='shareWithUser_update' name='shareUser' disabled></textarea>";
+			//echo "	<input type='text' id='shareWithUser_update' name='shareUserID' hidden disabled>";
+			
+			echo "<select id='shareWithUser_update' name='shareUser' style='width:370px;height:100px;' multiple='multiple' disabled>";
+			
+			$RecUserInfo = $pdo->query("SELECT * FROM usertable");
+			foreach( $RecUserInfo as $row1 ){
+				$selected=false;
+				for($i=0;$i<$listLength_shareUserInfo;$i++){
+					if($row1['userID']==$list_shareUserInfo[$i]){
+						echo "<option selected value='".$row1['userID']."'>" . $row1['firstName']." ".$row1['lastName']. "</option>";
+						$selected=true;
+					}
+				}
+				if($selected==false){
+					echo "<option value='".$row1['userID']."'>" . $row1['firstName']." ".$row1['lastName']. "</option>";
+				}
+			}
 		}
 	}
 	/*
