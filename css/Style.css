@@ -1,0 +1,137 @@
+
+/* style for search*/
+input[type=text] {
+  width: 100%;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-image: url('searchicon.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+}
+/* style for table nav bar*/
+body {
+  font-size: 28px;
+}
+
+.modalInputBox{
+border: none !important;
+border-bottom: solid 1px !important;
+padding: 5px !important;
+border-radius: unset !important;
+width: 75%;
+margin-bottom: 9px;
+}
+
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  /* background-color: #7baeaf !important; */
+  background-color: #d3e4e5 !important;
+  position: -webkit-sticky; /* Safari */
+  top: 0;
+}
+
+li {
+  float: left;
+  margin: 10px !important;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #111;
+}
+
+.active {
+  background-color: grey;
+}
+/* styles for table*/
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: cadetblue;
+  color: white;
+}
+
+
+
+/* OpenLibrary css */
+
+body {font-family: "Roboto", sans-serif;
+
+}
+
+.w3-bar-block .w3-bar-item {
+  padding: 16px;
+  font-weight: bold;
+}
+
+#table-wrapper {
+	position:relative;
+}
+#table-scroll {
+  height:140px;
+  overflow:auto;
+  margin-top:65px;
+}
+
+/* styles for share_table*/
+#share_table{
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#share_table th {
+  border-style: inset;
+  padding-left: 5px;
+}
+
+#share_table td {
+  padding: 8px;
+  padding-left: 5px;
+}
+
+#share_table tr:nth-child(even){background-color: #f2f2f2;}
+
+#share_table tr:hover {background-color: #ddd;}
+
+#share_table thead tr th {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  text-align: left;
+  background-color: cadetblue;
+  color: white;
+  position:absolute;
+  top:-65px;
+  z-index:2;
+}

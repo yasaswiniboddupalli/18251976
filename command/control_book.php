@@ -53,36 +53,207 @@
 		  $publisher=$row_RecReferenceInfo['publisher'];
 		  $year=$row_RecReferenceInfo['year'];
 		  $volume=$row_RecReferenceInfo['volume'];
+		  
+		  $posts = array('entryType'=> $entryType, 'author'=> $author, 'bookTitle'=> $bookTitle, 'editor'=> $editor, 'title'=> $title, 'journal'=> $journal, 'publisher'=> $publisher, 'year'=> $year, 'volume'=> $volume);
+		  
+			
+			$json_data = json_encode($posts);
+			file_put_contents('myfile.json', $json_data);
+			return;
+		  
+		/*
+		echo "<div class='col-sm-4'>Entry Type </div>";
+		echo "<div class='col-sm-8'>";
+		echo "	<select id='mySelect_update' onchange='chooseEntryType('mySelect_update')' name='entryType'>";
+		//echo "		<option value='SelectItems'>Select</option>";
+		if($entryType=="Book"){
+			echo "		<option value='Book' seleted>Book</option>";
+			echo "		<option value='Article'>Article</option>";
+			echo "		<option value='Incollection'>Incollection</option>";
+			echo "		<option value='Inproceedings'>Inproceedings</option>";
+		}else if($entryType=="Article"){
+			echo "		<option value='Book'>Book</option>";
+			echo "		<option value='Article' seleted>Article</option>";
+			echo "		<option value='Incollection'>Incollection</option>";
+			echo "		<option value='Inproceedings'>Inproceedings</option>";
+		}else if($entryType=="Incollection"){
+			echo "		<option value='Book'>Book</option>";
+			echo "		<option value='Article'>Article</option>";
+			echo "		<option value='Incollection' seleted>Incollection</option>";
+			echo "		<option value='Inproceedings'>Inproceedings</option>";
+		}else if($entryType=="Inproceedings"){
+			echo "		<option value='Book'>Book</option>";
+			echo "		<option value='Article'>Article</option>";
+			echo "		<option value='Incollection'>Incollection</option>";
+			echo "		<option value='Inproceedings' seleted>Inproceedings</option>";
+		}
+		echo "	</select>";
+		echo "</div>";
+		echo "<br/>";
+		echo "<br/>";
+		echo "<br/>";
 
+		if($entryType=="Book"){
+			echo "<div id='Bookid_update' class='col-sm-12'>";
+		}else{
+			echo "<div id='Bookid_update' style = 'display:none;'  class='col-sm-12'>";
+		}
+		echo "<div class='col-sm-4'>Author </div>";
+		echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='author' value='".$author."' > </div><br/>";
+		echo "<div class='col-sm-4' >Book Title </div>";
+		echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='booktitle' value='".$bookTitle."' > </div><br/>";
+			  
+		echo "<div class='col-sm-4'>Publisher </div>";
+		echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='publisher' value='".$publisher."' > </div><br/>";
+
+		echo "<div class='col-sm-4'>Year </div>";
+		echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='year' value='".$year."' ></div> <br/>";
+			  
+		echo "<div class='col-sm-4'>Volume </div>";
+		echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='volume' value='".$volume."' > </div><br/>";
+		
+		echo "<div class='col-sm-4'>Title </div>";
+		echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='title' value='".$title."' hidden> </div><br/>";
+		echo "<div class='col-sm-4'>Journal </div>";
+		echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='journal' value='".$journal."' hidden></div> <br/>";
+		echo "<div class='col-sm-4'>Editor </div>";
+		echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='editor' value='".$editor."' hidden> </div><br/>";
+
+		
+		echo "	<input type='submit' class='btn btn-default' id='ReferenceSubmitButton' style='margin-left: 216px; ' value='Insert' name='submitData' >";
+		echo "</div>";
+
+		if($entryType=="Articleid"){
+			echo "<div id='Articleid_update' class='col-sm-12'>";
+		}else{
+			echo "<div id='Articleid_update' style = 'display:none;' class='col-sm-12'>";
+		}
+		echo "<div class='col-sm-4'>Author </div>";
+		echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='author' value='".$author."' > </div><br/>";
+		
+		echo "<div class='col-sm-4'>Title </div>";
+		echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='title' value='".$title."' > </div><br/>";
+
+		echo "<div class='col-sm-4'>Journal </div>";
+		echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='journal' value='".$journal."' ></div> <br/>";
+
+
+		echo "<div class='col-sm-4'>Year </div>";
+		echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='year' value='".$year."' ></div> <br/>";
+
+		echo "<div class='col-sm-4'>Volume </div>";
+		echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='volume' value='".$volume."' > </div><br/>";
+		
+		echo "<div class='col-sm-4' >Book Title </div>";
+		echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='booktitle' value='' hidden> </div><br/>";
+		echo "<div class='col-sm-4'>Publisher </div>";
+		echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='publisher' value='' hidden> </div><br/>";
+		echo "<div class='col-sm-4'>Editor </div>";
+		echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='editor' value='".$editor."' hidden> </div><br/>";
+		
+		echo "	<input type='submit' class='btn btn-default' id='ReferenceSubmitButton' style='margin-left: 216px; ' value='Insert' name='submitData' >";
+		echo "</div>";
+
+		if($entryType=="Incollectionid"){
+			echo "<div id='Incollectionid_update' class='col-sm-12'>";
+		}else{
+			echo "<div id='Incollectionid_update' style = 'display:none;' class='col-sm-12'>";
+		}
+		echo "<div class='col-sm-4'>Author </div>";
+		echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='author' value='".$author."' > </div><br/>";
+		
+		echo "<div class='col-sm-4'>Editor </div>";
+		echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='editor' value='".$editor."' > </div><br/>";
+
+
+		echo "<div class='col-sm-4'>Title </div>";
+		echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='title' value='".$title."' > </div><br/>";
+
+		echo "<div class='col-sm-4'>Publisher </div>";
+		echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='publisher' value='".$publisher."' > </div><br/>";
+
+
+		echo "<div class='col-sm-4'>Year </div>";
+		echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='year' value='".$year."' ></div> <br/>";
+
+		echo "<div class='col-sm-4'>Volume </div>";
+		echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='volume' value='".$volume."' > </div><br/>";
+		
+		echo "<div class='col-sm-4' >Book Title </div>";
+		echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='booktitle' value='' hidden> </div><br/>";
+		echo "<div class='col-sm-4'>Journal </div>";
+		echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='journal' value='".$journal."' hidden></div> <br/>";
+		
+		echo "	<input type='submit' class='btn btn-default' id='ReferenceSubmitButton' style='margin-left: 216px; ' value='Insert' name='submitData' >";
+		echo "</div>";
+
+		if($entryType=="Inproceedingsid"){
+			echo "<div id='Inproceedingsid_update' class='col-sm-12'>";
+		}else{
+			echo "<div id='Inproceedingsid_update' style = 'display:none;' class='col-sm-12'>";
+		}
+		echo "<div class='col-sm-4'>Author </div>";
+		echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='author' value='".$author."' > </div><br/>";
+		
+		echo "<div class='col-sm-4'>Editor </div>";
+		echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='editor' value='".$editor."' > </div><br/>";
+
+
+		echo "<div class='col-sm-4'>Title </div>";
+		echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='title' value='".$title."' > </div><br/>";
+
+		echo "<div class='col-sm-4'>Year </div>";
+		echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='year' value='".$year."' ></div> <br/>";
+
+		echo "<div class='col-sm-4'>Volume </div>";
+		echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='volume' value='".$volume."' > </div><br/>";
+		
+		echo "<div class='col-sm-4' >Book Title </div>";
+		echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='booktitle' value='' hidden> </div><br/>";
+		echo "<div class='col-sm-4'>Publisher </div>";
+		echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='publisher' value='' hidden> </div><br/>";
+		echo "<div class='col-sm-4'>Journal </div>";
+		echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='journal' value='".$journal."' hidden></div> <br/>";
+		
+		echo "	<input type='submit' class='btn btn-default' id='ReferenceSubmitButton' style='margin-left: 216px; ' value='Insert' name='submitData' >";
+		echo "	</div>";
+
+		
 			if($entryType=="Book"){
-				echo "<div class='col-sm-4'>Author </div>";
+			  echo "<div class='col-sm-4'>Author </div>";
 			  echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='author' value='".$author."' > </div><br/>";
 			  echo "<div class='col-sm-4' >Book Title </div>";
 			  echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='booktitle' value='".$bookTitle."' > </div><br/>";
-				echo "<div class='col-sm-4'>Publisher </div>";
+			  echo "<div class='col-sm-4'>Publisher </div>";
 			  echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='publisher' value='".$publisher."' > </div><br/>";
 			  echo "<div class='col-sm-4'>Year </div>";
 			  echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='year' value='".$year."' ></div> <br/>";
 			  echo "<div class='col-sm-4'>Volume </div>";
 			  echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='volume' value='".$volume."' > </div><br/>";
+			  echo "<div class='col-sm-4'>Volume </div>";
+			  echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='volume' value='".$volume."' > </div><br/>";
+			  echo "<div class='col-sm-4'>Volume </div>";
+			  echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='volume' value='".$volume."' > </div><br/>";
+			  echo "<input type='submit' value='Update' name='submitData' >";
 			}
 		else if($entryType=="Article"){
 				echo "<div class='col-sm-4'>Author </div>";
 				echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='author' value='".$author."' > </div><br/>";
 				echo "<div class='col-sm-4'>Title </div>";
-			  echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='title' value='".$title."' > </div><br/>";
+			    echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='title' value='".$title."' > </div><br/>";
 				echo "<div class='col-sm-4'>Journal </div>";
 				echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='journal' value='".$journal."' ></div> <br/>";
 				echo "<div class='col-sm-4'>Year </div>";
 				echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='year' value='".$year."' ></div> <br/>";
 				echo "<div class='col-sm-4'>Volume </div>";
 				echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='volume' value='".$volume."' > </div><br/>";
+				echo "<input type='submit' value='Update' name='submitData' >";
 			}
 			else if($entryType=="Incollection"){
 					echo "<div class='col-sm-4'>Author </div>";
 					echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='author' value='".$author."' > </div><br/>";
 					echo "<div class='col-sm-4'>Editor </div>";
-				  echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='editor' value='".$editor."' > </div><br/>";
+				    echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='editor' value='".$editor."' > </div><br/>";
 					echo "<div class='col-sm-4'>Title </div>";
 				  echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='title' value='".$title."' > </div><br/>";
 					echo "<div class='col-sm-4'>Publisher </div>";
@@ -91,33 +262,92 @@
 					echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='year' value='".$year."' ></div> <br/>";
 					echo "<div class='col-sm-4'>Volume </div>";
 					echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='volume' value='".$volume."' > </div><br/>";
+					echo "<input type='submit' value='Update' name='submitData' >";
 				}
-else if($entryType=="Inproceedings"){
-			  echo "<input type='text' id='referenceID' name='referenceID' value='".$referenceID."' hidden />";
-			  echo "<div class='col-sm-4'>Author </div>";
-			  echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='author' value='".$author."' > </div><br/>";
-			  echo "<div class='col-sm-4'>Editor </div>";
-			  echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='editor' value='".$editor."' > </div><br/>";
-			  echo "<div class='col-sm-4'>Title </div>";
-			  echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='title' value='".$title."' > </div><br/>";
-			  echo "<div class='col-sm-4'>Year </div>";
-			  echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='year' value='".$year."' ></div> <br/>";
-			  echo "<div class='col-sm-4'>Volume </div>";
-			  echo "<div class='col-sm-8'><input type='text'  style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='volume' value='".$volume."' > </div><br/>";
-			  echo "<input type='submit' value='Update' name='submitData' >";
-		  }
-
+				else if($entryType=="Inproceedings"){
+					  echo "<input type='text' id='referenceID' name='referenceID' value='".$referenceID."' hidden />";
+					  echo "<div class='col-sm-4'>Author </div>";
+					  echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='author' value='".$author."' > </div><br/>";
+					  echo "<div class='col-sm-4'>Editor </div>";
+					  echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='editor' value='".$editor."' > </div><br/>";
+					  echo "<div class='col-sm-4'>Title </div>";
+					  echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='title' value='".$title."' > </div><br/>";
+					  echo "<div class='col-sm-4'>Year </div>";
+					  echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='year' value='".$year."' ></div> <br/>";
+					  echo "<div class='col-sm-4'>Volume </div>";
+					  echo "<div class='col-sm-8'><input type='text'  style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='volume' value='".$volume."' > </div><br/>";
+					  echo "<input type='submit' value='Update' name='submitData' >";
+				  }
+		*/
 	  }else if($operator=="updateReference"){
 		  $referenceID = $_REQUEST['referenceID'];
 		  $entryType = $_REQUEST['entryType'];
-		  $author = $_REQUEST['author'];
-		  $booktitle = $_REQUEST['booktitle'];
-		  $editor = $_REQUEST['editor'];
-		  $title = $_REQUEST['title'];
-		  $journal = $_REQUEST['journal'];
-		  $publisher = $_REQUEST['publisher'];
-		  $year = $_REQUEST['year'];
-		  $volume = $_REQUEST['volume'];
+		  if($entryType=="Book"){
+			  $author = $_REQUEST['author_Bookid'];
+		  }else if($entryType=="Article"){
+			  $author = $_REQUEST['author_Articleid'];
+		  }else if($entryType=="Incollection"){
+			  $author = $_REQUEST['author_Incollectionid'];
+		  }else{
+			  $author = $_REQUEST['author_Inproceedingsid'];
+		  }
+		  
+		  if($entryType=="Book"){
+			  $booktitle = $_REQUEST['booktitle_Bookid'];
+		  }else{
+			  $booktitle="";
+		  }
+		  
+		  if($entryType=="Incollection"){
+			$editor = $_REQUEST['editor_Incollectionid'];
+		  }else if($entryType=="Inproceedings"){
+			$editor = $_REQUEST['editor_Inproceedingsid'];
+		  }else{
+			  $editor="";
+		  }
+		  
+		  if($entryType=="Article"){
+			  $title = $_REQUEST['title_Articleid'];
+		  }else if($entryType=="Incollection"){
+			  $title = $_REQUEST['title_Incollectionid'];
+		  }else if($entryType=="Inproceedings"){
+			  $title = $_REQUEST['title_Inproceedingsid'];
+		  }else{
+			  $title="";
+		  }
+		  
+		  if($entryType=="Article"){
+			$journal = $_REQUEST['journal_Articleid'];
+		  }else{
+			  $journal ="";
+		  }
+		  
+		  if($entryType=="Incollection"){
+			  $publisher = $_REQUEST['publisher_Incollectionid'];
+		  }else if($entryType=="Book"){
+			  $publisher = $_REQUEST['publisher_Bookid'];
+		  }else{
+			  $publisher="";
+		  }
+		  
+		  if($entryType=="Book"){
+			  $year = $_REQUEST['year_Bookid'];
+		  }else if($entryType=="Article"){
+			  $year = $_REQUEST['year_Articleid'];
+		  }else if($entryType=="Incollection"){
+			  $year = $_REQUEST['year_Incollectionid'];
+		  }else{
+			  $year = $_REQUEST['year_Inproceedingsid'];
+		  }
+		  if($entryType=="Book"){
+			  $volume = $_REQUEST['volume_Bookid'];
+		  }else if($entryType=="Article"){
+			  $volume = $_REQUEST['volume_Articleid'];
+		  }else if($entryType=="Incollection"){
+			  $volume = $_REQUEST['volume_Incollectionid'];
+		  }else{
+			  $volume = $_REQUEST['volume_Inproceedingsid'];
+		  }
 
 		  $sql = "update referencetable set entryType='$entryType',author='$author',booktitle='$booktitle',editor='$editor',title='$title',journal='$journal',publisher='$publisher',year='$year',volume='$volume'  where referenceID='$referenceID'";
 		  $result_2 = $pdo->query($sql);

@@ -8,8 +8,8 @@ mysqli_select_db($connSQL, $database_connSQL);
 <html>
 <title>Bibilography Manager User Dashboard</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="Style.css">
-<link rel="stylesheet" href="dashboardstyle.css">
+<link rel="stylesheet" href="css/Style.css">
+<link rel="stylesheet" href="css/dashboardstyle.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
@@ -42,7 +42,7 @@ body {font-family: "Roboto", sans-serif}
     if(true) {
      while($row = $result->fetch_assoc()) {
   	   $id = $row["userID"];
-  		
+
 
   }}
   ?>
@@ -50,9 +50,9 @@ body {font-family: "Roboto", sans-serif}
 
 <form id="form" name="thisform" enctype="multipart/form-data" method="post" action="command/control_book.php?operator=DeleteTrash">
 
-	<ul>
-		<li><input type="submit" class="btn btn-info btn-lg" value="Restore" name="restore" class="btn btn-info btn-lg"></li>
-        <li><input type="submit" class="btn btn-info btn-lg" value="Delete Permanently" name="delete" class="btn btn-info btn-lg"></li>
+	<ul style="border-radius:32px !important; width:31% !important;">
+		<li><input type="submit" class="btn btn-lg" style="border-radius:38px;width: 185px;  background-color:cadetblue;" value="Restore Selected" name="restore" ></li>
+        <li><input type="submit" class="btn btn-lg" style="border-radius:38px;width: 185px;  background-color:cadetblue;" value="Empty Trash" name="delete" ></li>
 	</ul>
 
 <table id="customers" class=" table order-list">

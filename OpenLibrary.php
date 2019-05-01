@@ -3,8 +3,8 @@
 <html>
 <title>Bibilography Manager User Dashboard</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="Style.css">
-<link rel="stylesheet" href="dashboardstyle.css">
+<link rel="stylesheet" href="css/Style.css">
+<link rel="stylesheet" href="css/dashboardstyle.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="ReferenceData.js"></script>
+<script type="text/javascript" src="js/ReferenceData.js"></script>
 <!-- <style>
 body {font-family: "Roboto", sans-serif}
 .w3-bar-block .w3-bar-item {
@@ -172,7 +172,7 @@ body {font-family: "Roboto", sans-serif}
 												if($userID == $list_sharelibraryID[$i] && ($userID != $row_RecLibraryInfo['userID'])){
 										?>
 													<tr>
-														<td onclick="showInfo('userAndLibrary','<?php echo $row_RecLibraryInfo['libraryID'];?>','<?=$row_RecShareLibraryInfo['libraryName'];?>')">
+														<td onclick="showInfo('userAndLibrary','<?php echo $row_RecShareLibraryInfo['libraryID'];?>','<?=$row_RecLibraryInfo['libraryName'];?>')">
 															<input type="checkbox" name="check_LibraryUserList[]" value="<?php echo $row_RecLibraryInfo['userID'];?>" hidden>
 															<input type="checkbox" name="check_ShareLibraryList[]" value="<?php echo $row_RecLibraryInfo['libraryID'];?>">
 															<span style="color:black"><?php echo $row_RecLibraryInfo['libraryName'];?></span>
@@ -291,7 +291,7 @@ body {font-family: "Roboto", sans-serif}
 
            <div class="col-sm-4">Entry Type </div>
            <div class="col-sm-8">
-	                    <select id="mySelect" onchange="chooseEntryType()" name="entryType">
+	                    <select id="mySelect" onchange="chooseEntryType('mySelect')" name="entryType">
 	  		                	<option value="SelectItems">Select</option>
 	  		                	<option value="Book">Book</option>
   		                		<option value="Article">Article</option>
@@ -417,32 +417,137 @@ body {font-family: "Roboto", sans-serif}
       <div class="modal-body">
 
         <form action="command/control_book.php?operator=updateReference" method="post">
+		<input id="referenceID" name="referenceID" hidden>
+		<diV class="row">
+			<div class='col-sm-4'>Entry Type </div>
+		<div class='col-sm-8'>
+			<select id='mySelect_update' onchange="chooseEntryType('mySelect_update')" name='entryType'>
+					<option value='Book'>Book</option>
+					<option value='Article'>Article</option>
+					<option value='Incollection'>Incollection</option>
+					<option value='Inproceedings'>Inproceedings</option>			</select>
+		</div>
+		<br/>
+		<br/>
+		<br/>
 
-      <diV class="row" id="txtUpdateReference">
+			<div id='Bookid_update' style = 'display:none;'  class='col-sm-12'>
 
-      <div class="col-sm-4">Entry Type </div>
-      <div class="col-sm-8">
-      <input type="text" name="entryType" require_once>
-       </div><br/><br/>
-      <div class="col-sm-4">Author </div>
-      <div class="col-sm-8"><input   type="text" name="author"> </div><br/>
-      <div class="col-sm-4" >Book Title </div>
-      <div class="col-sm-8"><input  type="text" name="booktitle" > </div><br/>
-      <div class="col-sm-4">Editor </div>
-      <div class="col-sm-8"><input  type="text" name="editor" > </div><br/>
-      <div class="col-sm-4">Title </div>
-      <div class="col-sm-8"><input  type="text" name="title" > </div><br/>
-      <div class="col-sm-4">Journal </div>
-      <div class="col-sm-8"><input  type="text" name="journal" ></div> <br/>
-      <div class="col-sm-4">Publisher </div>
-      <div class="col-sm-8"><input  type="text" name="publisher" > </div><br/>
-      <div class="col-sm-4">Year </div>
-      <div class="col-sm-8"><input  type="text" name="year" ></div> <br/>
-      <div class="col-sm-4">Volume </div>
-      <div class="col-sm-8"><input  type="text" name="volume" > </div><br/>
-      <input type="submit" value="Update" name="submitData" >
+		<div class='col-sm-4'>Author </div>
+		<div class='col-sm-8'><input type='text' id="AuthorID_update_Book" style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='author_Bookid' value='' > </div><br/>
+		<div class='col-sm-4' >Book Title </div>
+		<div class='col-sm-8'><input type='text' id="BookTitleID_update_Book" style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='booktitle_Bookid' value='' > </div><br/>
+			  
+		<div class='col-sm-4'>Publisher </div>
+		<div class='col-sm-8'><input type='text' id="PublisherID_update_Book" style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='publisher_Bookid' value='' > </div><br/>
 
-         </div>
+		<div class='col-sm-4'>Year </div>
+		<div class='col-sm-8'><input type='text' id="YearID_update_Book" style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='year_Bookid' value='' ></div> <br/>
+			  
+		<div class='col-sm-4'>Volume </div>
+		<div class='col-sm-8'><input type='text' id="VolumeID_update_Book" style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='volume_Bookid' value='' > </div><br/>
+		
+		
+		<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' id="TitleID_update_Book" name='title' value='' hidden> </div><br/>
+		
+		<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' id="JournalID_update_Book" name='journal' value='' hidden></div> <br/>
+		
+		<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' id="EditorID_update_Book" name='editor' value='' hidden> </div><br/>
+
+		
+			<input type='submit' class='btn btn-default' id='ReferenceSubmitButton' style='margin-left: 216px; ' value='Insert' name='submitData' >
+		</div>
+
+
+			<div id='Articleid_update' style = 'display:none;' class='col-sm-12'>
+
+		<div class='col-sm-4'>Author </div>
+		<div class='col-sm-8'><input type='text' id="AuthorID_update_Article" style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='author_Articleid' value='' > </div><br/>
+		
+		<div class='col-sm-4'>Title </div>
+		<div class='col-sm-8'><input type='text' id="TitleID_update_Article" style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='title_Articleid' value='' > </div><br/>
+
+		<div class='col-sm-4'>Journal </div>
+		<div class='col-sm-8'><input type='text' id="JournalID_update_Article" style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='journal_Articleid' value='' ></div> <br/>
+
+
+		<div class='col-sm-4'>Year </div>
+		<div class='col-sm-8'><input type='text' id="YearID_update_Article" style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='year_Articleid' value='' ></div> <br/>
+
+		<div class='col-sm-4'>Volume </div>
+		<div class='col-sm-8'><input type='text' id="VolumeID_update_Article" style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='volume_Articleid' value='' > </div><br/>
+		
+		
+		<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' id="BookTitleID_update_Article" name='booktitle' value='' hidden> </div><br/>
+		
+		<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' id="PublisherID_update_Article" name='publisher' value='' hidden> </div><br/>
+		
+		<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' id="EditorID_update_Article" name='editor' value='' hidden> </div><br/>
+		
+			<input type='submit' class='btn btn-default' id='ReferenceSubmitButton' style='margin-left: 216px; ' value='Insert' name='submitData' >
+		</div>
+
+
+			<div id='Incollectionid_update' style = 'display:none;' class='col-sm-12'>
+
+		<div class='col-sm-4'>Author </div>
+		<div class='col-sm-8'><input type='text' id="AuthorID_update_Incollection" style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='author_Incollectionid' value='' > </div><br/>
+		
+		<div class='col-sm-4'>Editor </div>
+		<div class='col-sm-8'><input type='text' id="EditorID_update_Incollection" style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='editor_Incollectionid' value='' > </div><br/>
+
+
+		<div class='col-sm-4'>Title </div>
+		<div class='col-sm-8'><input type='text' id="TitleID_update_Incollection" style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='title_Incollectionid' value='' > </div><br/>
+
+		<div class='col-sm-4'>Publisher </div>
+		<div class='col-sm-8'><input type='text' id="PublisherID_update_Incollection" style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='publisher_Incollectionid' value='' > </div><br/>
+
+
+		<div class='col-sm-4'>Year </div>
+		<div class='col-sm-8'><input type='text' id="YearID_update_Incollection" style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='year_Incollectionid' value='' ></div> <br/>
+
+		<div class='col-sm-4'>Volume </div>
+		<div class='col-sm-8'><input type='text' id="VolumeID_update_Incollection" style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='volume_Incollectionid' value='' > </div><br/>
+		
+		
+		<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' id="BookTitleID_update_Incollection" name='booktitle' value='' hidden> </div><br/>
+		
+		<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' id="JournalID_update_Incollection" name='journal' value='' hidden></div> <br/>
+		
+			<input type='submit' class='btn btn-default' id='ReferenceSubmitButton' style='margin-left: 216px; ' value='Insert' name='submitData' >
+		</div>
+
+
+			<div id='Inproceedingsid_update' style = 'display:none;' class='col-sm-12'>
+
+		<div class='col-sm-4'>Author </div>
+		<div class='col-sm-8'><input type='text' id="AuthorID_update_Inproceedingsid" style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='author_Inproceedingsid' value='' > </div><br/>
+		
+		<div class='col-sm-4'>Editor </div>
+		<div class='col-sm-8'><input type='text' id="EditorID_update_Inproceedingsid" style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='editor_Inproceedingsid' value='' > </div><br/>
+
+
+		<div class='col-sm-4'>Title </div>
+		<div class='col-sm-8'><input type='text' id="TitleID_update_Inproceedingsid" style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='title_Inproceedingsid' value='' > </div><br/>
+
+		<div class='col-sm-4'>Year </div>
+		<div class='col-sm-8'><input type='text' id="YearID_update_Inproceedingsid" style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='year_Inproceedingsid' value='' ></div> <br/>
+
+		<div class='col-sm-4'>Volume </div>
+		<div class='col-sm-8'><input type='text' id="VolumeID_update_Inproceedingsid" style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='volume_Inproceedingsid' value='' > </div><br/>
+		
+		
+		<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' id="BookTitleID_update_Inproceedingsid" name='booktitle' value='' hidden> </div><br/>
+		
+		<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' id="PublisherID_update_Inproceedingsid" name='publisher' value='' hidden> </div><br/>
+		
+		<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' id="JournalID_update_Inproceedingsid" name='journal' value='' hidden></div> <br/>
+		
+			<input type='submit' class='btn btn-default' id='ReferenceSubmitButton' style='margin-left: 216px; ' value='Insert' name='submitData' >
+			</div>
+			
+		 </div>
       </form>
       </div>
     </div>
@@ -664,6 +769,7 @@ body {font-family: "Roboto", sans-serif}
 		}
 
 		function showInfo(type,id,name) {
+			//alert(type,id,name);
 			if(type != "userAndLibrary"){
 				document.getElementById("txtShareWithUser").innerHTML = "";
 			}
@@ -833,10 +939,22 @@ body {font-family: "Roboto", sans-serif}
 					}
 					//alert(i + (cboxes[i].checked?' checked ':' unchecked ') + cboxes[i].value);
 				}
+				
+				var cboxes_share = document.getElementById('shareWithUser_update');
+				var len = cboxes_share.options.length;
+				var value_checked_cboxes_share = '';
+				for (var i=0; i<len; i++) {
+					if(cboxes_share.options[i].selected){
+						value_checked_cboxes_share += (cboxes_share.options[i].value+',');
+					}
+				}
+				
+				//alert(value_checked_cboxes_share);
+				
 				var data = new FormData();
 				data.append('libraryID', value_checked_cboxes);
 				data.append('libraryName', document.forms["form_updateLibrary"]["libraryName"].value);
-				data.append('shareUser', document.forms["form_updateLibrary"]["shareUserID"].value);
+				data.append('shareUser', value_checked_cboxes_share);
 
 				url1 = "command/command.php?page=OpenLibrary&table=librarytable&operator=update";
 				var xhr = new XMLHttpRequest();
@@ -1015,12 +1133,65 @@ body {font-family: "Roboto", sans-serif}
 
 				xhr.onreadystatechange = function() {//Call a function when the state changes.
 					if(xhr.readyState == 4 && xhr.status == 200) {
-						document.getElementById("txtUpdateReference").innerHTML = xhr.responseText;
+						//document.getElementById("txtUpdateReference").innerHTML = xhr.responseText;
+						var xmlhttp = new XMLHttpRequest();
+							xmlhttp.onreadystatechange = function() {
+							  if (this.readyState == 4 && this.status == 200) {
+								var myObj = JSON.parse(this.responseText);
+								//document.getElementById("demo").innerHTML = myObj.name;
+								//alert(myObj.title);
+								//alert(myObj.entryType);
+								if(myObj.entryType=="Book"){
+									document.getElementById("Bookid_update").style = "display:initial";
+									
+								}else if(myObj.entryType=="Article"){
+									document.getElementById("Bookid_update").style = "display:initial";
+									
+								}else if(myObj.entryType=="Incollection"){
+									document.getElementById("Bookid_update").style = "display:initial";
+									
+								}else if(myObj.entryType=="Inproceedings"){
+									document.getElementById("Bookid_update").style = "display:initial";
+									
+								}
+								document.getElementById("referenceID").value = value_checked_cboxes;
+								
+								document.getElementById("AuthorID_update_Book").value = myObj.author;
+								document.getElementById("BookTitleID_update_Book").value = myObj.bookTitle;
+								document.getElementById("PublisherID_update_Book").value = myObj.publisher;
+								document.getElementById("YearID_update_Book").value = myObj.year;
+								document.getElementById("VolumeID_update_Book").value = myObj.volume;
+								
+								document.getElementById("AuthorID_update_Article").value = myObj.author;
+								document.getElementById("TitleID_update_Article").value = myObj.title;
+								document.getElementById("JournalID_update_Article").value = myObj.journal;
+								document.getElementById("YearID_update_Article").value = myObj.year;
+								document.getElementById("VolumeID_update_Article").value = myObj.volume;
+								
+								document.getElementById("AuthorID_update_Incollection").value = myObj.author;
+								document.getElementById("EditorID_update_Incollection").value = myObj.editor;
+								document.getElementById("TitleID_update_Incollection").value = myObj.title;
+								document.getElementById("PublisherID_update_Incollection").value = myObj.publisher;
+								document.getElementById("YearID_update_Incollection").value = myObj.year;
+								document.getElementById("VolumeID_update_Incollection").value = myObj.volume;
+								
+								document.getElementById("AuthorID_update_Inproceedingsid").value = myObj.author;
+								document.getElementById("EditorID_update_Inproceedingsid").value = myObj.editor;
+								document.getElementById("TitleID_update_Inproceedingsid").value = myObj.title;
+								document.getElementById("YearID_update_Inproceedingsid").value = myObj.year;
+								document.getElementById("VolumeID_update_Inproceedingsid").value = myObj.volume;
+								
+							  }
+							};
+							xmlhttp.open("GET", "command/myfile.json", true);
+							xmlhttp.send();
+						
+						$("#modal_updateReference").modal();
 					}
 				}
 				xhr.send(data);
 
-				$("#modal_updateReference").modal();
+				
 			}
 		}
 
