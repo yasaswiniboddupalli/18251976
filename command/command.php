@@ -107,32 +107,52 @@ if($page=='OpenLibrary'){
 		$value_checked_cboxes = $_REQUEST['value_checked_cboxes'];
 		$libraryID_DestID = $_REQUEST['libraryID_DestID'];
 		$userID = $_REQUEST['userID'];
+		$keepOne = $_REQUEST['keepOne'];
 		
-		$list_libraryID = explode(',',$libraryID_DestID);
-		$listLength_libraryID = sizeof($list_libraryID);
+		//if($keepOne=="yes"){
+			$list_libraryID = explode(',',$libraryID_DestID);
+			$listLength_libraryID = sizeof($list_libraryID);
+			
+			$list_reference = explode(',',$value_checked_cboxes);
+			$listLength_reference = sizeof($list_reference);
+			
+			for($i=0;$i<$listLength_libraryID-1;$i++){	//minor the last " "
+				$libraryID = $list_libraryID[$i];
+				for($j=0;$j<$listLength_reference-1;$j++){ //minor the last " "
+					$referenceID = $list_reference[$j];
+					$sql = "SELECT entryType, author, bookTitle, editor, title, journal, publisher, year, volume FROM referenceTable WHERE referenceID='$referenceID' ";
+					$stmt = $pdo->query($sql);
+					$row = $stmt->fetch();
+					$entryType = $row['entryType'];
+					$author = $row['author'];
+					$bookTitle = $row['bookTitle'];
+					$editor = $row['editor'];
+					$title = $row['title'];
+					$journal = $row['journal'];
+					$publisher = $row['publisher'];
+					$year = $row['year'];
+					$volume = $row['volume'];
+					
+					$defaultLibrary=0;
+					if($libraryID==0){
+						$defaultLibrary=1;
+					}
+					
+					$sql = "INSERT INTO referenceTable(entryType, author, bookTitle, editor, title, journal, publisher, year, volume, libraryID, defaultLibrary, isDelete, userID) VALUES ('$entryType','$author','$bookTitle','$editor','$title','$journal','$publisher','$year','$volume', $libraryID, $defaultLibrary, 0, $userID)";
+					$result = $pdo->query($sql);
+					if($result!=true){
+						$result_All=false;
+					}
+				}
+			}
+		//}
 		
-		$list_reference = explode(',',$value_checked_cboxes);
-		$listLength_reference = sizeof($list_reference);
-		
-		for($i=0;$i<$listLength_libraryID-1;$i++){	//minor the last " "
-			$libraryID = $list_libraryID[$i];
-			for($j=0;$j<$listLength_reference-1;$j++){ //minor the last " "
+		if($keepOne=="no"){
+			for($j=0;$j<$listLength_reference-1;$j++){ //minor the last " "	
 				$referenceID = $list_reference[$j];
-				$sql = "SELECT entryType, author, bookTitle, editor, title, journal, publisher, year, volume FROM referenceTable WHERE referenceID='$referenceID' ";
-				$stmt = $pdo->query($sql);
-				$row = $stmt->fetch();
-				$entryType = $row['entryType'];
-				$author = $row['author'];
-				$bookTitle = $row['bookTitle'];
-				$editor = $row['editor'];
-				$title = $row['title'];
-				$journal = $row['journal'];
-				$publisher = $row['publisher'];
-				$year = $row['year'];
-				$volume = $row['volume'];
-				
-				$sql = "INSERT INTO referenceTable(entryType, author, bookTitle, editor, title, journal, publisher, year, volume, libraryID, defaultLibrary, isDelete, userID) VALUES ('$entryType','$author','$bookTitle','$editor','$title','$journal','$publisher','$year','$volume', $libraryID, 0, 0, $userID)";
-				$result = $pdo->query($sql);
+				//echo $list_reference[$j];
+				$sql_delete = "DELETE from referenceTable WHERE referenceID='$referenceID'";
+				$result = $pdo->query($sql_delete);
 				if($result!=true){
 					$result_All=false;
 				}

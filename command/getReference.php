@@ -19,7 +19,7 @@ if($DataType=='reference'){
 	echo "<input type='text' id='libraryID' name='libraryID' value='".$DataInfo."' hidden />";
 	echo "<input type='text' id='libraryName' name='libraryName' value='".$row['libraryName']."' hidden />";
 	
-	$stmt = $pdo->query('SELECT * FROM referenceTable');
+	$stmt = $pdo->query("SELECT * FROM referenceTable where isDelete=0");
 	while($row = $stmt->fetch()) {
 		if($DataInfo==$row['libraryID']){
 			echo "<tr>";
@@ -117,10 +117,10 @@ if($DataType=='reference'){
 			echo "</div>";
 			
 			echo "<div class='col-sm-4'>Share with User</div>";
-			echo "<div class='col-sm-8'>";
+			echo "<div class='col-sm-8' rows='10' cols='30'>";
 			
 		if($count_shareLibrary>0){
-			echo "	<input type='text' id='shareWithUser_update' name='shareUser' value='".$userName."' disabled>";
+			echo "	<input type='text' class='scrollabletextbox' id='shareWithUser_update' name='shareUser' value='".$userName."' disabled>";
 			echo "	<input type='text' id='shareWithUser_update' name='shareUserID' value='".$row_shareLibrary['shareUser']."' hidden disabled>";
 		}else{
 			echo "	<input type='text' id='shareWithUser_update' name='shareUser' disabled>";
@@ -133,7 +133,7 @@ if($DataType=='reference'){
 			echo "</div>";
 			
 			echo "<div class='col-sm-4'>Share with User</div>";
-			echo "<div class='col-sm-8'>";
+			echo "<div class='col-sm-8' style='width: 200px; height: 100px; overflow-y: scroll;'>";
 			
 		if($count_shareLibrary>0){
 			echo "	<input type='text' id='shareWithUser_update' name='shareUser' value='".$userName."' disabled>";

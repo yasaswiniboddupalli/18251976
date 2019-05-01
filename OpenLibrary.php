@@ -90,7 +90,7 @@ body {font-family: "Roboto", sans-serif}
 	<ul>
 		<li><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal_createLibrary">Create New Library</button></li>
 		<li><button id="mybutton_updateLibrary" type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="showLibrary();">Update Library</button></li>
-		<li><button id="mybutton_deleteLibrary" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal_deleteLibrary">Delete Library</button></li>
+		<li><button id="mybutton_deleteLibrary" type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="deleteLibrary()">Delete Library</button></li>
 		<!--<li><button type="button" class="btn btn-info btn-lg" onclick="deleteLibrary()">Delete Library</button></li>-->
 	</ul>
 
@@ -113,6 +113,13 @@ body {font-family: "Roboto", sans-serif}
 								</tr>
 							</thead>
 							<tbody id ="txtLibrary">
+										<tr>
+											<td onclick="showInfo('unfiled',<?php echo $userID;?>)">
+												<!--<input type="checkbox" name="check_ShareLibraryList[]" value="0">-->
+												<input name="check_ShareLibraryList[]" value="0" hidden>
+												<span style="color:mediumblue">Unfiled</span>
+											</td>
+										</tr>
 								<?php 	$query_RecWebInfo = "SELECT * FROM librarytable where userID = '$userID'";
 										//$RecShareLibraryInfo = mysqli_query($connSQL, $query_RecWebInfo) or die(mysql_error());
 										$RecShareLibraryInfo = $pdo->query($query_RecWebInfo);
@@ -122,9 +129,9 @@ body {font-family: "Roboto", sans-serif}
 										{
 										?>
 											<tr>
-												<td>
+												<td onclick="showInfo('userAndLibrary','<?php echo $row_RecShareLibraryInfo['libraryID'];?>')">
 													<input type="checkbox" name="check_ShareLibraryList[]" value="<?php echo $row_RecShareLibraryInfo['libraryID'];?>">
-													<span style="color:mediumblue" onclick="showInfo('userAndLibrary','<?php echo $row_RecShareLibraryInfo['libraryID'];?>')"><?php echo $row_RecShareLibraryInfo['libraryName'];?></span>
+													<span style="color:mediumblue"><?php echo $row_RecShareLibraryInfo['libraryName'];?></span>
 												</td>
 											</tr>
 								<?php 	} ?>
@@ -150,9 +157,9 @@ body {font-family: "Roboto", sans-serif}
 												if($userID == $list_sharelibraryID[$i] && ($userID != $row_RecLibraryInfo['userID'])){
 										?>
 													<tr>
-														<td>
+														<td onclick="showInfo('userAndLibrary','<?php echo $row_RecLibraryInfo['libraryID'];?>')">
 															<input type="checkbox" name="check_ShareLibraryList[]" value="<?php echo $row_RecLibraryInfo['libraryID'];?>">
-															<span style="color:mediumblue" onclick="showInfo('userAndLibrary','<?php echo $row_RecLibraryInfo['libraryID'];?>')"><?php echo $row_RecLibraryInfo['libraryName'];?></span>
+															<span style="color:mediumblue"><?php echo $row_RecLibraryInfo['libraryName'];?></span>
 														</td>
 													</tr>
 										<?php
@@ -210,7 +217,7 @@ body {font-family: "Roboto", sans-serif}
 		<li><button id="mybutton_updateReference" type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="openModal_Reference('updateReference');">Update Reference</button></li>
 		<li><button id="mybutton_deleteReference" type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="openModal_Reference('deleteReference');">Delete Reference</button></li>
 		<li><button id="mybutton_addToOtherLibrary" type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="openModal_Reference('addToOtherLibrary');">Add To Other Library</button></li>
-		<li><button id="mybutton_removeFromLibrary" type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="openModal_Reference('removeFromLibrary');">Remove From Library</button></li>
+		<!--<li><button id="mybutton_removeFromLibrary" type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="openModal_Reference('removeFromLibrary');">Remove From Library</button></li>-->
 	</ul>
 
 	<!--table-->
@@ -218,7 +225,7 @@ body {font-family: "Roboto", sans-serif}
 		<table id="customers">
 			<thead>
 				<tr>
-					<th><input type="checkbox" onclick="select_all(this, 'reference');" />Library</th>
+					<th><input type="checkbox" onclick="select_all(this, 'reference');" />Reference</th>
 					<th>Entry Type</th>
 					<th>Author</th>
 					<th>Book Title</th>
@@ -236,13 +243,14 @@ body {font-family: "Roboto", sans-serif}
 				</tr>
 				<?php
 					$stmt = $pdo->query("SELECT * FROM referenceTable where isDelete=0 and defaultLibrary=1 and userID='$userID'");
+					echo "<tr hidden><td><input type='text' id='libraryID' name='libraryID' value='0' hidden/>";
+						echo "<input type='text' id='libraryName' name='libraryName' value='Unfiled' hidden/></td></tr>";
 					while($row = $stmt->fetch()) {
 						$refernce_libraryID = $row['libraryID'];
 						$stmt_lib = $pdo->query("SELECT * FROM librarytable where libraryID='$refernce_libraryID'");
 						$row_lib = $stmt_lib->fetch();
 
-						echo "<input type='text' id='libraryID' name='libraryID' value='0' hidden />";
-						//echo "<input type='text' id='libraryName' name='libraryName' value='".$row_lib['libraryName']."' hidden />";
+						
 						//if($DataInfo==$row['libraryID']){
 							echo "<tr>";
 							echo "<td><input type='checkbox' name='check_ReferenceList[]' value='" . $row['referenceID'] . "'></td>";
@@ -276,7 +284,7 @@ body {font-family: "Roboto", sans-serif}
       </div>
       <div class="modal-body">
 
-        <form action="command/control_book.php" method="post">
+        <form action="command/control_book.php?operator=" method="post">
 
       <diV class="row">
 
@@ -321,13 +329,13 @@ body {font-family: "Roboto", sans-serif}
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Insert Data</h4>
+        <h4 class="modal-title">Update Reference</h4>
       </div>
       <div class="modal-body">
 
-        <form action="command/control_book.php" method="post">
+        <form action="command/control_book.php?operator=updateReference" method="post">
 
-      <diV class="row">
+      <diV class="row" id="txtUpdateReference">
 
       <div class="col-sm-4">Entry Type </div>
       <div class="col-sm-8">
@@ -351,7 +359,7 @@ body {font-family: "Roboto", sans-serif}
       <div class="col-sm-8"><input type="text" name="year" ></div> <br/>
       <div class="col-sm-4">Volume </div>
       <div class="col-sm-8"><input type="text" name="volume" > </div><br/>
-      <input type="submit" value="Insert" name="submitData" >
+      <input type="submit" value="Update" name="submitData" >
 
          </div>
       </form>
@@ -503,12 +511,17 @@ body {font-family: "Roboto", sans-serif}
 
 						<div class="col-sm-4">Destination Library</div>
 						<div class="col-sm-8">
-							<input type="text" id="libraryID_Dest" name="libraryID_Dest" required>
+							<input type="text" id="libraryID_Dest" name="libraryID_Dest" disabled required>
 							<input type='text' id='libraryID_DestID' name='libraryID_DestID' hidden>
 							<input type='button' value='Search Library' onclick='openWindow_searchLibrary(<?php echo $userID?>)'>
 						</div>
 
-
+						<div class="col-sm-5">Also Keep one in Original Library</div>
+						<div class="col-sm-7">
+							<input type="radio" name="keep" value="yes"> Yes
+							<input type="radio" name="keep" value="no" checked> No<br>
+						</div>
+						
 						<input type="submit" value="Add To" name="submitData">
 
 					</div>
@@ -589,7 +602,12 @@ body {font-family: "Roboto", sans-serif}
 						document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
 					}
 				};
-				xmlhttp.open("GET","command/getReference.php?DataType=reference"+"&DataInfo="+id,true);
+				
+				if(type == "unfiled"){
+					xmlhttp.open("GET","command/control_book.php?operator=showUnfiled"+"&userID="+id,true);
+				}else{
+					xmlhttp.open("GET","command/getReference.php?DataType=reference"+"&DataInfo="+id,true);
+				}
 				xmlhttp.send();
 
 				if(type == "userAndLibrary"){
@@ -625,6 +643,12 @@ body {font-family: "Roboto", sans-serif}
 				}
 				//alert(i + (cboxes[i].checked?' checked ':' unchecked ') + cboxes[i].value);
 			}
+			
+			if( value_checked_cboxes== 0){
+				alert("This is Unfiled library, it can not be changed.");
+				return;
+			}
+			
 			if(count_checked_cboxes == 1){
 				$("#myModal_updateLibrary").modal();
 
@@ -788,6 +812,7 @@ body {font-family: "Roboto", sans-serif}
 		}
 
 		function deleteLibrary() {
+			/*
 			var cboxes = document.getElementsByName('check_ShareLibraryList[]');
 			var len = cboxes.length;
 			var count_checked_cboxes = 0;
@@ -803,7 +828,6 @@ body {font-family: "Roboto", sans-serif}
 				//alert(i + (cboxes[i].checked?' checked ':' unchecked ') + cboxes[i].value);
 			}
 
-			/*
 			var txt;
 			var result = confirm("Are you sure to delete the selected libraries? ("+count_checked_cboxes+" libraries:" + value_checked_cboxes+")");
 			if (result == true) {
@@ -825,15 +849,33 @@ body {font-family: "Roboto", sans-serif}
 				xhr.send(data);
 			}
 			*/
+			
+			var cboxes = document.getElementsByName('check_ShareLibraryList[]');
+			var len = cboxes.length;
+			var count_checked_cboxes = 0;
+			var value_checked_cboxes = '';
+			for (var i=0; i<len; i++) {
+				if(cboxes[i].checked){
+					if(cboxes[i].value==0){
+						alert("It includes Unfiled library, it can not be deleted.");
+					return;
+					}
+				}
+				//alert(i + (cboxes[i].checked?' checked ':' unchecked ') + cboxes[i].value);
+			}
+
+			$("#myModal_deleteLibrary").modal();
 		}
 
 		function openModal_Reference(param){
 			var cboxes = document.getElementsByName('check_ReferenceList[]');
 			var len = cboxes.length;
 			var count_checked_cboxes = 0;
+			var value_checked_cboxes = '';
 			for (var i=0; i<len; i++) {
 				if(cboxes[i].checked){
 					count_checked_cboxes++;
+					value_checked_cboxes = cboxes[i].value;
 				}
 				//alert(i + (cboxes[i].checked?' checked ':' unchecked ') + cboxes[i].value);
 			}
@@ -843,10 +885,7 @@ body {font-family: "Roboto", sans-serif}
 				return;
 			}
 
-			if((param="updateReference")&&(count_checked_cboxes!=1)){
-				alert("Please choose only one reference!");
-				return;
-			}
+			
 
 			if(param == "addToOtherLibrary"){
 				document.forms["form_addToOtherLibrary"]["libraryID_Origin"].value = document.getElementById("libraryName").value;
@@ -859,6 +898,28 @@ body {font-family: "Roboto", sans-serif}
 			}else if(param == "deleteReference"){
 				$("#myModal_deleteReference").modal();
 			}else if(param="updateReference"){
+				if((param=="updateReference")&&(count_checked_cboxes!=1)){
+					alert("Please choose only one reference!");
+					return;
+				}
+				
+				var data = new FormData();
+				data.append('referenceID', value_checked_cboxes);
+
+				url1 = "command/control_book.php?operator=showReference";
+				var xhr = new XMLHttpRequest();
+
+				xhr.open('POST', url1, true);
+				//Send the proper header information along with the request
+				//xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+				xhr.onreadystatechange = function() {//Call a function when the state changes.
+					if(xhr.readyState == 4 && xhr.status == 200) {
+						document.getElementById("txtUpdateReference").innerHTML = xhr.responseText;
+					}
+				}
+				xhr.send(data);
+				
 				$("#modal_updateReference").modal();
 			}
 		}
@@ -874,8 +935,9 @@ body {font-family: "Roboto", sans-serif}
 					}
 					//alert(i + (cboxes[i].checked?' checked ':' unchecked ') + cboxes[i].value);
 				}
-
+				
 				var data = new FormData();
+				data.append('keepOne', document.forms["form_addToOtherLibrary"]["keep"].value);
 				data.append('value_checked_cboxes', value_checked_cboxes);
 				data.append('libraryID_DestID', document.forms["form_addToOtherLibrary"]["libraryID_DestID"].value);
 				data.append('userID', userID);

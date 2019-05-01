@@ -34,6 +34,15 @@ $libraryID_Origin=$_GET["libraryID_Origin"];
 				</td>
 			</tr>
 			<tr>
+				<?php		if($libraryID_Origin != 0){?>			
+								<tr>
+									<td>
+										<input type="checkbox" name="check_ShareLibraryList" value="Unfiled,0">
+											Unfiled
+										</input>
+									</td>
+								</tr>
+				<?php		}?>
 				<?php 	
 						$query_RecWebInfo = "SELECT * FROM librarytable where userID='$userID'";
 						//$RecLibraryInfo = mysqli_query($connSQL, $query_RecWebInfo) or die(mysql_error());

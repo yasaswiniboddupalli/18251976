@@ -49,15 +49,19 @@ body {font-family: "Roboto", sans-serif}
 </h4>
 
 <form id="form" name="thisform" enctype="multipart/form-data" method="post" action="command/control_book.php?operator=DeleteTrash">
+
+	<ul>
+		<li><input type="submit" class="btn btn-info btn-lg" value="Restore" name="restore" class="btn btn-info btn-lg"></li>
+        <li><input type="submit" class="btn btn-info btn-lg" value="Delete Permanently" name="delete" class="btn btn-info btn-lg"></li>
+	</ul>
+
 <table id="customers" class=" table order-list">
   <thead>
     
 
       <tr>
-        <th><input type="submit" value="Restore" name="restore" class="btn btn-info btn-lg">
-            <input type="submit" value="Delete Permanently" name="delete" class="btn btn-info btn-lg">
-        </th>
-        <th>ReferenceID</th>
+		<th><input type="checkbox" onclick="selectall(this);" />Reference</th>
+        <!--<th>ReferenceID</th>-->
         <th>Entry Type</th>
         <th>Author</th>
         <th>Book Title</th>
@@ -100,7 +104,8 @@ body {font-family: "Roboto", sans-serif}
      while($row = $result->fetch_assoc())
       {
         $selected = $row["referenceID"];
-        echo "<tr><td><input type='checkbox' name='selectedcheckbox[]' value='$selected' ></td><td>". $row["referenceID"]. "</td><td>". $row["entryType"] . "</td><td>"
+        //echo "<tr><td><input type='checkbox' name='selectedcheckbox[]' value='$selected' ></td><td>". $row["referenceID"]. "</td><td>". $row["entryType"] . "</td><td>"
+        echo "<tr><td><input type='checkbox' name='selectedcheckbox[]' value='$selected' ></td><td>". $row["entryType"] . "</td><td>"
           . $row["author"]. "</td><td>" . $row["bookTitle"]. "</td><td>" . $row["editor"] . "</td><td>"
              . $row["title"]. "</td><td>" . $row["journal"]. "</td><td>" . $row["publisher"] . "</td><td>"
              . $row["year"]. "</td><td>" . $row["volume"]. "</td></tr>";
@@ -127,4 +132,14 @@ body {font-family: "Roboto", sans-serif}
 
 </div>
 </body>
+<script>
+	function selectall(source) {
+			var checkboxes = document.getElementsByName('selectedcheckbox[]');
+
+		for (var i = 0; i < checkboxes.length; i++) {
+			if (checkboxes[i] != source)
+				checkboxes[i].checked = source.checked;
+		}
+	}
+</script>
 </html>

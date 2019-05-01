@@ -23,12 +23,6 @@ $(document).ready(function(){
 
 $(document).ready(function(){
 
-   $('#OpenLibrary').load("OpenLibrary.php");
-
-});
-
-$(document).ready(function(){
-
    $('#Update').load("Update.html");
 
 });
@@ -46,9 +40,6 @@ $(document).ready(function(){
   <div class="w3-bar" style="background-color:cadetblue;color:#fff;">
     <button class="w3-bar-item w3-button tablink w3-red w3-mobile" onclick="openCity(event,'Home')">Home</button>
 
-
-    <button class="w3-bar-item w3-button tablink w3-mobile" onclick="openCity(event,'OpenLibrary')">Library</button>
-
     <button class="w3-bar-item w3-button tablink w3-mobile" onclick="openCity(event,'Update')">Update Details</button>
     <button class="w3-bar-item w3-button tablink w3-mobile" onclick="openCity(event,'Trash')">Trash</button>
 	<span class="w3-bar-item w3-right"><a href="Signin.html" style="text-decoration: none; color: white;">Logout</a></span>
@@ -60,14 +51,6 @@ $(document).ready(function(){
   <div id="Home" class="w3-container  city" style="display:none;height: 649px;">
   <?php } ?>
   </div>
-
-  <?php if($lastpage=="openlibrary"){ ?>
-  <div id="OpenLibrary" class="w3-container city">
-  <?php }else{ ?>
-  <div id="OpenLibrary" class="w3-container city" style="display:none;height: 649px;">
-  <?php } ?>
-  </div>
-
 
   <div id="Update" class="w3-container city" style="display:none;height: 649px;">
 
