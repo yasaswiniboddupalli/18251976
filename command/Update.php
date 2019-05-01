@@ -11,7 +11,7 @@ if(isset($_POST['Update'])){
 		//create user
 		$password = sha1($password); //security
 		$sql = "UPDATE userTable SET password='$password' WHERE email='$email'";
-
+		echo '1';
 		if ($connSQL->query($sql) === TRUE) {
 			echo "Record updated successfully";
 			header("location:../Dashboard.php");

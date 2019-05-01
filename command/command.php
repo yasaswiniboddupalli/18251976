@@ -36,7 +36,7 @@ if($page=='OpenLibrary'){
 		
 		$query_RecWebInfo = "SELECT * FROM sharelibrarytable where libraryID='$libraryID'";
 		//$RecLibraryInfo = mysqli_query($connSQL, $query_RecWebInfo) or die(mysql_error());
-		$RecLibraryInfo = $pdo->query($sql);
+		$RecLibraryInfo = $pdo->query($query_RecWebInfo);
 		//$totalRows_RecLibraryInfo = mysqli_num_rows($RecLibraryInfo);
 		$totalRows_RecLibraryInfo = $RecLibraryInfo->fetchColumn();
 		

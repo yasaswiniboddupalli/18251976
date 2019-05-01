@@ -54,7 +54,7 @@ body {font-family: "Roboto", sans-serif}
 <!--table-->
 <table id="customers" class=" table order-list">
   <thead>
-    <form id="form" name="thisform" enctype="multipart/form-data" method="post" action="Home.php">
+    <form id="form" name="thisform" enctype="multipart/form-data" method="post" action="command/control_book.php">
 
       <tr>
         <th><input type="submit" value="Delete" name="submit" class="btn btn-info btn-lg"></th>
