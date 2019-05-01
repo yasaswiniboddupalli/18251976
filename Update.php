@@ -69,8 +69,8 @@
   if(true) {
    while($row = $result->fetch_assoc()) {
 	    $id = $row["userID"];
-	    $firstName = $row["firstName"];
-	    $lastName = $row["lastName"];
+	    $firstName = $row["firstName"];//mysqli_real_escape_string($connSQL,$row["firstName"]);
+	    $lastName = $row["lastName"];//mysqli_real_escape_string($connSQL,$row["lastName"]);
 	    $email = $row["email"];
 		
 
@@ -97,11 +97,11 @@
     </div>
 	<div class="form-group">
       <label for="pwd_origin">Original Password</label>
-      <input type="password" class="form-control" style="width:80%;" id="pwd_origin" name="pwd_origin">
+      <input type="password" class="form-control" style="width:80%;" id="pwd_origin" name="pwd_origin" required>
     </div>
     <div class="form-group">
       <label for="pwd_new">New Password</label>
-      <input type="password" class="form-control" style="width:80%;" id="pwd_new" name="pwd_new"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" >
+      <input type="password" class="form-control" style="width:80%;" id="pwd_new" name="pwd_new"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
     </div>
 	<div class="form-group">
       <label for="pwd_new_comfirm">Re-Enter New Password</label>

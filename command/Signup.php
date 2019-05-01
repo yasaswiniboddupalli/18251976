@@ -1,6 +1,7 @@
 
 <?php
 include('../../Connections/connSQL.php');
+//this file foucs on signup function
 mysqli_select_db($connSQL, $database_connSQL);
 $emailError ="";
 $accountCreated ="";
@@ -8,8 +9,8 @@ $passwordDoesNotMatch="";
 
 
 if(isset($_POST['signup'])){
-	$firstName=$_POST['firstName'];
-	$lastName=$_POST['lastName'];
+	$firstName=mysqli_real_escape_string($connSQL,$_POST['firstName']);
+	$lastName=mysqli_real_escape_string($connSQL,$_POST['lastName']);
 	$email=$_POST['email'];
 	$password=$_POST['password'];
 	$password1=$_POST['password1'];
@@ -38,7 +39,7 @@ $passwordDoesNotMatch = "The passwords does not match";
 
 	}
 
-	//header("location:Signin.html");
+
 	}
 }
 ?>

@@ -1,5 +1,5 @@
-<?php require_once('../Connections/connSQL.php'); ?>
-<?php
+<!-- called connection file to establish connection -->
+<?php require_once('../Connections/connSQL.php'); 
 mysqli_select_db($connSQL, $database_connSQL);
 $lastpage = "";
 if(isset($_GET['lastpage'])){
@@ -15,6 +15,8 @@ if(isset($_GET['lastpage'])){
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <script>
+
+// navigation bar defined here. To call respective pages
 $(document).ready(function(){
 
    $('#Home').load("OpenLibrary.php");
@@ -36,7 +38,7 @@ $(document).ready(function(){
 
 <div>
 
-
+<!-- For styling -->
   <div class="w3-bar" style="background-color:cadetblue;color:#fff;">
     <button class="w3-bar-item w3-button tablink w3-white w3-mobile" onclick="openCity(event,'Home')">Home</button>
 

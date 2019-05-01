@@ -30,7 +30,7 @@ background-size: 1440px 788px;
 <!--This part is used make header visible when scrolled down-->
 <div class="w3-main" >
 
-   <div id="myTop" class="w3-container w3-top headerFooter">
+   <div id="myTop" class="w3-container w3-top headerFooter" style="background-color:black !important">
       <p>
       <span id="myIntro" class="w3-hide">Bibliography Manager</span>
       </p>

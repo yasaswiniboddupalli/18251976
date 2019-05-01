@@ -1,4 +1,5 @@
 <?php require_once('../../Connections/connSQL.php'); 
+//In this file, it foucs on get any information from database
 $userEmailId =$_SESSION["email"];
 $sql = "SELECT firstName, userID FROM userTable WHERE email = '$userEmailId'";
 $result = $connSQL->query($sql);
@@ -13,6 +14,7 @@ if(isset($_GET['DataInfo'])){
 }
 
 if($DataType=='reference'){
+//get reference here
 	
 	$stmt = $pdo->query("SELECT * FROM librarytable where libraryID='$DataInfo'");
 	$row = $stmt->fetch();
@@ -46,7 +48,7 @@ if($DataType=='reference'){
 			$stmt = $pdo->query("SELECT * FROM referenceTable where isDelete=0 ORDER BY year DESC");
 		}
 	}
-	//$stmt = $pdo->query("SELECT * FROM referenceTable where isDelete=0");
+
 	while($row = $stmt->fetch()) {
 		if($DataInfo==$row['libraryID']){
 			echo "<tr>";
@@ -64,6 +66,8 @@ if($DataType=='reference'){
 		}
 	}
 }else if($DataType=='userAndLibrary'){
+//get library information and user information
+
 	$stmt = $pdo->query('SELECT * FROM sharelibrarytable');
 
 	while($row = $stmt->fetch()) {
@@ -81,42 +85,16 @@ if($DataType=='reference'){
 				echo "</tr>";
 			}
 		}
-		/*
-		$list_sharelibraryID = explode(',',$row['shareLibraryID']);
-		$listLength_sharelibraryID = sizeof($list_sharelibraryID);
-		
-		for($i=0;$i<$listLength_sharelibraryID;$i++){
-			if($DataInfo==$list_sharelibraryID[$i]){
-				echo "<tr>";
-				echo "<td><input type='checkbox' name='check_ReferenceList[]' value='" . $row['referenceID'] . "'></td>";
-				echo "<td>" . $row['entryType'] . "</td>";
-				echo "<td>" . $row['author'] . "</td>";
-				echo "<td>" . $row['bookTitle'] . "</td>";
-				echo "<td>" . $row['editor'] . "</td>";
-				echo "<td>" . $row['title'] . "</td>";
-				echo "<td>" . $row['journal'] . "</td>";
-				echo "<td>" . $row['publisher'] . "</td>";
-				echo "<td>" . $row['year'] . "</td>";
-				echo "<td>" . $row['volume'] . "</td>";
-				echo "</tr>";
-				/*
-				echo "<td>" . $row['FirstName'] . "</td>";
-				echo "<td>" . $row['LastName'] . "</td>";
-				echo "<td>" . $row['Age'] . "</td>";
-				echo "<td>" . $row['Hometown'] . "</td>";
-				echo "<td>" . $row['Job'] . "</td>";
-				echo "</tr>";
-				*/
-			//}
-		//}
-		//*/
+
 	}
 }else if($DataType=='library'){
-	echo "1";
+	//echo "1";
 }else if($DataType=='libraryDetail'){
+//get more detail library detail when it needs to be updated
+
 	$stmt = $pdo->query("SELECT * FROM librarytable where libraryID='$DataInfo'");
 	$row = $stmt->fetch();
-	//echo $row['libraryName'];
+	echo $row['libraryName'];
 	
 	$stmt_shareLibrary = $pdo->query("SELECT * FROM sharelibrarytable where libraryID='$DataInfo'");
 	$count_shareLibrary = $stmt_shareLibrary->fetchColumn();
@@ -147,8 +125,8 @@ if($DataType=='reference'){
 			echo "<div class='col-sm-8'>";
 			
 		if($count_shareLibrary>0){
-			//echo "	<textarea rows='5' style='width:370px;height:100px;' class='scrollabletextbox' id='shareWithUser_update' name='shareUser' disabled>$userName</textarea>";
-			//echo "	<input type='text' id='shareWithUser_update' name='shareUserID' value='".$row_shareLibrary['shareUser']."' hidden disabled>";
+
+
 			echo "<select id='shareWithUser_update' name='shareUser' style='width:370px;height:100px;' multiple='multiple'>";
 			
 			$RecUserInfo = $pdo->query("SELECT * FROM usertable");
@@ -165,9 +143,7 @@ if($DataType=='reference'){
 				}
 			}
 		}else{
-			//echo "	<input type='text' id='shareWithUser_update' name='shareUser' disabled>";
-			//echo "	<textarea rows='5' style='width:370px;height:100px;' class='scrollabletextbox' id='shareWithUser_update' name='shareUser' disabled></textarea>";
-			//echo "	<input type='text' id='shareWithUser_update' name='shareUserID' hidden disabled>";
+
 			echo "<select id='shareWithUser_update' name='shareUser' style='width:370px;height:100px;' multiple='multiple'>";
 			
 			$RecUserInfo = $pdo->query("SELECT * FROM usertable");
@@ -194,10 +170,7 @@ if($DataType=='reference'){
 			echo "<div class='col-sm-8'>";
 			
 		if($count_shareLibrary>0){
-			//echo "	<input type='text' id='shareWithUser_update' name='shareUser' value='".$userName."' disabled>";
-			//echo "	<textarea rows='5' style='width:370px;height:100px;' class='scrollabletextbox' id='shareWithUser_update' name='shareUser' disabled>$userName</textarea>";
-			//echo "	<input type='text' id='shareWithUser_update' name='shareUserID' value='".$row_shareLibrary['shareUser']."' hidden disabled>";
-			
+
 			echo "<select id='shareWithUser_update' name='shareUser' style='width:370px;height:100px;' multiple='multiple' disabled>";
 			
 			$RecUserInfo = $pdo->query("SELECT * FROM usertable");
@@ -214,10 +187,7 @@ if($DataType=='reference'){
 				}
 			}
 		}else{
-			//echo "	<input type='text' id='shareWithUser_update' name='shareUser' disabled>";
-			//echo "	<textarea rows='5' style='width:370px;height:100px;' class='scrollabletextbox' id='shareWithUser_update' name='shareUser' disabled></textarea>";
-			//echo "	<input type='text' id='shareWithUser_update' name='shareUserID' hidden disabled>";
-			
+
 			echo "<select id='shareWithUser_update' name='shareUser' style='width:370px;height:100px;' multiple='multiple' disabled>";
 			
 			$RecUserInfo = $pdo->query("SELECT * FROM usertable");
@@ -235,15 +205,11 @@ if($DataType=='reference'){
 			}
 		}
 	}
-	/*
-	if($row['userID']==$userID){
-			echo "  <input type='button' value='Search User' onclick='openWindow_searchUser()'>";
-	}
-	*/
+
 			echo "</div>";
 
 			echo "<input type='submit' value='Update' name='submitData'>";
 }
 
-//mysqli_close($con);
+
 ?>

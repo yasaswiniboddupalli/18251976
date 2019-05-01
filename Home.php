@@ -1,3 +1,4 @@
+<!-- called connection file to establish connection -->
 <?php require_once('../Connections/connSQL.php'); ?>
 <?php
 mysqli_select_db($connSQL, $database_connSQL);
@@ -47,7 +48,7 @@ body {font-family: "Roboto", sans-serif}
 
   <!--table nav bar-->
   <ul>
-    <!-- <li><a class="active" href="AddData.php">Add</a></li> -->
+    
     <li><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Record</button></li>
   </ul>
 
@@ -129,15 +130,15 @@ body {font-family: "Roboto", sans-serif}
 
       if (isset($_REQUEST["submitData"]))
       {
-        $entryType  = $_POST['entryType'];
-        $author = $_POST['author'];
-        $booktitle = $_POST['bookTitle'];
-        $editor = $_POST['editor'];
-        $title = $_POST['title'];
-        $journal = $_POST['journal'];
-        $publisher = $_POST['publisher'];
-        $year = $_POST['year'];
-        $volume = $_POST['volume'];
+        $entryType  = mysqli_real_escape_string($connSQL,$_POST['entryType']);
+        $author = mysqli_real_escape_string($connSQL,$_POST['author']);
+        $booktitle = mysqli_real_escape_string($connSQL,$_POST['bookTitle']);
+        $editor = mysqli_real_escape_string($connSQL,$_POST['editor']);
+        $title = mysqli_real_escape_string($connSQL,$_POST['title']);
+        $journal = mysqli_real_escape_string($connSQL,$_POST['journal']);
+        $publisher = mysqli_real_escape_string($connSQL,$_POST['publisher']);
+        $year = mysqli_real_escape_string($connSQL,$_POST['year']);
+        $volume = mysqli_real_escape_string($connSQL,$_POST['volume']);
 
             $addsql = "Insert into referenceTable(entryType, author, bookTitle, editor, title, journal, publisher, year, volume, userID) values('$entryType','$author','$booktitle','$editor','$title','$journal','$publisher','$year','$volume','$id')";
 
@@ -165,28 +166,10 @@ body {font-family: "Roboto", sans-serif}
 
 
       <diV class="row">
-   
 
-<!-- ------- -->
-
-
-
-<!-- ------- -->
-
-
-
-   
       <div class="col-sm-4">Entry Type </div>
       <div class="col-sm-8">
       <input type="text" name="entryType" require_once>
-      <!-- <select id="selectProvider" name="field" onchange="checkValidOption();">
-            <option disabled selected> Select Entry Type </option>
-            <option value="Article"> Article</option>
-            <option value="Book"> Book </option>
-            <option value="Journal"> Journal </option>
-            <option value="Other"> Other </option>
-      </select> -->
-
 
        </div><br/><br/>
 

@@ -1,4 +1,4 @@
-
+/* this file is called in php files to style the body, buttons and so on things */
 /* style for search*/
 input[type=text] {
   width: 100%;

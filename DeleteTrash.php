@@ -1,3 +1,4 @@
+<!-- called connection file to establish connection -->
 <?php include('../Connections/connSQL.php'); ?>
 <?php
 mysqli_select_db($connSQL, $database_connSQL);
@@ -21,13 +22,13 @@ mysqli_select_db($connSQL, $database_connSQL);
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
+ <!-- to style the body -->
 <style>
 body {font-family: "Roboto", sans-serif}
 .w3-bar-block .w3-bar-item {
   padding: 16px;
   font-weight: bold;
 }
-
 </style>
 <body>
 <div class="w3-container" style="padding:32px">
@@ -55,13 +56,13 @@ body {font-family: "Roboto", sans-serif}
         <li><input type="submit" class="btn btn-lg" style="border-radius:38px;width: 185px;  background-color:cadetblue;" value="Empty Trash" name="delete" ></li>
 	</ul>
 
+<!-- table to show the references -->
 <table id="customers" class=" table order-list">
   <thead>
 
 
       <tr>
 		<th><input type="checkbox" onclick="selectall(this);" />Reference</th>
-        <!--<th>ReferenceID</th>-->
         <th>Entry Type</th>
         <th>Author</th>
         <th>Book Title</th>
@@ -75,7 +76,7 @@ body {font-family: "Roboto", sans-serif}
 
 <?php
     // to get the user id of the loggedin user
-      // each checkbox is given referenceId so that we can delete  them easily
+      // each checkbox is given referenceId so that we can update them easily to restore the values
       if(!empty($_POST['selectedcheckbox'])&& isset($_POST['restore'])){
         // Loop to store and display values of individual checked checkbox.
         foreach($_POST['selectedcheckbox'] as $selected){
@@ -104,7 +105,7 @@ body {font-family: "Roboto", sans-serif}
      while($row = $result->fetch_assoc())
       {
         $selected = $row["referenceID"];
-        //echo "<tr><td><input type='checkbox' name='selectedcheckbox[]' value='$selected' ></td><td>". $row["referenceID"]. "</td><td>". $row["entryType"] . "</td><td>"
+        
         echo "<tr><td><input type='checkbox' name='selectedcheckbox[]' value='$selected' ></td><td>". $row["entryType"] . "</td><td>"
           . $row["author"]. "</td><td>" . $row["bookTitle"]. "</td><td>" . $row["editor"] . "</td><td>"
              . $row["title"]. "</td><td>" . $row["journal"]. "</td><td>" . $row["publisher"] . "</td><td>"
@@ -132,6 +133,7 @@ body {font-family: "Roboto", sans-serif}
 
 </div>
 </body>
+<!-- code to check with checkbox is selected -->
 <script>
 	function selectall(source) {
 			var checkboxes = document.getElementsByName('selectedcheckbox[]');
