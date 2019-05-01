@@ -14,9 +14,6 @@ body {font-family: "Roboto", sans-serif}
   padding: 16px;
   font-weight: bold;
 }
-
-.library2_hidden { display:none; }
-.library1_hidden { display:none; } <!-- table-row--> <!-- table-row-group-->
 </style>
 <body>
 
@@ -34,7 +31,8 @@ body {font-family: "Roboto", sans-serif}
   <a class="w3-bar-item w3-button w3-xlarge" href="#"><i class='fas fa-folder-minus' style='font-size:25px; color:black'> Delete Library</i></a>
   <a class="w3-bar-item w3-button w3-xlarge" href="#"><i class='fas fa-folder-open' style='font-size:25px; color:black'> Open Library</i></a>
   <a class="w3-bar-item w3-button w3-xlarge" href="#"><i class='fas fa-share-alt' style='font-size:25px; color:black'> Share</i></a>
-  <a class="w3-bar-item w3-button w3-xlarge" href="#"><i class='fas fa-pencil-alt' style='font-size:25px; color:black'> Update details</i></a>
+  <a class="w3-bar-item w3-button w3-xlarge" href="#"><i class='fas fa-pencil-alt' style='font-size:25px; color:black'> Update Library</i></a>
+  <a class="w3-bar-item w3-button w3-xlarge" href="#"><i class='fas fa-pencil-alt' style='font-size:25px; color:black'> Update Reference</i></a>
   <a class="w3-bar-item w3-button w3-xlarge" href="#"><i class='fas fa-file-pdf' style='font-size:25px; color:black'></i> Upload file</a>
 </nav>
 
@@ -67,145 +65,95 @@ body {font-family: "Roboto", sans-serif}
 <form>
   <input type="text" name="search" placeholder="Search..">
 </form>
-
-			<div class="w3-example">
-				<h4>Library</h4>
-				<div class="w3-code">
-					<span style="color:black">
-						<span style="color:mediumblue" onclick="myFunction_hiden('library1')">library1</span>
-					</span>
-				</div>
-				<div class="w3-code-ccc">
-					<span style="color:black">
-						<span style="color:mediumblue" onclick="myFunction_hiden('library2')">library2</span>
-					</span>
-				</div>
-			<p>
-			</p>
-			</div>
-
 <!--table-->
-	<div>
+<table id="customers">
+  <thead>
+  <form>
+      <tr>
+        <th>Author</th>
+        <th>Title</th>
+        <th>Year</th>
+      </tr>
+    </thead>
+    <tr>
+      <td><input type="checkbox" value="">Jill</td>
+      <td>Psychology of reading</td>
+      <td>1950</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" value="">Eve</td>
+      <td>Theory of computation</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" value="">Adam</td>
+      <td>Automata</td>
+      <td>2005</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" value="">Jill</td>
+      <td>Psychology of reading</td>
+      <td>1950</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" value="">Eve</td>
+      <td>Theory of computation</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" value="">Adam</td>
+      <td>Automata</td>
+      <td>2005</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" value="">Jill</td>
+      <td>Psychology of reading</td>
+      <td>1950</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" value="">Eve</td>
+      <td>Theory of computation</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" value="">Adam</td>
+      <td>Automata</td>
+      <td>2005</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" value="">Jill</td>
+      <td>Psychology of reading</td>
+      <td>1950</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" value="">Eve</td>
+      <td>Theory of computation</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" value="">Adam</td>
+      <td>Automata</td>
+      <td>2005</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" value="">Jill</td>
+      <td>Psychology of reading</td>
+      <td>1950</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" value="">Eve</td>
+      <td>Theory of computation</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" value="">Adam</td>
+      <td>Automata</td>
+      <td>2005</td>
+    </tr>
+    </form>
+</table>
 
-          <table id="customers">
-			<thead>
-				<tr>
-					<th><input type="checkbox" value="">All</th>
-					<th>Title</th>
-					<th>Author</th>
-					<th>Year</th>
-					<th>Abstract</th>
-					<th>PDF</th>
-					<th>ShareWith</th>
-				</tr>
-			</thead>
-			<tbody>	<!--<tbody class="library1_hidden">-->
-				<tr class="library1_hidden">
-					<td><input type="checkbox" value=""></td>
-					<td>Psychology of reading</td>
-					<td>Jill</td>
-					<td>1950</td>
-					<td>A</td>
-					<td>A</td>
-					<td>A</td>	
-				</tr>
-				
-				<tr class="library1_hidden">
-					<td><input type="checkbox" value=""></td>
-					<td>Psychology of reading</td>
-					<td>Jill</td>
-					<td>1950</td>
-					<td>A</td>
-					<td>A</td>
-					<td>A</td>	
-				</tr>
-				
-				<tr class="library1_hidden">
-					<td><input type="checkbox" value=""></td>
-					<td>Psychology of reading</td>
-					<td>Jill</td>
-					<td>1950</td>
-					<td>A</td>
-					<td>A</td>
-					<td>A</td>	
-				</tr>
-				
-				<tr class="library1_hidden">
-					<td><input type="checkbox" value=""></td>
-					<td>Psychology of reading</td>
-					<td>Jill</td>
-					<td>1950</td>
-					<td>A</td>
-					<td>A</td>
-					<td>A</td>	
-				</tr>
-				
-				<tr class="library2_hidden">
-					<td><input type="checkbox" value=""></td>
-					<td>Theory of computation</td>
-					<td>Eve</td>
-					<td>2001</td>
-					<td>A</td>
-					<td>A</td>
-					<td>A</td>	
-				</tr>
-				
-				<tr class="library2_hidden">
-					<td><input type="checkbox" value=""></td>
-					<td>Theory of computation</td>
-					<td>Eve</td>
-					<td>2001</td>
-					<td>A</td>
-					<td>A</td>
-					<td>A</td>	
-				</tr>
-				
-				<tr class="library2_hidden">
-					<td><input type="checkbox" value=""></td>
-					<td>Theory of computation</td>
-					<td>Eve</td>
-					<td>2001</td>
-					<td>A</td>
-					<td>A</td>
-					<td>A</td>	
-				</tr>
-				
-				<tr class="library2_hidden">
-					<td><input type="checkbox" value=""></td>
-					<td>Theory of computation</td>
-					<td>Eve</td>
-					<td>2001</td>
-					<td>A</td>
-					<td>A</td>
-					<td>A</td>	
-				</tr>
-				
-				<tr class="library2_hidden">
-					<td><input type="checkbox" value=""></td>
-					<td>Theory of computation</td>
-					<td>Eve</td>
-					<td>2001</td>
-					<td>A</td>
-					<td>A</td>
-					<td>A</td>	
-				</tr>
-				
-				<tr class="library2_hidden">
-					<td><input type="checkbox" value=""></td>
-					<td>Theory of computation</td>
-					<td>Eve</td>
-					<td>2001</td>
-					<td>A</td>
-					<td>A</td>
-					<td>A</td>	
-				</tr>
-            </tbody> 
-          </table>
-          <br>
-          <input  type="submit" value="Submit" style="text-align:center;"></input>
 
-    </div>
-	
 <footer class="w3-container w3-theme" style="padding:32px">
   <p>Developed by Yash, Hung & Sam</p>
 </footer>
@@ -248,20 +196,6 @@ function myAccordion(id) {
     x.previousElementSibling.className.replace(" w3-theme", "");
   }
 }
-
-		function myFunction_hiden(parameter1) {
-			if(parameter1 == "library1"){
-				var x = document.getElementsByClassName("library2_hidden");
-				x[0].style.display = "none";
-				var x = document.getElementsByClassName("library1_hidden");
-				x[0].style.display = "table-row";
-			}else if(parameter1 == "library2"){
-				var x = document.getElementsByClassName("library1_hidden");
-				x[0].style.display = "none";
-				var x = document.getElementsByClassName("library2_hidden");
-				x[0].style.display = "table-row";
-			}
-		}
 </script>
 
 </body>

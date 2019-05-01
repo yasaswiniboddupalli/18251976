@@ -48,7 +48,7 @@ li a:hover {
   background-color: grey;
 }
 /* styles for table*/
-#customers {
+#customers{
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
@@ -64,6 +64,30 @@ li a:hover {
 #customers tr:hover {background-color: #ddd;}
 
 #customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: black;
+  color: white;
+}
+
+/* styles for share_table*/
+#share_table{
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#share_table td, #share_table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#share_table tr:nth-child(even){background-color: #f2f2f2;}
+
+#share_table tr:hover {background-color: #ddd;}
+
+#share_table th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;

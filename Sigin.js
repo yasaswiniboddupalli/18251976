@@ -1,11 +1,12 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html>
 <title>Bibilography Manager</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
 body {font-family: "Roboto", sans-serif}
 .w3-bar-block .w3-bar-item {
   padding: 16px;
@@ -19,7 +20,7 @@ body {font-family: "Roboto", sans-serif}
 <!--This part is used make header visible when scrolled down-->
 <div class="w3-main" style="margin-left:250px;">
 
-<div id="myTop" class="w3-container w3-top w3-theme w3-large">
+<div id="myTop" class="w3-container w3-top w3-theme ">
   <p>
   <span id="myIntro" class="w3-hide">Bibliography Manager</span></p>
 </div>
