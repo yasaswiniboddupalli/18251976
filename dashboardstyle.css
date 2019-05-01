@@ -11,7 +11,7 @@ nav {
   float: left;
   width: 20%;
   height: 600px; /* only for demonstration, should be removed */
-  background: #ccc;
+  background: #7fb1b3 !important;
   padding: 20px;
 }
 

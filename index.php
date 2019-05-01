@@ -11,6 +11,10 @@ body {font-family: "Roboto", sans-serif}
   padding: 16px;
   font-weight: bold;
 }
+.headerFooter{
+  color: #fff;
+  background-color: darkcyan;
+}
 </style>
 <body>
 
@@ -19,19 +23,20 @@ body {font-family: "Roboto", sans-serif}
 <!--This part is used make header visible when scrolled down-->
 <div class="w3-main" >
 
-<div id="myTop" class="w3-container w3-top w3-theme ">
-  <p>
-  <span id="myIntro" class="w3-hide">Bibliography Manager</span></p>
-</div>
+   <div id="myTop" class="w3-container w3-top headerFooter">
+      <p>
+      <span id="myIntro" class="w3-hide">Bibliography Manager</span>
+      </p>
+   </div>
 
-<!-- <header class="w3-container w3-theme" style="padding:34px"> -->
-<header class="w3-container w3-theme" style="height:100px !important; text-align:center;">
-  <h1 class="w3-xxxlarge">Bibliography Manager</h1>
+
+<header class="w3-container headerFooter" style="height:75px !important; text-align:center;">
+  <h1 style="font-size: 44px; margin-top: 6px;">Bibliography Manager</h1>
 </header>
-<iframe class="w3-container" height="630px" width="100%" style="" src="Signin.html" name="iframe_a">
+<iframe  height="685px" width="100%" style="border-width: 0px !important; " src="Signin.html" name="iframe_a">
   </iframe>
-  <footer class="w3-container w3-theme" style="position: fixed;width: 100%;text-align: center;">
-  <p>© copyright Maynooth Students</p>
+  <footer class="w3-container headerFooter" style="position: fixed;width: 100%;text-align: center;">
+  <p style="margin-top: 2px;">© Copyright Maynooth Students</p>
 </footer>
 
 

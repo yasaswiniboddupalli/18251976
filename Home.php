@@ -29,7 +29,7 @@ body {font-family: "Roboto", sans-serif}
 }
 </style>
 <body>
-<div class="w3-container" style="padding:32px">
+<div style="padding:0px">
 <!--Home of user dashboard--->
 
   <!--Code to print user name--->
