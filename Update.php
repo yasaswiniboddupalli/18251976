@@ -35,8 +35,8 @@
 	    $firstName = $row["firstName"];
 	    $lastName = $row["lastName"];
 	    $email = $row["email"];
-		
-
+		echo "Hello"." ".$row["firstName"];
+  
 }}
 ?>
 </h4>
@@ -45,7 +45,7 @@
 <center>
 <form action="command/Update.php?userID=<?=$id;?>" class="w3-container w3-card-4 w3-light-grey w3-text-black w3-margin" style="width:35%;margin-top:50px !important; height:auto;" method="post">
 <h2 class="w3-center">Update Details</h2>
-
+	
 	<div class="form-group">
       <label for="firstName" >First Name</label>
       <input type="text" class="form-control" style="width:80%;" id="firstName" name="firstName" value="<?=$firstName;?>">

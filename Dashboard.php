@@ -23,7 +23,7 @@ $(document).ready(function(){
 
 $(document).ready(function(){
 
-   $('#Update').load("Update.html");
+   $('#Update').load("Update.php");
 
 });
 $(document).ready(function(){

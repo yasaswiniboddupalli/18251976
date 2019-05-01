@@ -104,7 +104,7 @@ if($DataType=='reference'){
 			$RecUserInfo = $pdo->query("SELECT * FROM usertable");
 			while ($row_RecUserInfo = $RecUserInfo->fetch()){
 				if($row_RecUserInfo['userID']==$list_shareUserInfo[$i]){
-					$userName.=($row_RecUserInfo['firstName']." ".$row_RecUserInfo['lastName'].";");
+					$userName.=($row_RecUserInfo['firstName']." ".$row_RecUserInfo['lastName'].";&#10;");
 				}
 			}
 		}
@@ -120,7 +120,7 @@ if($DataType=='reference'){
 			echo "<div class='col-sm-8' rows='10' cols='30'>";
 			
 		if($count_shareLibrary>0){
-			echo "	<input type='text' class='scrollabletextbox' id='shareWithUser_update' name='shareUser' value='".$userName."' disabled>";
+			echo "	<textarea rows='5' class='scrollabletextbox' id='shareWithUser_update' name='shareUser' disabled>$userName</textarea>";
 			echo "	<input type='text' id='shareWithUser_update' name='shareUserID' value='".$row_shareLibrary['shareUser']."' hidden disabled>";
 		}else{
 			echo "	<input type='text' id='shareWithUser_update' name='shareUser' disabled>";

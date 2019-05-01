@@ -643,13 +643,13 @@ body {font-family: "Roboto", sans-serif}
 				}
 				//alert(i + (cboxes[i].checked?' checked ':' unchecked ') + cboxes[i].value);
 			}
-			
-			if( value_checked_cboxes== 0){
-				alert("This is Unfiled library, it can not be changed.");
-				return;
-			}
-			
+						
 			if(count_checked_cboxes == 1){
+				if( value_checked_cboxes== 0){
+					alert("This is Unfiled library, it can not be changed.");
+					return;
+				}
+				
 				$("#myModal_updateLibrary").modal();
 
 				if (window.XMLHttpRequest) {
