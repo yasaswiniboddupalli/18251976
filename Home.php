@@ -13,13 +13,17 @@ mysqli_select_db($connSQL, $database_connSQL);
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <!--jquery file added-->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+
+<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <style>
 body {font-family: "Roboto", sans-serif}
@@ -29,7 +33,7 @@ body {font-family: "Roboto", sans-serif}
 }
 </style>
 <body>
-<div style="padding:0px">
+<div class="w3-container" style="padding:32px">
 <!--Home of user dashboard--->
 
   <!--Code to print user name--->
@@ -45,6 +49,8 @@ body {font-family: "Roboto", sans-serif}
 ?>
 </h4>
 
+<h4 style="text-align:right">Logout<h4>
+
   <!--table nav bar-->
   <ul>
     <!-- <li><a class="active" href="AddData.php">Add</a></li> -->
@@ -54,7 +60,7 @@ body {font-family: "Roboto", sans-serif}
 <!--table-->
 <table id="customers" class=" table order-list">
   <thead>
-    <form id="form" name="thisform" enctype="multipart/form-data" method="post" action="command/control_book.php">
+    <form id="form" name="thisform" enctype="multipart/form-data" method="post" action="Home.php">
 
       <tr>
         <th><input type="submit" value="Delete" name="submit" class="btn btn-info btn-lg"></th>
@@ -157,11 +163,11 @@ body {font-family: "Roboto", sans-serif}
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Insert Reference Data</h4>
+        <h4 class="modal-title">Insert Data</h4>
       </div>
       <div class="modal-body">
 
-        <form action="command/control_book.php" method="post">
+        <form action="Home.php" method="post">
 
 
       <diV class="row">
@@ -192,25 +198,25 @@ body {font-family: "Roboto", sans-serif}
 
 
       <div class="col-sm-4">Author </div>
-      <div class="col-sm-8"><input style="border: none !important;border-bottom: solid 1px !important;padding: 5px !important;border-radius: unset !important;width: 80%;margin-bottom: 9px;" type="text" name="author"> </div><br/>
-
+      <div class="col-sm-8"><input type="text" name="author"> </div><br/>
+      
       <tr id='BookTitle'>
       <div class="col-sm-4" >Book Title </div>
-      <div class="col-sm-8"><input class="modalInputBox" type="text" name="booktitle" > </div><br/>
+      <div class="col-sm-8"><input type="text" name="booktitle" > </div><br/>
       </tr>
 
       <div class="col-sm-4">Editor </div>
-      <div class="col-sm-8"><input class="modalInputBox" type="text" name="editor" > </div><br/>
+      <div class="col-sm-8"><input type="text" name="editor" > </div><br/>
       <div class="col-sm-4">Title </div>
-      <div class="col-sm-8"><input class="modalInputBox"  type="text" name="title" > </div><br/>
+      <div class="col-sm-8"><input type="text" name="title" > </div><br/>
       <div class="col-sm-4">Journal </div>
-      <div class="col-sm-8"><input class="modalInputBox" type="text" name="journal" ></div> <br/>
+      <div class="col-sm-8"><input type="text" name="journal" ></div> <br/>
       <div class="col-sm-4">Publisher </div>
-      <div class="col-sm-8"><input class="modalInputBox" type="text" name="publisher" > </div><br/>
+      <div class="col-sm-8"><input type="text" name="publisher" > </div><br/>
       <div class="col-sm-4">Year </div>
       <div class="col-sm-8"><input type="text" name="year" ></div> <br/>
       <div class="col-sm-4">Volume </div>
-      <div class="col-sm-8"><input class="modalInputBox" type="text" name="volume" > </div><br/>
+      <div class="col-sm-8"><input type="text" name="volume" > </div><br/>
 
 
       <input type="submit" value="Insert" name="submitData" >

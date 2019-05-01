@@ -15,7 +15,7 @@ $result = mysqli_query($con,$sql);
 */
 
 if($libraryType=='sharelibrary'){
-	//$stmt = $pdo->query('SELECT * FROM referenceTable where sharelibraryID='.$libraryID);
+	//$stmt = $pdo->query('SELECT * FROM referenceTable where shareLibraryID='.$libraryID);
 	$stmt = $pdo->query('SELECT * FROM referenceTable');
 	//while ($row = $stmt->fetch())
 	//{
@@ -24,7 +24,7 @@ if($libraryType=='sharelibrary'){
 
 
 	while($row = $stmt->fetch()) {
-		$list_sharelibraryID = explode(',',$row['sharelibraryID']);
+		$list_sharelibraryID = explode(',',$row['shareLibraryID']);
 		$listLength_sharelibraryID = sizeof($list_sharelibraryID);
 		
 		for($i=0;$i<$listLength_sharelibraryID;$i++){
@@ -33,7 +33,7 @@ if($libraryType=='sharelibrary'){
 				echo "<td><input type='checkbox' name='check_ReferenceList[]' value='" . $row['referenceID'] . "'></td>";
 				echo "<td>" . $row['entryType'] . "</td>";
 				echo "<td>" . $row['author'] . "</td>";
-				echo "<td>" . $row['booktitle'] . "</td>";
+				echo "<td>" . $row['bookTitle'] . "</td>";
 				echo "<td>" . $row['editor'] . "</td>";
 				echo "<td>" . $row['title'] . "</td>";
 				echo "<td>" . $row['journal'] . "</td>";

@@ -1,5 +1,5 @@
 <?php 
-include('../Connections/connSQL.php');
+include('connSQL.php');
 mysqli_select_db($connSQL, $database_connSQL);
 
 if(isset($_POST['signup'])){

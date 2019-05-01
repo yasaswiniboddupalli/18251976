@@ -13,13 +13,17 @@ mysqli_select_db($connSQL, $database_connSQL);
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <!--jquery file added-->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+
+<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <style>
 body {font-family: "Roboto", sans-serif}
@@ -35,33 +39,27 @@ body {font-family: "Roboto", sans-serif}
 
   <!--Code to print user name--->
 <h4 style="text-align:left">
-  <?php
-    $userEmailId =$_SESSION["email"];
-    $sql = "SELECT userID, firstName FROM userTable WHERE email = '$userEmailId'";
-    $result = $connSQL->query($sql);
-    if(true) {
-     while($row = $result->fetch_assoc()) {
-  	   $id = $row["userID"];
-  		
-
-  }}
-  ?>
+<?php
+  $userEmailId =$_SESSION["email"];
+  $sql = "SELECT firstName FROM userTable WHERE email = '$userEmailId'";
+  $result = $connSQL->query($sql);
+  if(true) {
+   while($row = $result->fetch_assoc()) {
+  echo "Hello"." ".$row["firstName"];
+}}
+?>
 </h4>
 
-<form id="form" name="thisform" enctype="multipart/form-data" method="post" action="command/control_book.php?operator=DeleteTrash">
-
-	<ul>
-		<li><input type="submit" class="btn btn-info btn-lg" value="Restore" name="restore" class="btn btn-info btn-lg"></li>
-        <li><input type="submit" class="btn btn-info btn-lg" value="Delete Permanently" name="delete" class="btn btn-info btn-lg"></li>
-	</ul>
 
 <table id="customers" class=" table order-list">
   <thead>
-
+    <form id="form" name="thisform" enctype="multipart/form-data" method="post" action="DeleteTrash.php">
 
       <tr>
-		<th><input type="checkbox" onclick="selectall(this);" />Reference</th>
-        <!--<th>ReferenceID</th>-->
+        <th><input type="submit" value="Restore" name="restore" class="btn btn-info btn-lg">
+            <input type="submit" value="Delete" name="delete" class="btn btn-info btn-lg">
+        </th>
+        <th>ReferenceID</th>
         <th>Entry Type</th>
         <th>Author</th>
         <th>Book Title</th>
@@ -72,18 +70,25 @@ body {font-family: "Roboto", sans-serif}
         <th>Year</th>
         <th>Volume</th>
       </tr>
+    </thead>
 
 <?php
     // to get the user id of the loggedin user
+    $user = "SELECT userID FROM userTable WHERE email = '$userEmailId'";
+    $result1 = $connSQL->query($user);
+    $row1 = mysqli_fetch_assoc($result1);
+    $id = $row1["userID"];
+
       // each checkbox is given referenceId so that we can delete  them easily
       if(!empty($_POST['selectedcheckbox'])&& isset($_POST['restore'])){
+		echo 1;
         // Loop to store and display values of individual checked checkbox.
         foreach($_POST['selectedcheckbox'] as $selected){
           $sqldelete = "UPDATE referenceTable SET isDelete = 0 WHERE referenceID='$selected'";
           $result2 = $connSQL->query($sqldelete);
         }
       }
-
+ 
       // each checkbox is given referenceId so that we can delete  them easily
   if(!empty($_POST['selectedcheckbox'])&& isset($_POST['delete'])){
   // Loop to store and display values of individual checked checkbox.
@@ -91,7 +96,7 @@ body {font-family: "Roboto", sans-serif}
     $sqldelete = "DELETE from referenceTable WHERE referenceID='$selected'";
     $result2 = $connSQL->query($sqldelete);
   }
-  }
+  } 
 
 
 
@@ -104,8 +109,7 @@ body {font-family: "Roboto", sans-serif}
      while($row = $result->fetch_assoc())
       {
         $selected = $row["referenceID"];
-        //echo "<tr><td><input type='checkbox' name='selectedcheckbox[]' value='$selected' ></td><td>". $row["referenceID"]. "</td><td>". $row["entryType"] . "</td><td>"
-        echo "<tr><td><input type='checkbox' name='selectedcheckbox[]' value='$selected' ></td><td>". $row["entryType"] . "</td><td>"
+        echo "<tr><td><input type='checkbox' name='selectedcheckbox[]' value='$selected' ></td><td>". $row["referenceID"]. "</td><td>". $row["entryType"] . "</td><td>"
           . $row["author"]. "</td><td>" . $row["bookTitle"]. "</td><td>" . $row["editor"] . "</td><td>"
              . $row["title"]. "</td><td>" . $row["journal"]. "</td><td>" . $row["publisher"] . "</td><td>"
              . $row["year"]. "</td><td>" . $row["volume"]. "</td></tr>";
@@ -116,11 +120,9 @@ body {font-family: "Roboto", sans-serif}
 
 
 ?>
-
-
-	</thead>
-</table>
     </form>
+</table>
+
 
 
 
@@ -132,14 +134,4 @@ body {font-family: "Roboto", sans-serif}
 
 </div>
 </body>
-<script>
-	function selectall(source) {
-			var checkboxes = document.getElementsByName('selectedcheckbox[]');
-
-		for (var i = 0; i < checkboxes.length; i++) {
-			if (checkboxes[i] != source)
-				checkboxes[i].checked = source.checked;
-		}
-	}
-</script>
 </html>

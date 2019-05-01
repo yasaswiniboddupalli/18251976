@@ -21,35 +21,60 @@ body {font-family: "Roboto", sans-serif}
 }
 
 #table-wrapper {
-  position:relative;
+	position:relative;
 }
 #table-scroll {
   height:150px;
   overflow:auto;  
-  margin-top:50px;
+  margin-top:65px;
+  border: 1px solid #ddd;
 }
 #table-wrapper table {
   width:100%;
     
 }
 
+/* styles for share_table*/
+#share_table{
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#share_table td, #share_table th {
+
+  padding: 8px;
+}
+
+#share_table tr:nth-child(even){background-color: #f2f2f2;}
+
+#share_table tr:hover {background-color: #ddd;}
+
+#share_table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: black;
+  color: white;
+}
 </style>
 <body>
 <div class="w3-container" style="padding:32px">
 <!--Home of user dashboard--->
-<h4 style="text-align:left">Welcome User!</h4>
+<h4 style="text-align:left">
+<?php
+	$userEmailId =$_SESSION["email"];
+	$sql = "SELECT firstName, userID FROM userTable WHERE email = '$userEmailId'";
+	$result = $connSQL->query($sql);
+	if(true) {
+		while($row = $result->fetch_assoc()) {
+			echo "Hello"." ".$row["firstName"];
+			$userID = $row["userID"];
+		}
+	}
+?>
+</h4>
 <h4 style="text-align:right">Logout<h4>
-<!--table nav bar-->
-<ul>
-  <li><a class="active" href="#add">Add</a></li>
-  <li><a href="#sort">Sort</a></li>
-  <li><a href="#share">Share</a></li>
-  <li><a href="#delete">Delete</a></li>
-</ul>
-<!--search bar-->
-<form>
-  <input type="text" name="search" placeholder="Search..">
-</form>
 
 <?php
 	//do{
@@ -67,6 +92,7 @@ body {font-family: "Roboto", sans-serif}
 							<th><h4>Library</h4></th>
 						</tr>
 					</thead>
+					<!--
 					<tbody>
 						<tr>
 							<td>
@@ -88,20 +114,8 @@ body {font-family: "Roboto", sans-serif}
 							</td>
 						</tr>
 					</tbody>
-				</table>
-			</td>
-			
-			<td style="width:500px">
-				<form id="form" name="thisform" enctype="multipart/form-data" method="post" action="command/command.php?table=sharelibrarytable&page=OpenLibrary">
-					<div id="table-wrapper">
-					<div id="table-scroll">
-					<table id="share_table">
-						<thead>
-							<tr>
-								<th style="position:absolute; top:-50px; z-index:2; height:20px; width:35%;"><h4>Shared Library</h4></th>
-							</tr>
-						</thead>
-						<tbody>
+					-->
+					<tbody>
 							<!--
 							<tr>
 								<td>
@@ -116,15 +130,9 @@ body {font-family: "Roboto", sans-serif}
 								</td>
 							</tr>
 							-->
-							<?php 	$query_RecWebInfo = "SELECT * FROM sharelibrarytable";
+							<?php 	$query_RecWebInfo = "SELECT * FROM librarytable where userID = '$userID'";
 									$RecShareLibraryInfo = mysqli_query($connSQL, $query_RecWebInfo) or die(mysql_error());
-									//$row_RecShareLibraryInfo = mysqli_fetch_assoc($RecShareLibraryInfo);
-									$totalRows_RecShareLibraryInfo = mysqli_num_rows($RecShareLibraryInfo);
 
-									//$query_RecWebInfo = "SELECT * FROM librarytable";
-									//$RecLibraryInfo = mysqli_query($connSQL, $query_RecWebInfo) or die(mysql_error());
-									//$row_RecLibraryInfo = mysqli_fetch_assoc($RecLibraryInfo);
-									//$totalRows_RecLibraryInfo = mysqli_num_rows($RecLibraryInfo);
 									$index =1;
 									//$libraryName;
 									while ($row_RecShareLibraryInfo = mysqli_fetch_assoc($RecShareLibraryInfo))
@@ -159,9 +167,80 @@ body {font-family: "Roboto", sans-serif}
 								</td>
 							</tr>
 						</tbody>
+				</table>
+			</td>
+			<td style="width:100px;">
+			</td>
+			<td style="width:500px">
+				<form id="form" name="thisform" enctype="multipart/form-data" method="post" action="command/command.php?table=sharelibrarytable&page=OpenLibrary">
+					<div id="table-wrapper">
+					<div id="table-scroll">
+					<table id="share_table">
+						<thead>
+							<tr>
+								<th style="position:absolute; top:-65px; z-index:2; width:100%;"><h4>Shared Library</h4></th>
+							</tr>
+						</thead>
+						<tbody>
+							<!--
+							<tr>
+								<td>
+									<input type="checkbox" value="">
+									<span style="color:mediumblue" onclick="myFunction('sharelibrary1')">Shared_library1</span>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input type="checkbox" value="">
+									<span style="color:mediumblue" onclick="myFunction('sharelibrary2')">Shared_library2</span>
+								</td>
+							</tr>
+							-->
+							<?php 	$query_RecWebInfo = "SELECT * FROM sharelibrarytable";
+									$RecShareLibraryInfo = mysqli_query($connSQL, $query_RecWebInfo) or die(mysql_error());
+									//$row_RecShareLibraryInfo = mysqli_fetch_assoc($RecShareLibraryInfo);
+									//$totalRows_RecShareLibraryInfo = mysqli_num_rows($RecShareLibraryInfo);
+
+									//$query_RecWebInfo = "SELECT * FROM librarytable";
+									//$RecLibraryInfo = mysqli_query($connSQL, $query_RecWebInfo) or die(mysql_error());
+									//$row_RecLibraryInfo = mysqli_fetch_assoc($RecLibraryInfo);
+									//$totalRows_RecLibraryInfo = mysqli_num_rows($RecLibraryInfo);
+									//$index =1;
+									//$libraryName;
+									while ($row_RecShareLibraryInfo = mysqli_fetch_assoc($RecShareLibraryInfo))
+									{
+										$list_sharelibraryID = explode(',',$row_RecShareLibraryInfo['shareUser']);
+										$listLength_sharelibraryID = sizeof($list_sharelibraryID);
+										
+										for($i=0;$i<$listLength_sharelibraryID;$i++){
+											if($userID == $list_sharelibraryID[$i]){
+									?>
+												<tr>
+													<td>
+														<input type="checkbox" name="check_ShareLibraryList[]" value="<?php echo $row_RecShareLibraryInfo['libraryID'];?>">
+														<!--	<span style="color:mediumblue" onclick="myFunction('sharelibrary1')">Shared_library1</span>	-->
+														<span style="color:mediumblue" onclick="showUser('sharelibrary','<?php echo $row_RecShareLibraryInfo['libraryID'];?>')"><?php echo $row_RecShareLibraryInfo['libraryName'];?></span>
+													</td>
+												</tr>
+									<?php 			
+												break;
+											}
+										}
+										//$index++;
+									} ?>								
+						</tbody>
 					</table>
 					</div>
 					</div>
+					<table>
+						<tr>
+							<td>
+								<input  type="submit" name="Update" value="Update" style="float:left;"></input>
+								<input  type="submit" name="Create" value="Create" style="float:left;"></input>
+								<input  type="submit" name="Delete" value="Delete" style="float:left;"></input>
+							</td>
+						</tr>
+					</table>
 				</form>
 			</td>
 		</tr>
@@ -187,112 +266,10 @@ body {font-family: "Roboto", sans-serif}
 			</thead>
 			<tbody id ="txtHint">	
 				<tr>
-					Person info will be listed here...
-				</tr>
-			</tbody>
-			<tbody id ="library1_hidden" style="display:none;">					<!--<tbody class="library1_hidden">-->
-				<tr>
-					<td><input type="checkbox" value=""></td>
-					<td>Psychology of reading</td>
-					<td>Jill</td>
-					<td>1950</td>
-					<td>A</td>
-					<td>A</td>
-					<td>A</td>	
-				</tr>
-				
-				<tr>
-					<td><input type="checkbox" value=""></td>
-					<td>Psychology of reading</td>
-					<td>Jill</td>
-					<td>1950</td>
-					<td>A</td>
-					<td>A</td>
-					<td>A</td>	
-				</tr>
-				
-				<tr>
-					<td><input type="checkbox" value=""></td>
-					<td>Psychology of reading</td>
-					<td>Jill</td>
-					<td>1950</td>
-					<td>A</td>
-					<td>A</td>
-					<td>A</td>	
-				</tr>
-				
-				<tr>
-					<td><input type="checkbox" value=""></td>
-					<td>Psychology of reading</td>
-					<td>Jill</td>
-					<td>1950</td>
-					<td>A</td>
-					<td>A</td>
-					<td>A</td>	
+					Reference info will be listed here...
 				</tr>
 			</tbody>
 			
-			<tbody id ="library2_hidden" style="display:none;">					<!--<tbody class="library1_hidden">-->
-				<tr>
-					<td><input type="checkbox" value=""></td>
-					<td>Theory of computation</td>
-					<td>Eve</td>
-					<td>2001</td>
-					<td>A</td>
-					<td>A</td>
-					<td>A</td>	
-				</tr>
-				
-				<tr>
-					<td><input type="checkbox" value=""></td>
-					<td>Theory of computation</td>
-					<td>Eve</td>
-					<td>2001</td>
-					<td>A</td>
-					<td>A</td>
-					<td>A</td>	
-				</tr>
-				
-				<tr>
-					<td><input type="checkbox" value=""></td>
-					<td>Theory of computation</td>
-					<td>Eve</td>
-					<td>2001</td>
-					<td>A</td>
-					<td>A</td>
-					<td>A</td>	
-				</tr>
-				
-				<tr>
-					<td><input type="checkbox" value=""></td>
-					<td>Theory of computation</td>
-					<td>Eve</td>
-					<td>2001</td>
-					<td>A</td>
-					<td>A</td>
-					<td>A</td>	
-				</tr>
-				
-				<tr>
-					<td><input type="checkbox" value=""></td>
-					<td>Theory of computation</td>
-					<td>Eve</td>
-					<td>2001</td>
-					<td>A</td>
-					<td>A</td>
-					<td>A</td>	
-				</tr>
-				
-				<tr>
-					<td><input type="checkbox" value=""></td>
-					<td>Theory of computation</td>
-					<td>Eve</td>
-					<td>2001</td>
-					<td>A</td>
-					<td>A</td>
-					<td>A</td>	
-				</tr>
-            </tbody>
 		</table>
 
 		<input  type="submit" value="UpdateReference" style="text-align:center;">
