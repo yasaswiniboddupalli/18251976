@@ -19,6 +19,20 @@ body {font-family: "Roboto", sans-serif}
   padding: 16px;
   font-weight: bold;
 }
+
+#table-wrapper {
+  position:relative;
+}
+#table-scroll {
+  height:150px;
+  overflow:auto;  
+  margin-top:50px;
+}
+#table-wrapper table {
+  width:100%;
+    
+}
+
 </style>
 <body>
 <div class="w3-container" style="padding:32px">
@@ -79,10 +93,12 @@ body {font-family: "Roboto", sans-serif}
 			
 			<td style="width:500px">
 				<form id="form" name="thisform" enctype="multipart/form-data" method="post" action="command/command.php?table=sharelibrarytable&page=OpenLibrary">
+					<div id="table-wrapper">
+					<div id="table-scroll">
 					<table id="share_table">
 						<thead>
 							<tr>
-								<th><h4>Shared Library</h4></th>
+								<th style="position:absolute; top:-50px; z-index:2; height:20px; width:35%;"><h4>Shared Library</h4></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -129,11 +145,12 @@ body {font-family: "Roboto", sans-serif}
 											<td>
 												<input type="checkbox" name="check_ShareLibraryList[]" value="<?php echo $row_RecShareLibraryInfo['libraryID'];?>">
 												<!--	<span style="color:mediumblue" onclick="myFunction('sharelibrary1')">Shared_library1</span>	-->
-												<span style="color:mediumblue" onclick="myFunction('sharelibrary<?php echo $index;?>')"><?php echo $row_RecShareLibraryInfo['libraryName'];?></span>
+												<span style="color:mediumblue" onclick="showUser('sharelibrary','<?php echo $row_RecShareLibraryInfo['libraryID'];?>')"><?php echo $row_RecShareLibraryInfo['libraryName'];?></span>
 											</td>
 										</tr>
 							<?php 	$index++;
-									} ?>
+									} ?>		
+									
 							<tr>
 								<td>
 									<input  type="submit" name="Update" value="Update" style="float:left;"></input>
@@ -143,6 +160,8 @@ body {font-family: "Roboto", sans-serif}
 							</tr>
 						</tbody>
 					</table>
+					</div>
+					</div>
 				</form>
 			</td>
 		</tr>
@@ -150,18 +169,27 @@ body {font-family: "Roboto", sans-serif}
 	<p>
 
 	<!--table-->
+	<form id="form" name="thisform" enctype="multipart/form-data" method="post" action="command/command.php?table=sharelibrarytable&page=OpenLibrary">
 		<table id="customers">
 			<thead>
 				<tr>
 					<th><input type="checkbox" value="">All</th>
-					<th>Title</th>
+					<th>Entry Type</th>
 					<th>Author</th>
+					<th>Book Title</th>
+					<th>Editor</th>
+					<th>Title</th>
+					<th>Journal</th>
+					<th>Publisher</th>
 					<th>Year</th>
-					<th>Abstract</th>
-					<th>PDF</th>
-					<th>ShareWith</th>
+					<th>Volume</th>
 				</tr>
 			</thead>
+			<tbody id ="txtHint">	
+				<tr>
+					Person info will be listed here...
+				</tr>
+			</tbody>
 			<tbody id ="library1_hidden" style="display:none;">					<!--<tbody class="library1_hidden">-->
 				<tr>
 					<td><input type="checkbox" value=""></td>
@@ -265,107 +293,52 @@ body {font-family: "Roboto", sans-serif}
 					<td>A</td>	
 				</tr>
             </tbody>
-			<tbody id ="sharelibrary1_hidden" style="display:none;">					<!--<tbody class="library1_hidden">-->
-				<tr>
-					<td><input type="checkbox" value=""></td>
-					<td>Psychology of reading</td>
-					<td>Jill</td>
-					<td>1950</td>
-					<td>A</td>
-					<td>A</td>
-					<td>A</td>	
-				</tr>
-				
-				<tr>
-					<td><input type="checkbox" value=""></td>
-					<td>Psychology of reading</td>
-					<td>Jill</td>
-					<td>1950</td>
-					<td>A</td>
-					<td>A</td>
-					<td>A</td>	
-				</tr>
-				
-				<tr>
-					<td><input type="checkbox" value=""></td>
-					<td>Psychology of reading</td>
-					<td>Jill</td>
-					<td>1950</td>
-					<td>A</td>
-					<td>A</td>
-					<td>A</td>	
-				</tr>
-			</tbody>
-			
-			<tbody id ="sharelibrary2_hidden" style="display:none;">					<!--<tbody class="library1_hidden">-->
-				<tr>
-					<td><input type="checkbox" value=""></td>
-					<td>Theory of computation</td>
-					<td>Eve</td>
-					<td>2001</td>
-					<td>A</td>
-					<td>A</td>
-					<td>A</td>	
-				</tr>
-				
-				<tr>
-					<td><input type="checkbox" value=""></td>
-					<td>Theory of computation</td>
-					<td>Eve</td>
-					<td>2001</td>
-					<td>A</td>
-					<td>A</td>
-					<td>A</td>	
-				</tr>
-				
-				<tr>
-					<td><input type="checkbox" value=""></td>
-					<td>Theory of computation</td>
-					<td>Eve</td>
-					<td>2001</td>
-					<td>A</td>
-					<td>A</td>
-					<td>A</td>	
-				</tr>
-				
-				<tr>
-					<td><input type="checkbox" value=""></td>
-					<td>Theory of computation</td>
-					<td>Eve</td>
-					<td>2001</td>
-					<td>A</td>
-					<td>A</td>
-					<td>A</td>	
-				</tr>
-            </tbody>
 		</table>
+
 		<input  type="submit" value="UpdateReference" style="text-align:center;">
 		<input  type="submit" value="AddToLibrary" style="text-align:center;">
-		<input  type="submit" value="AddToShareLibrary" style="text-align:center;">
+
+		<select name="select_shareLibrary">
+		<option value="">Share Library:</option>
+		<option value="1">sharelibrary1</option>
+		<option value="2">sharelibrary2</option>
+		<option value="3">sharelibrary3</option>
+		</select>
+		<input  type="submit" name="submit_addshareLibrary" value="Add To" style="text-align:center;"></input>
+		<input  type="submit" name="submit_removeshareLibrary" value="Remove from" style="text-align:center;"></input>
+	</form>
 </div>
 
 	<script>
 		function myFunction(parameter1) {
 			if(parameter1 == "library1"){
 				document.getElementById("library2_hidden").style.display = "none";
-				document.getElementById("sharelibrary2_hidden").style.display = "none";
-				document.getElementById("sharelibrary1_hidden").style.display = "none";
 				document.getElementById("library1_hidden").style.display = "table-row-group";
 			}else if(parameter1 == "library2"){
 				document.getElementById("library1_hidden").style.display = "none";
-				document.getElementById("sharelibrary2_hidden").style.display = "none";
-				document.getElementById("sharelibrary1_hidden").style.display = "none";
 				document.getElementById("library2_hidden").style.display = "table-row-group";
-			}else if(parameter1 == "sharelibrary1"){
-				document.getElementById("sharelibrary2_hidden").style.display = "none";
-				document.getElementById("library1_hidden").style.display = "none";
-				document.getElementById("library2_hidden").style.display = "none";
-				document.getElementById("sharelibrary1_hidden").style.display = "table-row-group";
-			}else if(parameter1 == "sharelibrary2"){
-				document.getElementById("sharelibrary1_hidden").style.display = "none";
-				document.getElementById("library1_hidden").style.display = "none";
-				document.getElementById("library2_hidden").style.display = "none";
-				document.getElementById("sharelibrary2_hidden").style.display = "table-row-group";
+			}
+		}
+		
+		function showUser(type,id) {
+			if (id == "") {
+				document.getElementById("txtHint").innerHTML = "";
+				return;
+			} else { 
+				if (window.XMLHttpRequest) {
+					// code for IE7+, Firefox, Chrome, Opera, Safari
+					xmlhttp = new XMLHttpRequest();
+				} else {
+					// code for IE6, IE5
+					xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				xmlhttp.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						document.getElementById("txtHint").innerHTML = this.responseText;
+					}
+				};
+				xmlhttp.open("GET","command/getReference.php?libraryType="+type+"&libraryID="+id,true);
+				xmlhttp.send();
 			}
 		}
 	</script>
