@@ -11,15 +11,11 @@ if (isset($_POST['Update'])){
 	$command='delete';
 }
 */
+$shareUserID=$_GET["shareUserID"];
 ?>
 <head>
     <script type="text/javascript">
 	function closeWindow(){
-		//alert(document.searchUserForm.check_ShareLibraryList.value);
-		//alert(11111);
-		//alert(window.opener.document.updateLibraryForm.shareUser.value);
-		// 將xxx的value給父視窗的rtn
-		//alert(document.searchUserForm.check_ShareLibraryList.length);
 		var i;
 		var text = "";
 		var textID = "";
@@ -30,11 +26,11 @@ if (isset($_POST['Update'])){
 				text += res[0];
 				text += ';';
 				textID += res[1];
-				textID += ';';
+				textID += ',';
 			}
 		}
-		window.opener.document.updateLibraryForm.shareUser.value = text;
-		window.opener.document.updateLibraryForm.shareUserID.value = textID;
+		window.opener.document.form_updateLibrary.shareUser.value = text;
+		window.opener.document.form_updateLibrary.shareUserID.value = textID;
 		window.close();
 	}
     </script>
@@ -43,19 +39,57 @@ if (isset($_POST['Update'])){
     <form name="searchUserForm">
 		<table id="share_table">
 			<tr>
-				<?php 	$query_RecWebInfo = "SELECT * FROM usertable";
-						$RecUserInfo = mysqli_query($connSQL, $query_RecWebInfo) or die(mysql_error());
-						while ($row_RecUserInfo = mysqli_fetch_assoc($RecUserInfo))
+				<td>
+				<input type="checkbox" onclick="select_all(this,'shareUser');" />Select/Deselect All
+				</td>
+			</tr>
+			<tr>
+				<?php 	
+						$list_shareUser = explode(',',$shareUserID);
+						$listLength_shareUser = sizeof($list_shareUser);
+						
+						$query_RecWebInfo = "SELECT * FROM usertable";
+						//$RecUserInfo = mysqli_query($connSQL, $query_RecWebInfo) or die(mysql_error());
+						$RecUserInfo = $pdo->query($query_RecWebInfo);
+						//while ($row_RecUserInfo = mysqli_fetch_assoc($RecUserInfo))
+						while ($row_RecUserInfo = $RecUserInfo->fetch())
 						{
-							//echo $row_RecUserInfo['userName'];
+							$checkbox = false;
+							for($i=0;$i<$listLength_shareUser;$i++){
+								if($row_RecUserInfo['userID'] == $list_shareUser[$i]){
+									$checkbox = true;
+								}
+							}
+							
+							if($checkbox){
 				?>
-							<tr>
-								<td>
-									<input type="checkbox" name="check_ShareLibraryList" value="<?php echo $row_RecUserInfo['userName'].','.$row_RecUserInfo['userID'];?>"><?php echo $row_RecUserInfo['userName'];?>
-									</input>
-								</td>
-							</tr>
-				<?php	} ?>
+								<tr>
+									<td>
+										<input type="checkbox" name="check_ShareLibraryList" value="<?php echo $row_RecUserInfo['firstName']. " ". $row_RecUserInfo['lastName'].','.$row_RecUserInfo['userID'];?>" checked>
+											<?php echo $row_RecUserInfo['firstName'];
+												  echo " ";
+												  echo $row_RecUserInfo['lastName'];?>
+										</td>
+										<td>
+											<?php echo $row_RecUserInfo['email'];?>
+										</td>
+										</input>
+								</tr>
+				<?php		}else{?>
+								<tr>
+									<td>
+										<input type="checkbox" name="check_ShareLibraryList" value="<?php echo $row_RecUserInfo['firstName']. " ". $row_RecUserInfo['lastName'].','.$row_RecUserInfo['userID'];?>">
+											<?php echo $row_RecUserInfo['firstName'];
+												  echo " ";
+												  echo $row_RecUserInfo['lastName'];?>
+										</td>
+										<td>
+											<?php echo $row_RecUserInfo['email'];?>
+										</td>
+										</input>
+								</tr>
+				<?php		}
+						} ?>
 			</tr>
 			<tr>
 				<td>
@@ -65,3 +99,12 @@ if (isset($_POST['Update'])){
 		</table>
 	</form>
 </body>
+
+<script>
+	function select_all(source, type) {
+		for (var i = 0; i < document.searchUserForm.check_ShareLibraryList.length; i++) {
+			if (document.searchUserForm.check_ShareLibraryList[i] != source)
+				document.searchUserForm.check_ShareLibraryList[i].checked = source.checked;
+		}
+	}
+</script>

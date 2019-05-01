@@ -10,7 +10,10 @@ mysqli_select_db($connSQL, $database_connSQL);
 <title>W3.CSS</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!--jquery file added-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <script>
 $(document).ready(function(){
    
@@ -69,7 +72,7 @@ $(document).ready(function(){
     
   </div>
 
-  <div id="OpenLibrary" class="w3-container w3-border city" style="display:none">
+  <div id="OpenLibrary" class="w3-container w3-border city">
     
   </div>
   <div id="CreateLibrary" class="w3-container w3-border city" style="display:none">
