@@ -206,6 +206,9 @@ body {font-family: "Roboto", sans-serif}
 	<p style="height:20px;">
 	
 	<ul>
+		<li><button id="mybutton_addReference" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Record</button></li>
+		<li><button id="mybutton_updateReference" type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="openModal_Reference('updateReference');">Update Reference</button></li>
+		<li><button id="mybutton_deleteReference" type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="openModal_Reference('deleteReference');">Delete Reference</button></li>
 		<li><button id="mybutton_addToOtherLibrary" type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="openModal_Reference('addToOtherLibrary');">Add To Other Library</button></li>
 		<li><button id="mybutton_removeFromLibrary" type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="openModal_Reference('removeFromLibrary');">Remove From Library</button></li>
 	</ul>
@@ -231,6 +234,31 @@ body {font-family: "Roboto", sans-serif}
 				<tr>
 					Reference info will be listed here...
 				</tr>
+				<?php
+					$stmt = $pdo->query("SELECT * FROM referenceTable where isDelete=0 and defaultLibrary=1 and userID='$userID'");
+					while($row = $stmt->fetch()) {
+						$refernce_libraryID = $row['libraryID'];
+						$stmt_lib = $pdo->query("SELECT * FROM librarytable where libraryID='$refernce_libraryID'");
+						$row_lib = $stmt_lib->fetch();
+												
+						echo "<input type='text' id='libraryID' name='libraryID' value='0' hidden />";
+						//echo "<input type='text' id='libraryName' name='libraryName' value='".$row_lib['libraryName']."' hidden />";
+						//if($DataInfo==$row['libraryID']){
+							echo "<tr>";
+							echo "<td><input type='checkbox' name='check_ReferenceList[]' value='" . $row['referenceID'] . "'></td>";
+							echo "<td>" . $row['entryType'] . "</td>";
+							echo "<td>" . $row['author'] . "</td>";
+							echo "<td>" . $row['bookTitle'] . "</td>";
+							echo "<td>" . $row['editor'] . "</td>";
+							echo "<td>" . $row['title'] . "</td>";
+							echo "<td>" . $row['journal'] . "</td>";
+							echo "<td>" . $row['publisher'] . "</td>";
+							echo "<td>" . $row['year'] . "</td>";
+							echo "<td>" . $row['volume'] . "</td>";
+							echo "</tr>";
+						//}
+					}
+				?>
 			</tbody>
 			
 		</table>
@@ -238,6 +266,132 @@ body {font-family: "Roboto", sans-serif}
 </div>
 
 <!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Insert Data</h4>
+      </div>
+      <div class="modal-body">
+
+        <form action="command/control_book.php" method="post">
+
+      <diV class="row">
+  
+      <div class="col-sm-4">Entry Type </div>
+      <div class="col-sm-8">
+      <input type="text" name="entryType" require_once>
+       </div><br/><br/>
+      <div class="col-sm-4">Author </div>
+      <div class="col-sm-8"><input type="text" name="author"> </div><br/>
+      <tr id='BookTitle'>
+      <div class="col-sm-4" >Book Title </div>
+      <div class="col-sm-8"><input type="text" name="booktitle" > </div><br/>
+      </tr>
+      <div class="col-sm-4">Editor </div>
+      <div class="col-sm-8"><input type="text" name="editor" > </div><br/>
+      <div class="col-sm-4">Title </div>
+      <div class="col-sm-8"><input type="text" name="title" > </div><br/>
+      <div class="col-sm-4">Journal </div>
+      <div class="col-sm-8"><input type="text" name="journal" ></div> <br/>
+      <div class="col-sm-4">Publisher </div>
+      <div class="col-sm-8"><input type="text" name="publisher" > </div><br/>
+      <div class="col-sm-4">Year </div>
+      <div class="col-sm-8"><input type="text" name="year" ></div> <br/>
+      <div class="col-sm-4">Volume </div>
+      <div class="col-sm-8"><input type="text" name="volume" > </div><br/>
+      <input type="submit" value="Insert" name="submitData" >
+
+         </div>
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal fade" id="modal_updateReference" role="dialog" aria-labelledby="dialog1Title" aria-describedby="dialog1Desc">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Insert Data</h4>
+      </div>
+      <div class="modal-body">
+
+        <form action="command/control_book.php" method="post">
+
+      <diV class="row">
+  
+      <div class="col-sm-4">Entry Type </div>
+      <div class="col-sm-8">
+      <input type="text" name="entryType" require_once>
+       </div><br/><br/>
+      <div class="col-sm-4">Author </div>
+      <div class="col-sm-8"><input type="text" name="author"> </div><br/>
+      <tr id='BookTitle'>
+      <div class="col-sm-4" >Book Title </div>
+      <div class="col-sm-8"><input type="text" name="booktitle" > </div><br/>
+      </tr>
+      <div class="col-sm-4">Editor </div>
+      <div class="col-sm-8"><input type="text" name="editor" > </div><br/>
+      <div class="col-sm-4">Title </div>
+      <div class="col-sm-8"><input type="text" name="title" > </div><br/>
+      <div class="col-sm-4">Journal </div>
+      <div class="col-sm-8"><input type="text" name="journal" ></div> <br/>
+      <div class="col-sm-4">Publisher </div>
+      <div class="col-sm-8"><input type="text" name="publisher" > </div><br/>
+      <div class="col-sm-4">Year </div>
+      <div class="col-sm-8"><input type="text" name="year" ></div> <br/>
+      <div class="col-sm-4">Volume </div>
+      <div class="col-sm-8"><input type="text" name="volume" > </div><br/>
+      <input type="submit" value="Insert" name="submitData" >
+
+         </div>
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<fieldset class="modal fade" id="myModal_deleteReference" role="dialog" aria-labelledby="dialog1Title" aria-describedby="dialog1Desc">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Delete Reference</h4>
+			</div>
+			<div class="modal-body">
+				<form name="form_deleteReference" onsubmit="reference_operator('deleteReference',<?php echo $userID?>)">
+					<div class="row">
+						
+						<div class="col-sm">Are you sure to delete the selected references from the library?</div>
+						
+
+						<input type="submit" value="Delete" name="submitData">
+
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+
+	</div>
+</fieldset>
+
 <fieldset class="modal fade" id="myModal_createLibrary" role="dialog" aria-labelledby="dialog1Title" aria-describedby="dialog1Desc">
 	<div class="modal-dialog">
 		<!-- Modal content-->
@@ -688,6 +842,12 @@ body {font-family: "Roboto", sans-serif}
 				alert("Please choose at least one reference!");
 				return;
 			}
+			
+			if((param="updateReference")&&(count_checked_cboxes!=1)){
+				alert("Please choose only one reference!");
+				return;
+			}
+			
 			if(param == "addToOtherLibrary"){				
 				document.forms["form_addToOtherLibrary"]["libraryID_Origin"].value = document.getElementById("libraryName").value;
 				
@@ -696,6 +856,10 @@ body {font-family: "Roboto", sans-serif}
 				document.forms["form_removeFromLibrary"]["libraryID_Origin"].value = document.getElementById("libraryName").value;
 				
 				$("#myModal_removeFromLibrary").modal();
+			}else if(param == "deleteReference"){
+				$("#myModal_deleteReference").modal();
+			}else if(param="updateReference"){
+				$("#modal_updateReference").modal();
 			}
 		}
 		
@@ -765,6 +929,42 @@ body {font-family: "Roboto", sans-serif}
 					}
 					xhr.send(data);
 				}
+			}else if(type=="deleteReference"){
+				var cboxes = document.getElementsByName('check_ReferenceList[]');
+				var len = cboxes.length;
+				var count_checked_cboxes = 0;
+				var value_checked_cboxes = '';
+				for (var i=0; i<len; i++) {
+					if(cboxes[i].checked){
+						count_checked_cboxes++;
+						if(count_checked_cboxes>1){
+							value_checked_cboxes += ",";
+						}
+						value_checked_cboxes += (cboxes[i].value);
+					}
+					//alert(i + (cboxes[i].checked?' checked ':' unchecked ') + cboxes[i].value);
+				}
+				
+				var txt;
+				//var result = confirm("Are you sure to delete the selected references? ("+count_checked_cboxes+" references:" + value_checked_cboxes+")");
+				//if (result == true) {
+					var data = new FormData();
+					data.append('deleteReference', value_checked_cboxes);
+
+					url1 = "command/control_book.php?operator=deleteReference";
+					var xhr = new XMLHttpRequest();
+					
+					xhr.open('POST', url1, true);
+					//Send the proper header information along with the request
+					//xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+					xhr.onreadystatechange = function() {//Call a function when the state changes.
+						if(xhr.readyState == 4 && xhr.status == 200) {
+							//alert(xhr.responseText);
+						}
+					}
+					xhr.send(data);
+				//}
 			}
 		}
 	</script>

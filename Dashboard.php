@@ -17,7 +17,7 @@ if(isset($_GET['lastpage'])){
 <script>
 $(document).ready(function(){
    
-   $('#Home').load("Home.php");
+   $('#Home').load("OpenLibrary.php");
 
 });
 
