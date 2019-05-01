@@ -53,7 +53,7 @@ body {font-family: "Roboto", sans-serif}
 
       <tr>
         <th><input type="submit" value="Restore" name="restore" class="btn btn-info btn-lg">
-            <input type="submit" value="Delete" name="delete" class="btn btn-info btn-lg">
+            <input type="submit" value="Delete Permanently" name="delete" class="btn btn-info btn-lg">
         </th>
         <th>ReferenceID</th>
         <th>Entry Type</th>

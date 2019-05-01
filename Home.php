@@ -45,8 +45,6 @@ body {font-family: "Roboto", sans-serif}
 ?>
 </h4>
 
-<h4 style="text-align:right">Logout<h4>
-
   <!--table nav bar-->
   <ul>
     <!-- <li><a class="active" href="AddData.php">Add</a></li> -->
@@ -163,7 +161,7 @@ body {font-family: "Roboto", sans-serif}
       </div>
       <div class="modal-body">
 
-        <form action="Home.php" method="post">
+        <form action="command/control_book.php" method="post">
 
 
       <diV class="row">

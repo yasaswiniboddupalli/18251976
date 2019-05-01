@@ -12,17 +12,6 @@ if(isset($_GET['DataInfo'])){
 	$DataInfo = $_GET['DataInfo'];
 }
 
-/*
-$q = intval($_GET['q']);
-$con = mysqli_connect('localhost','peter','abc123','my_db');
-if (!$con) {
-    die('Could not connect: ' . mysqli_error($con));
-}
-
-mysqli_select_db($con,"ajax_demo");
-$sql="SELECT * FROM user WHERE id = '".$q."'";
-$result = mysqli_query($con,$sql);
-*/
 if($DataType=='reference'){
 	$stmt = $pdo->query("SELECT * FROM librarytable where libraryID='$DataInfo'");
 	$row = $stmt->fetch();
@@ -131,11 +120,11 @@ if($DataType=='reference'){
 			echo "<div class='col-sm-8'>";
 			
 		if($count_shareLibrary>0){
-			echo "	<input type='text' id='shareWithUser_update' name='shareUser' value='".$userName."'>";
-			echo "	<input type='text' id='shareWithUser_update' name='shareUserID' value='".$row_shareLibrary['shareUser']."' hidden>";
+			echo "	<input type='text' id='shareWithUser_update' name='shareUser' value='".$userName."' disabled>";
+			echo "	<input type='text' id='shareWithUser_update' name='shareUserID' value='".$row_shareLibrary['shareUser']."' hidden disabled>";
 		}else{
-			echo "	<input type='text' id='shareWithUser_update' name='shareUser'>";
-			echo "	<input type='text' id='shareWithUser_update' name='shareUserID' hidden>";
+			echo "	<input type='text' id='shareWithUser_update' name='shareUser' disabled>";
+			echo "	<input type='text' id='shareWithUser_update' name='shareUserID' hidden disabled>";
 		}
 	}else{
 			echo "<div class='col-sm-4'>Library Name</div>";

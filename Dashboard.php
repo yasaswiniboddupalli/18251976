@@ -1,47 +1,41 @@
 <?php require_once('../Connections/connSQL.php'); ?>
 <?php
 mysqli_select_db($connSQL, $database_connSQL);
+$lastpage = "";
+if(isset($_GET['lastpage'])){
+	$lastpage = $_GET['lastpage'];
+}
 ?>
-
-
 
 <!DOCTYPE html>
 <html>
 <title>W3.CSS</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<!--jquery file added-->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <script>
 $(document).ready(function(){
    
    $('#Home').load("Home.php");
+
 });
-$(document).ready(function(){
-   
-   $('#CreateLibrary').load("CreateLibrary.html");
-});
+
 $(document).ready(function(){
    
    $('#OpenLibrary').load("OpenLibrary.php");
+
 });
-$(document).ready(function(){
-   
-   $('#Unfiled').load("Unfiled.php");
-});
-$(document).ready(function(){
-   
-   $('#DeleteLibrary').load("DeleteLibrary.html");
-});
+
 $(document).ready(function(){
    
    $('#Update').load("Update.html");
+
 });
 $(document).ready(function(){
    
    $('#Trash').load("DeleteTrash.php");
+
 });
 </script>
 <body>
@@ -52,38 +46,28 @@ $(document).ready(function(){
   <div class="w3-bar w3-black">
     <button class="w3-bar-item w3-button tablink w3-red w3-mobile" onclick="openCity(event,'Home')">Home</button>
     
-    <div class="w3-dropdown-hover">
-      <button class="w3-button w3-mobile">Library<i class="fa fa-caret-down"></i></button>
-      <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-dark-grey w3-mobile">
-      <button class="w3-bar-item w3-button tablink w3-mobile" onclick="openCity(event,'OpenLibrary')">Open Library</button>
-      <button class="w3-bar-item w3-button tablink w3-mobile" onclick="openCity(event,'CreateLibrary')">Create Library</button>
-      <button class="w3-bar-item w3-button tablink w3-mobile" onclick="openCity(event,'Unfiled')">Unfiled</button>
-      <button class="w3-bar-item w3-button tablink w3-mobile" onclick="openCity(event,'DeleteLibrary')">Delete library</button>
-      </div>
-    </div>
     
+    <button class="w3-bar-item w3-button tablink w3-mobile" onclick="openCity(event,'OpenLibrary')">Library</button>
 
     <button class="w3-bar-item w3-button tablink w3-mobile" onclick="openCity(event,'Update')">Update Details</button>
     <button class="w3-bar-item w3-button tablink w3-mobile" onclick="openCity(event,'Trash')">Trash</button>
 	<span class="w3-bar-item w3-right"><a href="Signin.html" style="text-decoration: none; color: white;">Logout</a></span>
   </div>
   
+  <?php if($lastpage!="openlibrary"){ ?>
   <div id="Home" class="w3-container w3-border city">
-    
+  <?php }else{ ?>
+  <div id="Home" class="w3-container w3-border city" style="display:none">
+  <?php } ?>
   </div>
 
+  <?php if($lastpage=="openlibrary"){ ?>
   <div id="OpenLibrary" class="w3-container w3-border city">
-    
+  <?php }else{ ?>
+  <div id="OpenLibrary" class="w3-container w3-border city" style="display:none">
+  <?php } ?>
   </div>
-  <div id="CreateLibrary" class="w3-container w3-border city" style="display:none">
-    
-  </div>
-  <div id="DeleteLibrary" class="w3-container w3-border city" style="display:none">
-     
-  </div>
-  <div id="Unfiled" class="w3-container w3-border city" style="display:none">
-     
-  </div>
+  
 
   <div id="Update" class="w3-container w3-border city" style="display:none">
     
@@ -111,6 +95,3 @@ function openCity(evt, cityName) {
 
 </body>
 </html>
-
-
-

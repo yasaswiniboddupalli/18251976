@@ -1,16 +1,5 @@
 <?php require_once('../../Connections/connSQL.php'); ?>
 <?php
-//$table=$_GET["table"];
-//$page=$_GET["page"];
-/*
-if (isset($_POST['Update'])){
-	$command='update';
-}else if (isset($_POST['Create'])){
-	$command='create';
-}else if (isset($_POST['Delete'])){
-	$command='delete';
-}
-*/
 $shareUserID=$_GET["shareUserID"];
 ?>
 <head>

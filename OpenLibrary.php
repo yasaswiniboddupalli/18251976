@@ -1,7 +1,4 @@
 <?php require_once('../Connections/connSQL.php'); ?>
-<?php
-//mysqli_select_db($connSQL, $database_connSQL);
-?>
 <!DOCTYPE html>
 <html>
 <title>Bibilography Manager User Dashboard</title>
@@ -84,7 +81,6 @@ body {font-family: "Roboto", sans-serif}
 	}
 ?>
 </h4>
-<h4 style="text-align:right">Logout<h4>
 
 <?php
 	//do{
@@ -251,7 +247,7 @@ body {font-family: "Roboto", sans-serif}
 				<h4 class="modal-title">Create Library</h4>
 			</div>
 			<div class="modal-body">
-				<form name="form_createNewLibrary" onsubmit="library_operator('createNewLibrary',<?php echo $userID?>)">
+				<form action="dashboard.php?lastpage=openlibrary" name="form_createNewLibrary" onsubmit="library_operator('createNewLibrary',<?php echo $userID?>)">
 					<div class="row">
 
 						<div class="col-sm-4">Library Name</div>
