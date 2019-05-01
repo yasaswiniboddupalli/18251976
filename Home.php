@@ -157,7 +157,7 @@ body {font-family: "Roboto", sans-serif}
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Insert Data</h4>
+        <h4 class="modal-title">Insert Reference Data</h4>
       </div>
       <div class="modal-body">
 
@@ -192,25 +192,25 @@ body {font-family: "Roboto", sans-serif}
 
 
       <div class="col-sm-4">Author </div>
-      <div class="col-sm-8"><input type="text" name="author"> </div><br/>
-      
+      <div class="col-sm-8"><input style="border: none !important;border-bottom: solid 1px !important;padding: 5px !important;border-radius: unset !important;width: 80%;margin-bottom: 9px;" type="text" name="author"> </div><br/>
+
       <tr id='BookTitle'>
       <div class="col-sm-4" >Book Title </div>
-      <div class="col-sm-8"><input type="text" name="booktitle" > </div><br/>
+      <div class="col-sm-8"><input class="modalInputBox" type="text" name="booktitle" > </div><br/>
       </tr>
 
       <div class="col-sm-4">Editor </div>
-      <div class="col-sm-8"><input type="text" name="editor" > </div><br/>
+      <div class="col-sm-8"><input class="modalInputBox" type="text" name="editor" > </div><br/>
       <div class="col-sm-4">Title </div>
-      <div class="col-sm-8"><input type="text" name="title" > </div><br/>
+      <div class="col-sm-8"><input class="modalInputBox"  type="text" name="title" > </div><br/>
       <div class="col-sm-4">Journal </div>
-      <div class="col-sm-8"><input type="text" name="journal" ></div> <br/>
+      <div class="col-sm-8"><input class="modalInputBox" type="text" name="journal" ></div> <br/>
       <div class="col-sm-4">Publisher </div>
-      <div class="col-sm-8"><input type="text" name="publisher" > </div><br/>
+      <div class="col-sm-8"><input class="modalInputBox" type="text" name="publisher" > </div><br/>
       <div class="col-sm-4">Year </div>
       <div class="col-sm-8"><input type="text" name="year" ></div> <br/>
       <div class="col-sm-4">Volume </div>
-      <div class="col-sm-8"><input type="text" name="volume" > </div><br/>
+      <div class="col-sm-8"><input class="modalInputBox" type="text" name="volume" > </div><br/>
 
 
       <input type="submit" value="Insert" name="submitData" >

@@ -15,8 +15,8 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-
-<style>
+<script type="text/javascript" src="ReferenceData.js"></script>
+<!-- <style>
 body {font-family: "Roboto", sans-serif}
 .w3-bar-block .w3-bar-item {
   padding: 16px;
@@ -64,9 +64,11 @@ body {font-family: "Roboto", sans-serif}
   z-index:2;
 }
 
-</style>
+</style> -->
 <body>
-<div class="w3-container" style="padding:32px">
+
+<div class="w3-container" style="padding:0px">
+
 <!--Home of user dashboard--->
 <h4 style="text-align:left">
 <?php
@@ -87,17 +89,28 @@ body {font-family: "Roboto", sans-serif}
 		//echo $totalRows_RecLibraryInfo;
 	//}while($row_RecLibraryInfo = mysqli_fetch_assoc($RecLibraryInfo));
 ?>
-	<ul>
-		<li><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal_createLibrary">Create New Library</button></li>
-		<li><button id="mybutton_updateLibrary" type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="showLibrary();">Update Library</button></li>
-		<li><button id="mybutton_deleteLibrary" type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="deleteLibrary()">Delete Library</button></li>
+	<!-- <ul style="border-radius:35px;width:205px">
+		<li><button type="button" style="border-radius:35px;width: 185px;" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal_createLibrary">Create New Library</button></li>
+		<li><button id="mybutton_updateLibrary" style="border-radius:35px;width: 185px;" type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="showLibrary();">Update Library</button></li>
+		<li><button id="mybutton_deleteLibrary" style="border-radius:35px;width: 185px;" type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="deleteLibrary('<?=$userID;?>')">Delete Library</button></li>
+</ul> -->
 		<!--<li><button type="button" class="btn btn-info btn-lg" onclick="deleteLibrary()">Delete Library</button></li>-->
-	</ul>
+
 
 	<p>
-	<table style="table-layout: fixed;">
+	<table style="table-layout: fixed; margin-bottom:20px;">
 		<form id="form" name="thisform" enctype="multipart/form-data" method="post" action="command/command.php?table=sharelibrarytable&page=OpenLibrary">
 			<tr>
+				<td style="width:3%;"></td>
+				<td>
+					<ul style="border-radius:35px;width:205px">
+						<li><button type="button" style="border-radius:35px;width: 185px; background-color:cadetblue;" class="btn btn-lg" data-toggle="modal" data-target="#myModal_createLibrary">Create New Library</button></li>
+						<li><button id="mybutton_updateLibrary" style="border-radius:35px;width: 185px; background-color:cadetblue;" type="button" class="btn  btn-lg" data-toggle="modal" onclick="showLibrary();">Update Library</button></li>
+						<li><button id="mybutton_deleteLibrary" style="border-radius:35px;width: 185px; background-color:cadetblue;" type="button" class="btn btn-lg" data-toggle="modal" onclick="deleteLibrary('<?=$userID;?>')">Delete Library</button></li>
+					</ul>
+				</td>
+				<td style="width:3%;">
+				</td>
 				<td style="width:500px; border-style: groove;">
 
 						<div id="table-wrapper">
@@ -106,18 +119,19 @@ body {font-family: "Roboto", sans-serif}
 							<thead>
 								<tr>
 									<th style="width:100%;">
-										<h4 style="margin-top:0px !important;">
-										<input type="checkbox" onclick="select_all(this,'library');" /> Library
+										<h4 style="margin-top:0px !important; padding =0px; margin-left:11px;" >
+										<input type="checkbox" onclick="select_all(this,'library');" /> Library<p style="margin-top:6px" id="library_name">Active Library is 'unfiled'</p>
 										</h4>
 									</th>
 								</tr>
 							</thead>
 							<tbody id ="txtLibrary">
 										<tr>
-											<td onclick="showInfo('unfiled',<?php echo $userID;?>)">
+											<td onclick="showInfo('unfiled',<?php echo $userID;?>,'unfiled')">
 												<!--<input type="checkbox" name="check_ShareLibraryList[]" value="0">-->
+												<input name="check_LibraryUserList[]" value="<?=$userID;?>" hidden>
 												<input name="check_ShareLibraryList[]" value="0" hidden>
-												<span style="color:mediumblue">Unfiled</span>
+												<span style="color:black">Unfiled</span>
 											</td>
 										</tr>
 								<?php 	$query_RecWebInfo = "SELECT * FROM librarytable where userID = '$userID'";
@@ -129,9 +143,10 @@ body {font-family: "Roboto", sans-serif}
 										{
 										?>
 											<tr>
-												<td onclick="showInfo('userAndLibrary','<?php echo $row_RecShareLibraryInfo['libraryID'];?>')">
+												<td onclick="showInfo('userAndLibrary','<?php echo $row_RecShareLibraryInfo['libraryID'];?>','<?=$row_RecShareLibraryInfo['libraryName'];?>')">
+													<input type="checkbox" name="check_LibraryUserList[]" value="<?php echo $row_RecShareLibraryInfo['userID'];?>" hidden>
 													<input type="checkbox" name="check_ShareLibraryList[]" value="<?php echo $row_RecShareLibraryInfo['libraryID'];?>">
-													<span style="color:mediumblue"><?php echo $row_RecShareLibraryInfo['libraryName'];?></span>
+													<span style="color:black"><?php echo $row_RecShareLibraryInfo['libraryName'];?></span>
 												</td>
 											</tr>
 								<?php 	} ?>
@@ -157,9 +172,10 @@ body {font-family: "Roboto", sans-serif}
 												if($userID == $list_sharelibraryID[$i] && ($userID != $row_RecLibraryInfo['userID'])){
 										?>
 													<tr>
-														<td onclick="showInfo('userAndLibrary','<?php echo $row_RecLibraryInfo['libraryID'];?>')">
+														<td onclick="showInfo('userAndLibrary','<?php echo $row_RecLibraryInfo['libraryID'];?>','<?=$row_RecShareLibraryInfo['libraryName'];?>')">
+															<input type="checkbox" name="check_LibraryUserList[]" value="<?php echo $row_RecLibraryInfo['userID'];?>" hidden>
 															<input type="checkbox" name="check_ShareLibraryList[]" value="<?php echo $row_RecLibraryInfo['libraryID'];?>">
-															<span style="color:mediumblue"><?php echo $row_RecLibraryInfo['libraryName'];?></span>
+															<span style="color:black"><?php echo $row_RecLibraryInfo['libraryName'];?></span>
 														</td>
 													</tr>
 										<?php
@@ -172,7 +188,7 @@ body {font-family: "Roboto", sans-serif}
 						</div>
 						</div>
 				</td>
-				<td style="width:26%;">
+				<td style="width:4%;">
 				</td>
 				<td style="width:500px; border-style: groove; height:150px;">
 						<div id="table-wrapper">
@@ -180,7 +196,7 @@ body {font-family: "Roboto", sans-serif}
 						<table id="share_table">
 							<thead>
 								<tr>
-									<th style="width:100%;"><h4>Shared with User</h4></th>
+									<th style="width:100%;height:65px"><h4 style="margin-top:11px !important; margin-left: 11px;">Shared with User</h4></th>
 								</tr>
 							</thead>
 							<tbody id ="txtShareWithUser">
@@ -191,32 +207,17 @@ body {font-family: "Roboto", sans-serif}
 						</div>
 				</td>
 			</tr>
-			<tr>
-				<td>
-						<div style="height:5px;"></div>
-				</td>
-			</tr>
-			<table>
-				<tr>
-					<td>
-						<!--
-						<input  type="submit" name="Update" value="Update" style="float:left;"></input>
-						<input  type="submit" name="Create" value="Create" style="float:left;"></input>
-						<input  type="submit" name="Delete" value="Delete" style="float:left;"></input>
-						-->
 
-					</td>
-				</tr>
-			</table>
+
 		</form>
 	</table>
-	<p style="height:20px;">
+	<p style="height:0px;">
 
-	<ul>
-		<li><button id="mybutton_addReference" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Record</button></li>
-		<li><button id="mybutton_updateReference" type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="openModal_Reference('updateReference');">Update Reference</button></li>
-		<li><button id="mybutton_deleteReference" type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="openModal_Reference('deleteReference');">Delete Reference</button></li>
-		<li><button id="mybutton_addToOtherLibrary" type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="openModal_Reference('addToOtherLibrary');">Add To Other Library</button></li>
+	<ul style="border-radius:35px;">
+		<li><button id="mybutton_addReference" style="border-radius:38px;width: 185px; margin-left: 100px; margin-right: 60px; background-color:cadetblue;" type="button" class="btn btn-lg" data-toggle="modal" data-target="#myModal">Add Record</button></li>
+		<li><button id="mybutton_updateReference" style="border-radius:38px; width: 185px; margin-left: 60px; margin-right: 60px; background-color:cadetblue;" type="button" class="btn btn-lg" data-toggle="modal" onclick="openModal_Reference('updateReference');">Update Reference</button></li>
+		<li><button id="mybutton_deleteReference" style="border-radius:38px; width: 185px; margin-left: 60px; margin-right: 60px; background-color:cadetblue;" type="button" class="btn btn-lg" data-toggle="modal" onclick="openModal_Reference('deleteReference');">Delete Reference</button></li>
+		<li><button id="mybutton_addToOtherLibrary" style="border-radius:38px; width: 185px; margin-left: 60px; margin-right: 100px; background-color:cadetblue;" type="button" class="btn btn-lg" data-toggle="modal" onclick="openModal_Reference('addToOtherLibrary');">Add To Other Library</button></li>
 		<!--<li><button id="mybutton_removeFromLibrary" type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="openModal_Reference('removeFromLibrary');">Remove From Library</button></li>-->
 	</ul>
 
@@ -238,9 +239,9 @@ body {font-family: "Roboto", sans-serif}
 				</tr>
 			</thead>
 			<tbody id ="txtHint">
-				<tr>
+				<!-- <tr>
 					Reference info will be listed here...
-				</tr>
+				</tr> -->
 				<?php
 					$stmt = $pdo->query("SELECT * FROM referenceTable where isDelete=0 and defaultLibrary=1 and userID='$userID'");
 					echo "<tr hidden><td><input type='text' id='libraryID' name='libraryID' value='0' hidden/>";
@@ -250,7 +251,7 @@ body {font-family: "Roboto", sans-serif}
 						$stmt_lib = $pdo->query("SELECT * FROM librarytable where libraryID='$refernce_libraryID'");
 						$row_lib = $stmt_lib->fetch();
 
-						
+
 						//if($DataInfo==$row['libraryID']){
 							echo "<tr>";
 							echo "<td><input type='checkbox' name='check_ReferenceList[]' value='" . $row['referenceID'] . "'></td>";
@@ -273,56 +274,138 @@ body {font-family: "Roboto", sans-serif}
 	</form>
 </div>
 
-<!-- Modal -->
+<!-- Add Record Modal -->
 <div class="modal fade" id="myModal" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->
     <div class="modal-content">
+
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Insert Data</h4>
+        <h4 class="modal-title">Insert Reference Details</h4>
       </div>
+
       <div class="modal-body">
-
         <form action="command/control_book.php?operator=" method="post">
+          <diV class="row">
 
-      <diV class="row">
+           <div class="col-sm-4">Entry Type </div>
+           <div class="col-sm-8">
+	                    <select id="mySelect" onchange="chooseEntryType()" name="entryType">
+	  		                	<option value="SelectItems">Select</option>
+	  		                	<option value="Book">Book</option>
+  		                		<option value="Article">Article</option>
+  		                		<option value="Incollection">Incollection</option>
+  			                	<option value="Inproceedings">Inproceedings</option>
+		                 </select>
+	        </div>
+	         <br/>
+            <br/>
+             <br/>
 
-      <div class="col-sm-4">Entry Type </div>
-      <div class="col-sm-8">
-      <input type="text" name="entryType" require_once>
-       </div><br/><br/>
-      <div class="col-sm-4">Author </div>
-      <div class="col-sm-8"><input type="text" name="author"> </div><br/>
-      <tr id='BookTitle'>
-      <div class="col-sm-4" >Book Title </div>
-      <div class="col-sm-8"><input type="text" name="booktitle" > </div><br/>
-      </tr>
-      <div class="col-sm-4">Editor </div>
-      <div class="col-sm-8"><input type="text" name="editor" > </div><br/>
-      <div class="col-sm-4">Title </div>
-      <div class="col-sm-8"><input type="text" name="title" > </div><br/>
-      <div class="col-sm-4">Journal </div>
-      <div class="col-sm-8"><input type="text" name="journal" ></div> <br/>
-      <div class="col-sm-4">Publisher </div>
-      <div class="col-sm-8"><input type="text" name="publisher" > </div><br/>
-      <div class="col-sm-4">Year </div>
-      <div class="col-sm-8"><input type="text" name="year" ></div> <br/>
-      <div class="col-sm-4">Volume </div>
-      <div class="col-sm-8"><input type="text" name="volume" > </div><br/>
-      <input type="submit" value="Insert" name="submitData" >
+           <div id="Bookid" style = "display:none;"  class="col-sm-12">
 
-         </div>
+
+       <div class="col-sm-4"  style=" width:100px;">Author</div>
+       <div class="col-sm-8"><input id="AuthorInput" class="modalInputBox" placeholder="Author Name" type="text" name="author_Bookid"  > </div><br/>
+
+       <div class="col-sm-4"  style=" width:100px;">Book Title </div>
+       <div class="col-sm-8"><input id="BookTitleInput"  class="modalInputBox" placeholder="Book Title" type="text" name="booktitle_Bookid" > </div><br/>
+
+        <div class="col-sm-4"  style=" width:100px;">Publisher </div>
+         <div class="col-sm-8"><input id="PublisherInput"  class="modalInputBox" placeholder="Publisher" type="text" name="publisher_Bookid" > </div><br/>
+
+         <div class="col-sm-4"  style="width:100px;">Year </div>
+         <div class="col-sm-8"><input id="YearInput" class="modalInputBox" placeholder="Year" type="text" name="year_Bookid" ></div> <br/>
+
+         <div class="col-sm-4"  style=" width:100px;">Volume </div>
+         <div class="col-sm-8"><input id="VolumeInput" class="modalInputBox" placeholder="Volume no"  type="text" name="volume_Bookid" > </div><br/>
+
+        <input type="submit" class="btn btn-default" id="ReferenceSubmitButton" style="margin-left: 216px; " value="Insert" name="submitData" >
+           </div>
+
+
+     <div id="Articleid" style = "display:none;" class="col-sm-12">
+
+       <div class="col-sm-4" style=" width:100px;">Author</div>
+       <div class="col-sm-8"><input id="AuthorInput" class="modalInputBox" placeholder="Author Name" type="text" name="author_Articleid" > </div><br/>
+
+       <div class="col-sm-4"  style=" width:100px;">Title </div>
+         <div class="col-sm-8"><input id="TitleInput"  class="modalInputBox" placeholder="Title" type="text" name="title_Articleid" > </div><br/>
+
+      <div class="col-sm-4"  style=" width:100px;">Journal </div>
+         <div class="col-sm-8"><input id="JournalInput" class="modalInputBox" placeholder="Journal"  type="text" name="journal_Articleid" ></div><br/>
+
+
+         <div class="col-sm-4"  style=" width:100px;">Year </div>
+         <div class="col-sm-8"><input id="YearInput"  class="modalInputBox" placeholder="Year" type="text" name="year_Articleid" ></div> <br/>
+
+         <div class="col-sm-4" style=" width:100px;">Volume </div>
+         <div class="col-sm-8"><input  id="VolumeInput" class="modalInputBox" placeholder="Volume no"  type="text" name="volume_Articleid" > </div><br/>
+
+	  <input type="submit" class="btn btn-default" id="ReferenceSubmitButton" style="margin-left: 216px; " value="Insert" name="submitData" >
+     </div>
+
+     <div id="Incollectionid" style = "display:none;" class="col-sm-12">
+
+       <div class="col-sm-4" style=" width:100px;">Author</div>
+       <div class="col-sm-8"><input id="AuthorInput" class="modalInputBox" placeholder="Author Name" type="text" name="author_Incollectionid" > </div><br/>
+
+       <div class="col-sm-4"  style="width:100px;">Editor </div>
+         <div class="col-sm-8"><input id="EditorInput" class="modalInputBox" placeholder="Editor" type="text" name="editor_Incollectionid" > </div><br/>
+
+
+       <div class="col-sm-4"  style=" width:100px;">Title </div>
+         <div class="col-sm-8"><input id="TitleInput"  class="modalInputBox" placeholder="Title" type="text" name="title_Incollectionid" > </div><br/>
+
+         <div class="col-sm-4"  style=" width:100px;">Publisher </div>
+          <div class="col-sm-8"><input id="PublisherInput" class="modalInputBox" placeholder="Publisher" type="text" name="publisher_Incollectionid" > </div><br/>
+
+
+         <div class="col-sm-4"  style=" width:100px;">Year </div>
+         <div class="col-sm-8"><input id="YearInput" class="modalInputBox" placeholder="Year" type="text" name="year_Incollectionid" ></div> <br/>
+
+         <div class="col-sm-4" style=" width:100px;">Volume </div>
+         <div class="col-sm-8"><input  id="VolumeInput"  class="modalInputBox" placeholder="Volume no"  type="text" name="volume_Incollectionid" > </div><br/>
+
+  <input type="submit" class="btn btn-default" id="ReferenceSubmitButton" style="margin-left: 216px; " value="Insert" name="submitData" >
+     </div>
+
+          <div id="Inproceedingsid" style = "display:none;" class="col-sm-12">
+
+            <div class="col-sm-4" style=" width:100px;">Author</div>
+            <div class="col-sm-8"><input id="AuthorInput" class="modalInputBox" placeholder="Author Name" type="text" name="author_Inproceedingsid" > </div><br/>
+
+            <div class="col-sm-4"  style="width:100px;">Editor </div>
+              <div class="col-sm-8"><input id="EditorInput" class="modalInputBox" placeholder="Editor" type="text" name="editor_Inproceedingsid" > </div><br/>
+
+
+            <div class="col-sm-4"  style=" width:100px;">Title </div>
+              <div class="col-sm-8"><input id="TitleInput"  class="modalInputBox" placeholder="Title" type="text" name="title_Inproceedingsid" > </div><br/>
+
+          <div class="col-sm-4"  style=" width:100px;">Year </div>
+              <div class="col-sm-8"><input id="YearInput" class="modalInputBox" placeholder="Year" type="text" name="year_Inproceedingsid"  ></div> <br/>
+
+              <div class="col-sm-4" style=" width:100px;">Volume </div>
+              <div class="col-sm-8"><input id="VolumeInput"  class="modalInputBox" placeholder="Volume no"  type="text" name="volume_Inproceedingsid" > </div><br/>
+
+<input type="submit" class="btn btn-default" id="ReferenceSubmitButton" style="margin-left: 216px; " value="Insert" name="submitData" >
+          </div>
+ <!-- <input type="submit" class="btn btn-default" id="ReferenceSubmitButton" style="margin-left: 216px; " value="Insert" name="submitData" > -->
       </form>
+			<!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
+
     </div>
 
   </div>
 </div>
+</div>
 
+
+
+
+<!-- update reference modal -->
 <div class="modal fade" id="modal_updateReference" role="dialog" aria-labelledby="dialog1Title" aria-describedby="dialog1Desc">
   <div class="modal-dialog">
     <!-- Modal content-->
@@ -342,36 +425,35 @@ body {font-family: "Roboto", sans-serif}
       <input type="text" name="entryType" require_once>
        </div><br/><br/>
       <div class="col-sm-4">Author </div>
-      <div class="col-sm-8"><input type="text" name="author"> </div><br/>
-      <tr id='BookTitle'>
+      <div class="col-sm-8"><input   type="text" name="author"> </div><br/>
       <div class="col-sm-4" >Book Title </div>
-      <div class="col-sm-8"><input type="text" name="booktitle" > </div><br/>
-      </tr>
+      <div class="col-sm-8"><input  type="text" name="booktitle" > </div><br/>
       <div class="col-sm-4">Editor </div>
-      <div class="col-sm-8"><input type="text" name="editor" > </div><br/>
+      <div class="col-sm-8"><input  type="text" name="editor" > </div><br/>
       <div class="col-sm-4">Title </div>
-      <div class="col-sm-8"><input type="text" name="title" > </div><br/>
+      <div class="col-sm-8"><input  type="text" name="title" > </div><br/>
       <div class="col-sm-4">Journal </div>
-      <div class="col-sm-8"><input type="text" name="journal" ></div> <br/>
+      <div class="col-sm-8"><input  type="text" name="journal" ></div> <br/>
       <div class="col-sm-4">Publisher </div>
-      <div class="col-sm-8"><input type="text" name="publisher" > </div><br/>
+      <div class="col-sm-8"><input  type="text" name="publisher" > </div><br/>
       <div class="col-sm-4">Year </div>
-      <div class="col-sm-8"><input type="text" name="year" ></div> <br/>
+      <div class="col-sm-8"><input  type="text" name="year" ></div> <br/>
       <div class="col-sm-4">Volume </div>
-      <div class="col-sm-8"><input type="text" name="volume" > </div><br/>
+      <div class="col-sm-8"><input  type="text" name="volume" > </div><br/>
       <input type="submit" value="Update" name="submitData" >
 
          </div>
       </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
 
   </div>
 </div>
 
+
+
+
+<!-- delete reference modal -->
 <fieldset class="modal fade" id="myModal_deleteReference" role="dialog" aria-labelledby="dialog1Title" aria-describedby="dialog1Desc">
 	<div class="modal-dialog">
 		<!-- Modal content-->
@@ -384,22 +466,24 @@ body {font-family: "Roboto", sans-serif}
 				<form name="form_deleteReference" onsubmit="reference_operator('deleteReference',<?php echo $userID?>)">
 					<div class="row">
 
-						<div class="col-sm">Are you sure to delete the selected references from the library?</div>
+						<div class="col-sm">Click On Delete Button to delete the selected reference</div>
 
 
-						<input type="submit" value="Delete" name="submitData">
+						<input type="submit" value="Delete" name="submitData" style="margin-left: 250px;">
 
 					</div>
 				</form>
 			</div>
-			<div class="modal-footer">
-			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			</div>
+
 		</div>
 
 	</div>
 </fieldset>
 
+
+
+
+<!-- create library modal -->
 <fieldset class="modal fade" id="myModal_createLibrary" role="dialog" aria-labelledby="dialog1Title" aria-describedby="dialog1Desc">
 	<div class="modal-dialog">
 		<!-- Modal content-->
@@ -414,22 +498,22 @@ body {font-family: "Roboto", sans-serif}
 
 						<div class="col-sm-4">Library Name</div>
 						<div class="col-sm-8">
-							<input type="text" id="libraryName_create" name="libraryName" required>
+							<input type="text" id="libraryName_create" name="libraryName" class="modalInputBox" style="margin-bottom:25px;" required>
 						</div>
 
-						<input type="submit" value="Create" name="submitData">
+						<input type="submit" value="Create" name="submitData" style="margin-left: 250px;">
 
 					</div>
 				</form>
 			</div>
-			<div class="modal-footer">
-			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			</div>
+
 		</div>
 
 	</div>
 </fieldset>
 
+
+<!-- update library modal -->
 <fieldset class="modal fade" id="myModal_updateLibrary" role="dialog" aria-labelledby="dialog1Title" aria-describedby="dialog1Desc">
 	<div class="modal-dialog">
 		<!-- Modal content-->
@@ -457,14 +541,14 @@ body {font-family: "Roboto", sans-serif}
 					</div>
 				</form>
 			</div>
-			<div class="modal-footer">
-			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			</div>
+
 		</div>
 
 	</div>
 </fieldset>
 
+
+<!-- delete library modal -->
 <fieldset class="modal fade" id="myModal_deleteLibrary" role="dialog" aria-labelledby="dialog1Title" aria-describedby="dialog1Desc">
 	<div class="modal-dialog">
 		<!-- Modal content-->
@@ -477,21 +561,21 @@ body {font-family: "Roboto", sans-serif}
 				<form name="form_deleteLibrary" onsubmit="library_operator('deleteLibrary',<?php echo $userID?>)">
 					<div class="row" id="txtDeleteLibrary">
 
-						<div class="col-sm">Are you sure to delete the selected libraries?</div>
+						<div class="col-sm-4" style="  margin-bottom: 15px;">Are you sure to delete all selected libraries?</div>
 
-						<input type="submit" value="Delete" name="submitData">
+						<input type="submit" value="Delete Selected Libraries" name="submitData" style="margin-left: 200px;">
 
 					</div>
 				</form>
 			</div>
-			<div class="modal-footer">
-			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			</div>
+
 		</div>
 
 	</div>
 </fieldset>
 
+
+<!-- addToLibrary modal -->
 <fieldset class="modal fade" id="myModal_addToOtherLibrary" role="dialog" aria-labelledby="dialog1Title" aria-describedby="dialog1Desc">
 	<div class="modal-dialog">
 		<!-- Modal content-->
@@ -506,35 +590,36 @@ body {font-family: "Roboto", sans-serif}
 
 						<div class="col-sm-4">Original Library</div>
 						<div class="col-sm-8">
-							<input type="text" id="libraryID_Origin" name="libraryID_Origin" required>
+							<input type="text" class="modalInputBox" style="margin-bottom: 13px;"  id="libraryID_Origin" name="libraryID_Origin" required>
 						</div>
 
 						<div class="col-sm-4">Destination Library</div>
 						<div class="col-sm-8">
-							<input type="text" id="libraryID_Dest" name="libraryID_Dest" disabled required>
-							<input type='text' id='libraryID_DestID' name='libraryID_DestID' hidden>
-							<input type='button' value='Search Library' onclick='openWindow_searchLibrary(<?php echo $userID?>)'>
+						<textarea type="text" style="width:100%;    height: 75px;" id="libraryID_Dest" name="libraryID_Dest" disabled required></textarea>
+							<input type='text'  id='libraryID_DestID' name='libraryID_DestID' hidden>
+							<input type='button' style="margin-bottom: 13px;" value='Search Library' onclick='openWindow_searchLibrary(<?php echo $userID?>)'>
 						</div>
 
 						<div class="col-sm-5">Also Keep one in Original Library</div>
 						<div class="col-sm-7">
 							<input type="radio" name="keep" value="yes"> Yes
-							<input type="radio" name="keep" value="no" checked> No<br>
+							<input type="radio" style="margin-bottom: 13px;"  name="keep" value="no" checked> No<br>
 						</div>
-						
-						<input type="submit" value="Add To" name="submitData">
+
+
+						<input type="submit" value="Add To" name="submitData" style="    margin-left: 250px;">
 
 					</div>
 				</form>
 			</div>
-			<div class="modal-footer">
-			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			</div>
+
 		</div>
 
 	</div>
 </fieldset>
 
+
+<!-- removeFromLibrary modal -->
 <fieldset class="modal fade" id="myModal_removeFromLibrary" role="dialog" aria-labelledby="dialog1Title" aria-describedby="dialog1Desc">
 	<div class="modal-dialog">
 		<!-- Modal content-->
@@ -561,9 +646,7 @@ body {font-family: "Roboto", sans-serif}
 					</div>
 				</form>
 			</div>
-			<div class="modal-footer">
-			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			</div>
+
 		</div>
 
 	</div>
@@ -580,7 +663,7 @@ body {font-family: "Roboto", sans-serif}
 			}
 		}
 
-		function showInfo(type,id) {
+		function showInfo(type,id,name) {
 			if(type != "userAndLibrary"){
 				document.getElementById("txtShareWithUser").innerHTML = "";
 			}
@@ -600,11 +683,13 @@ body {font-family: "Roboto", sans-serif}
 				xmlhttp.onreadystatechange = function() {
 					if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 						document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+						document.getElementById("library_name").innerHTML = "Active Library is '"+name+"'";
 					}
 				};
-				
+
 				if(type == "unfiled"){
 					xmlhttp.open("GET","command/control_book.php?operator=showUnfiled"+"&userID="+id,true);
+
 				}else{
 					xmlhttp.open("GET","command/getReference.php?DataType=reference"+"&DataInfo="+id,true);
 				}
@@ -620,7 +705,9 @@ body {font-family: "Roboto", sans-serif}
 					}
 					xmlhttp_user.onreadystatechange = function() {
 						if (xmlhttp_user.readyState == 4 && xmlhttp_user.status == 200) {
+
 							document.getElementById("txtShareWithUser").innerHTML = xmlhttp_user.responseText;
+
 						}
 					};
 					xmlhttp_user.open("GET","command/getReference.php?DataType="+type+"&DataInfo="+id,true);
@@ -643,13 +730,13 @@ body {font-family: "Roboto", sans-serif}
 				}
 				//alert(i + (cboxes[i].checked?' checked ':' unchecked ') + cboxes[i].value);
 			}
-						
+
 			if(count_checked_cboxes == 1){
 				if( value_checked_cboxes== 0){
 					alert("This is Unfiled library, it can not be changed.");
 					return;
 				}
-				
+
 				$("#myModal_updateLibrary").modal();
 
 				if (window.XMLHttpRequest) {
@@ -811,7 +898,7 @@ body {font-family: "Roboto", sans-serif}
 			window.open('command/searchLibrary.php?userID='+userID+'&libraryID_Origin='+document.getElementById("libraryID").value,'_blank','height=400,width=400');
 		}
 
-		function deleteLibrary() {
+		function deleteLibrary(userID) {
 			/*
 			var cboxes = document.getElementsByName('check_ShareLibraryList[]');
 			var len = cboxes.length;
@@ -849,16 +936,29 @@ body {font-family: "Roboto", sans-serif}
 				xhr.send(data);
 			}
 			*/
-			
+			//alert(userID);
 			var cboxes = document.getElementsByName('check_ShareLibraryList[]');
+			var cboxes_user = document.getElementsByName('check_LibraryUserList[]');
 			var len = cboxes.length;
+			//var len_suer = cboxes_user.length;
 			var count_checked_cboxes = 0;
 			var value_checked_cboxes = '';
 			for (var i=0; i<len; i++) {
 				if(cboxes[i].checked){
 					if(cboxes[i].value==0){
 						alert("It includes Unfiled library, it can not be deleted.");
-					return;
+						return;
+					}
+				}
+				//alert(i + (cboxes[i].checked?' checked ':' unchecked ') + cboxes[i].value);
+			}
+
+			for (var i=0; i<len; i++) {
+				if(cboxes[i].checked){
+					//alert(cboxes_user[i].value);
+					if(cboxes_user[i].value!=userID){
+						alert("You can not delete the library that is not belong to you!");
+						return;
 					}
 				}
 				//alert(i + (cboxes[i].checked?' checked ':' unchecked ') + cboxes[i].value);
@@ -885,7 +985,7 @@ body {font-family: "Roboto", sans-serif}
 				return;
 			}
 
-			
+
 
 			if(param == "addToOtherLibrary"){
 				document.forms["form_addToOtherLibrary"]["libraryID_Origin"].value = document.getElementById("libraryName").value;
@@ -902,7 +1002,7 @@ body {font-family: "Roboto", sans-serif}
 					alert("Please choose only one reference!");
 					return;
 				}
-				
+
 				var data = new FormData();
 				data.append('referenceID', value_checked_cboxes);
 
@@ -919,7 +1019,7 @@ body {font-family: "Roboto", sans-serif}
 					}
 				}
 				xhr.send(data);
-				
+
 				$("#modal_updateReference").modal();
 			}
 		}
@@ -935,7 +1035,7 @@ body {font-family: "Roboto", sans-serif}
 					}
 					//alert(i + (cboxes[i].checked?' checked ':' unchecked ') + cboxes[i].value);
 				}
-				
+
 				var data = new FormData();
 				data.append('keepOne', document.forms["form_addToOtherLibrary"]["keep"].value);
 				data.append('value_checked_cboxes', value_checked_cboxes);

@@ -1,11 +1,12 @@
+
 <?php require_once('../../Connections/connSQL.php'); ?>
 <?php
 	  $operator ="";
 	  $operator =$_GET["operator"];
-	  
+
 	  if($operator=="deleteReference"){
 		$deleteReference = $_REQUEST['deleteReference'];
-		
+
 		$list_deleteReference = explode(',',$deleteReference);
 		$listLength_deleteLibrary = sizeof($list_deleteReference);
 		$result_All = true;
@@ -26,7 +27,7 @@
 				  $result2 = $connSQL->query($sqldelete);
 				}
 			  }
-		 
+
 			  // each checkbox is given referenceId so that we can delete  them easily
 		  if(!empty($_POST['selectedcheckbox'])&& isset($_POST['delete'])){
 		  // Loop to store and display values of individual checked checkbox.
@@ -34,7 +35,7 @@
 			$sqldelete = "DELETE from referenceTable WHERE referenceID='$selected'";
 			$result2 = $connSQL->query($sqldelete);
 		  }
-		  } 
+		  }
 
 
 
@@ -52,33 +53,60 @@
 		  $publisher=$row_RecReferenceInfo['publisher'];
 		  $year=$row_RecReferenceInfo['year'];
 		  $volume=$row_RecReferenceInfo['volume'];
-		  
-		  {
-			  echo "<input type='text' id='referenceID' name='referenceID' value='".$referenceID."' hidden />";
-			  echo "<div class='col-sm-4'>Entry Type </div>";
-			  echo "<div class='col-sm-8'>";
-			  echo "<input type='text' name='entryType' value='".$entryType."' require_once> </div><br/><br/>";
-			  echo "<div class='col-sm-4'>Author </div>";
-			  echo "<div class='col-sm-8'><input type='text' name='author' value='".$author."' > </div><br/>";
-			  echo "<tr id='BookTitle'>";
+
+			if($entryType=="Book"){
+				echo "<div class='col-sm-4'>Author </div>";
+			  echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='author' value='".$author."' > </div><br/>";
 			  echo "<div class='col-sm-4' >Book Title </div>";
-			  echo "<div class='col-sm-8'><input type='text' name='booktitle' value='".$bookTitle."' > </div><br/>";
-			  echo "</tr>";
-			  echo "<div class='col-sm-4'>Editor </div>";
-			  echo "<div class='col-sm-8'><input type='text' name='editor' value='".$editor."' > </div><br/>";
-			  echo "<div class='col-sm-4'>Title </div>";
-			  echo "<div class='col-sm-8'><input type='text' name='title' value='".$title."' > </div><br/>";
-			  echo "<div class='col-sm-4'>Journal </div>";
-			  echo "<div class='col-sm-8'><input type='text' name='journal' value='".$journal."' ></div> <br/>";
-			  echo "<div class='col-sm-4'>Publisher </div>";
-			  echo "<div class='col-sm-8'><input type='text' name='publisher' value='".$publisher."' > </div><br/>";
+			  echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='booktitle' value='".$bookTitle."' > </div><br/>";
+				echo "<div class='col-sm-4'>Publisher </div>";
+			  echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='publisher' value='".$publisher."' > </div><br/>";
 			  echo "<div class='col-sm-4'>Year </div>";
-			  echo "<div class='col-sm-8'><input type='text' name='year' value='".$year."' ></div> <br/>";
+			  echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='year' value='".$year."' ></div> <br/>";
 			  echo "<div class='col-sm-4'>Volume </div>";
-			  echo "<div class='col-sm-8'><input type='text' name='volume' value='".$volume."' > </div><br/>";
+			  echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='volume' value='".$volume."' > </div><br/>";
+			}
+		else if($entryType=="Article"){
+				echo "<div class='col-sm-4'>Author </div>";
+				echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='author' value='".$author."' > </div><br/>";
+				echo "<div class='col-sm-4'>Title </div>";
+			  echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='title' value='".$title."' > </div><br/>";
+				echo "<div class='col-sm-4'>Journal </div>";
+				echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='journal' value='".$journal."' ></div> <br/>";
+				echo "<div class='col-sm-4'>Year </div>";
+				echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='year' value='".$year."' ></div> <br/>";
+				echo "<div class='col-sm-4'>Volume </div>";
+				echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='volume' value='".$volume."' > </div><br/>";
+			}
+			else if($entryType=="Incollection"){
+					echo "<div class='col-sm-4'>Author </div>";
+					echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='author' value='".$author."' > </div><br/>";
+					echo "<div class='col-sm-4'>Editor </div>";
+				  echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='editor' value='".$editor."' > </div><br/>";
+					echo "<div class='col-sm-4'>Title </div>";
+				  echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='title' value='".$title."' > </div><br/>";
+					echo "<div class='col-sm-4'>Publisher </div>";
+					echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='publisher' value='".$publisher."' > </div><br/>";
+					echo "<div class='col-sm-4'>Year </div>";
+					echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='year' value='".$year."' ></div> <br/>";
+					echo "<div class='col-sm-4'>Volume </div>";
+					echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='volume' value='".$volume."' > </div><br/>";
+				}
+else if($entryType=="Inproceedings"){
+			  echo "<input type='text' id='referenceID' name='referenceID' value='".$referenceID."' hidden />";
+			  echo "<div class='col-sm-4'>Author </div>";
+			  echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='author' value='".$author."' > </div><br/>";
+			  echo "<div class='col-sm-4'>Editor </div>";
+			  echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='editor' value='".$editor."' > </div><br/>";
+			  echo "<div class='col-sm-4'>Title </div>";
+			  echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='title' value='".$title."' > </div><br/>";
+			  echo "<div class='col-sm-4'>Year </div>";
+			  echo "<div class='col-sm-8'><input type='text' style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='year' value='".$year."' ></div> <br/>";
+			  echo "<div class='col-sm-4'>Volume </div>";
+			  echo "<div class='col-sm-8'><input type='text'  style='border: none !important; border-bottom: solid 1px !important; padding: 5px !important; border-radius: unset !important;width: 90%;margin-bottom: 9px;' name='volume' value='".$volume."' > </div><br/>";
 			  echo "<input type='submit' value='Update' name='submitData' >";
 		  }
-		  
+
 	  }else if($operator=="updateReference"){
 		  $referenceID = $_REQUEST['referenceID'];
 		  $entryType = $_REQUEST['entryType'];
@@ -90,7 +118,7 @@
 		  $publisher = $_REQUEST['publisher'];
 		  $year = $_REQUEST['year'];
 		  $volume = $_REQUEST['volume'];
-		  
+
 		  $sql = "update referencetable set entryType='$entryType',author='$author',booktitle='$booktitle',editor='$editor',title='$title',journal='$journal',publisher='$publisher',year='$year',volume='$volume'  where referenceID='$referenceID'";
 		  $result_2 = $pdo->query($sql);
 		  if($result_2==True){
@@ -106,7 +134,7 @@
 				$stmt_lib = $pdo->query("SELECT * FROM librarytable where libraryID='$refernce_libraryID'");
 				$row_lib = $stmt_lib->fetch();
 
-				echo "<input type='text' id='libraryID' name='libraryID' value='0' hidden />";
+				echo "<input type='text' id='libraryID' name='libraryID' value='0'  hidden />";
 				echo "<input type='text' id='libraryName' name='libraryName' value='Unfiled' hidden />";
 				//if($DataInfo==$row['libraryID']){
 					echo "<tr>";
@@ -133,18 +161,42 @@
 		  if (isset($_REQUEST["submitData"]))
 		  {
 			$entryType  = $_POST['entryType'];
-			$author = $_POST['author'];
-			$booktitle = $_POST['booktitle'];
-			$editor = $_POST['editor'];
-			$title = $_POST['title'];
-			$journal = $_POST['journal'];
-			$publisher = $_POST['publisher'];
-			$year = $_POST['year'];
-			$volume = $_POST['volume'];
+			$author = "";
+			$booktitle = "";
+			$publisher = "";
+			$year = "";
+			$volume = "";
+			$editor = "";
+			$title = "";
+			$journal = "";
+			if($entryType=="Book"){
+				$author = $_POST['author_Bookid'];
+				$booktitle = $_POST['booktitle_Bookid'];
+				$publisher = $_POST['publisher_Bookid'];
+				$year = $_POST['year_Bookid'];
+				$volume = $_POST['volume_Bookid'];
+			}else if($entryType=="Article"){
+				$author = $_POST['author_Articleid'];
+				$title = $_POST['title_Articleid'];
+				$journal = $_POST['journal_Articleid'];
+				$year = $_POST['year_Articleid'];
+				$volume = $_POST['volume_Articleid'];
+			}else if($entryType=="Incollection"){
+				$author = $_POST['author_Incollectionid'];
+				$editor = $_POST['editor_Incollectionid'];
+				$title = $_POST['title_Incollectionid'];
+				$publisher = $_POST['publisher_Incollectionid'];
+				$year = $_POST['year_Incollectionid'];
+				$volume = $_POST['volume_Incollectionid'];
+			}elseif($entryType=="Inproceedings"){
+				$author = $_POST['author_Inproceedingsid'];
+				$editor = $_POST['editor_Inproceedingsid'];
+				$title = $_POST['title_Inproceedingsid'];
+				$year = $_POST['year_Inproceedingsid'];
+				$volume = $_POST['volume_Inproceedingsid'];
+			}
 
 				$addsql = "Insert into referenceTable(entryType, author, bookTitle, editor, title, journal, publisher, year, volume, userID, defaultLibrary) values('$entryType','$author','$booktitle','$editor','$title','$journal','$publisher','$year','$volume','$id',1)";
-
-
 				if (mysqli_query($connSQL, $addsql))
 				{
 					//echo "Data added successfully";
@@ -155,7 +207,7 @@
 					//echo "Data not added";
 				}
 		  }
-		  
+
 		  // to get the user id of the loggedin user
 		$user = "SELECT userID FROM userTable WHERE email = '$userEmailId'";
 		$result1 = $connSQL->query($user);

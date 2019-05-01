@@ -120,10 +120,11 @@ if($DataType=='reference'){
 			echo "<div class='col-sm-8' rows='10' cols='30'>";
 			
 		if($count_shareLibrary>0){
-			echo "	<textarea rows='5' class='scrollabletextbox' id='shareWithUser_update' name='shareUser' disabled>$userName</textarea>";
+			echo "	<textarea rows='5' style='width:370px;height:100px;' class='scrollabletextbox' id='shareWithUser_update' name='shareUser' disabled>$userName</textarea>";
 			echo "	<input type='text' id='shareWithUser_update' name='shareUserID' value='".$row_shareLibrary['shareUser']."' hidden disabled>";
 		}else{
-			echo "	<input type='text' id='shareWithUser_update' name='shareUser' disabled>";
+			//echo "	<input type='text' id='shareWithUser_update' name='shareUser' disabled>";
+			echo "	<textarea rows='5' style='width:370px;height:100px;' class='scrollabletextbox' id='shareWithUser_update' name='shareUser' disabled></textarea>";
 			echo "	<input type='text' id='shareWithUser_update' name='shareUserID' hidden disabled>";
 		}
 	}else{
@@ -136,10 +137,12 @@ if($DataType=='reference'){
 			echo "<div class='col-sm-8' style='width: 200px; height: 100px; overflow-y: scroll;'>";
 			
 		if($count_shareLibrary>0){
-			echo "	<input type='text' id='shareWithUser_update' name='shareUser' value='".$userName."' disabled>";
+			//echo "	<input type='text' id='shareWithUser_update' name='shareUser' value='".$userName."' disabled>";
+			echo "	<textarea rows='5' style='width:370px;height:100px;' class='scrollabletextbox' id='shareWithUser_update' name='shareUser' disabled>$userName</textarea>";
 			echo "	<input type='text' id='shareWithUser_update' name='shareUserID' value='".$row_shareLibrary['shareUser']."' hidden disabled>";
 		}else{
-			echo "	<input type='text' id='shareWithUser_update' name='shareUser' disabled>";
+			//echo "	<input type='text' id='shareWithUser_update' name='shareUser' disabled>";
+			echo "	<textarea rows='5' style='width:370px;height:100px;' class='scrollabletextbox' id='shareWithUser_update' name='shareUser' disabled></textarea>";
 			echo "	<input type='text' id='shareWithUser_update' name='shareUserID' hidden disabled>";
 		}
 	}
